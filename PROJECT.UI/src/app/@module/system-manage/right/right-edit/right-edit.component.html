@@ -1,0 +1,23 @@
+<form (ngSubmit)="updateRight()">
+    <div class="card">
+        <div class="card-header">{{'LANGUAGE_LIST_TITLE' | translate}}</div>
+        <div class="card-body">
+            <div class="d-flex flex-row">
+                <div class="p-2">
+                    <button type="submit" class="btn btn-success"><i
+                            class="bi bi-check2-all"></i> Lưu thông tin</button>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-6">
+                    <label class="form-label">Mã</label>
+                    <input type="text" class="form-control" name="CODE" [(ngModel)]="itemDetail.CODE" disabled>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Tên</label>
+                    <input type="text" class="form-control" name="NAME" [(ngModel)]="itemDetail.NAME">
+                </div>             
+            </div>
+        </div>
+    </div>
+</form>

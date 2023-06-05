@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-header">DANH SÁCH CÁC LOẠI HÀNG</div>
+    <div class="card-body">
+        <div class="d-flex flex-row">
+            <div class="p-2">
+                <button type="button" class="btn btn-warning"><i class="bi bi-arrow-repeat"></i> Đồng bộ</button>
+            </div>
+            <div class="p-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" (keyup)="searchMaterial($event)">
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="listMaterial && listMaterial.length > 0">
+            <table class="table table-hover table-bordered" id="table-user">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã hàng hoá</th>
+                        <th scope="col">Tên hàng hoá</th>
+                        <th scope="col">Loại hàng hoá</th>
+                        <th scope="col">Đơn vị tính</th>
+                        <th scope="col" style="width: 60px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listMaterial">
+
+                        <td>{{item.CODE}}</td>
+                        <td>{{item.TEXT}}</td>
+                        <td>{{item.TYPE}}</td>
+                        <td>{{item.UNIT}}</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="ACTIVE" [(ngModel)]="item.ACTIVE"
+                                    (change)="updateMaterial(item)">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="float-end">
+                <ngb-pagination [pageSize]="filter.PageSize" [collectionSize]="filter.ItemCount"
+                    [(page)]="filter.CurrentPage" [maxSize]="5" (pageChange)="onChangePage($event)"
+                    aria-label="User pagination" class="pagination"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

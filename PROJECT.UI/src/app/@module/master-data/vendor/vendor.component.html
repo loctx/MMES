@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header">DANH SÁCH ĐƠN VỊ VẬN TẢI</div>
+    <div class="card-body">
+        <div class="d-flex flex-row">
+            <div class="p-2">
+                <button type="button" class="btn btn-warning"><i class="bi bi-arrow-repeat"></i> Đồng bộ</button>
+            </div>
+            <div class="p-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" (keyup)="searchVendor($event)">
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="listVendor && listVendor.length > 0">
+            <table class="table table-hover table-bordered" id="table-user">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col" style="width: 60px;"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listVendor">
+
+                        <td>{{item.CODE}}</td>
+                        <td>{{item.TEXT}}</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="ACTIVE" [(ngModel)]="item.ACTIVE"
+                                    (change)="updateVendor(item)">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="float-end">
+                <ngb-pagination [pageSize]="filter.PageSize" [collectionSize]="filter.ItemCount"
+                    [(page)]="filter.CurrentPage" [maxSize]="5" (pageChange)="onChangePage($event)"
+                    aria-label="User pagination" class="pagination"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

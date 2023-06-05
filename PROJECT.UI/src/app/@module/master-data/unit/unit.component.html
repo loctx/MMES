@@ -1,0 +1,337 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex border-bottom  flex-wrap">
+            <div class="">
+                <h5 class="card-title">
+                    <i class="bi bi-journal-text"></i>
+                    Danh sách đơn hàng
+                </h5>
+            </div>
+
+            <div class="d-flex flex-row-reverse card-function flex-grow-1">
+                <div>
+                    <button type="button" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Xác nhận
+                    </button>
+
+                    <button type="button" class="btn btn-warning">
+                        <i class="bi bi-dash-circle"></i> Từ chối
+                    </button>
+
+                    <button type="button" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Hủy đơn
+                    </button>
+
+                    <button type="button" class="btn btn-info">
+                        <i class="bi bi-file-earmark-excel"></i> Xuất excel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row p-1 border-bottom flex-wrap">
+            <div class="d-flex flex-row p-l-2 flex-grow-1">
+                <input type="date" class="form-control" placeholder="Từ ngày"> &nbsp;
+                <input type="date" class="form-control" placeholder="Đến ngày">
+            </div>
+
+            <div class="d-flex flex-row p-l-2 flex-grow-1">
+                <select class="form-select" aria-label="Trạng thái">
+                    <option selected="">Trạng thái</option>
+                    <option value="1">Đã xác nhận</option>
+                    <option value="2">Đã vào cổng</option>
+                    <option value="3">Đã cân lần 1</option>
+                </select>
+            </div>
+
+            <div class="d-flex flex-row p-l-2 flex-grow-1">
+                <select class="form-select" aria-label="Khách hàng">
+                    <option selected="">Khách hàng</option>
+                    <option value="1">Khách hàng 1</option>
+                    <option value="2">Khách hàng 2</option>
+                    <option value="3">Khách hàng 3</option>
+                </select>
+            </div>
+
+            <div class="d-flex flex-row p-l-2 flex-grow-1">
+                <select class="form-select" aria-label="Mặt hàng">
+                    <option selected="">Hàng hóa</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="d-flex flex-row flex-grow-3 p-l-2">
+                <div class="input-group search-box">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm"/>
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text"><i class="bi bi-filter"></i></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="listUnit && listUnit.length > 0" class="p-2">
+            <table class="table table-hover" id="table-user">
+                <thead>
+                    <tr>
+                        <th scope="col" class="align-center">STT</th>
+                        <th scope="col" class="align-center">Mã đơn hàng</th>
+                        <th scope="col" class="align-center">Ngày đặt hàng</th>
+                        <th scope="col">Phương tiện</th>
+                        <th scope="col">Khách hàng</th>
+                        <th scope="col">Hàng hóa</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col" class="align-center">Ngày tạo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-center">1</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">2</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">3</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning font-12 p-b-6">Chờ xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">4</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary font-12 p-b-6">Đã từ chối</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">5</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-info font-12 p-b-6">Đã cân lần 1</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">6</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">1</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">2</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">3</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning font-12 p-b-6">Chờ xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">4</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary font-12 p-b-6">Đã từ chối</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">5</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-info font-12 p-b-6">Đã cân lần 1</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="align-center">6</td>
+                        <td class="align-center">xxxxxxxx</td>
+                        <td class="align-center">xx/xx/xxxx</td>
+                        <td>37xxxxx</td>
+                        <td>xxxxxxxxxxxxxxxxxxxx</td>
+                        <td>
+                            <div>MH1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                            <div>MH2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xx.xxx kg</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-primary font-12 p-b-6 p-b-6">Đã xác nhận</span>
+                        </td>
+                        <td class="align-center">
+                            <div>xxxxxx</div>
+                            <div>xx/xx/xxxx</div>
+                        </td>
+                    </tr>
+                    <!-- <tr *ngFor="let item of listUnit">
+
+                        <td>{{item.CODE}}</td>
+                        <td>{{item.TEXT}}</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="ACTIVE" [(ngModel)]="item.ACTIVE"
+                                    (change)="updateUnit(item)">
+                            </div>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+            <div class="float-end">
+                <ngb-pagination [pageSize]="filter.PageSize" [collectionSize]="filter.ItemCount"
+                    [(page)]="filter.CurrentPage" [maxSize]="5" (pageChange)="onChangePage($event)"
+                    aria-label="User pagination" class="pagination"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">
+            <i class="bi bi-journal-text"></i>
+            Danh sách phương tiện
+        </h5>
+        <!-- <div class="d-flex flex-row">
+            <div class="p-2">
+                <button type="button" class="btn btn-warning"><i class="bi bi-arrow-repeat"></i> Đồng bộ</button>
+            </div>
+            <div class="p-2">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" (keyup)="searchVehicle($event)">
+                </div>
+            </div>
+        </div> -->
+
+
+        <div *ngIf="listVehicle && listVehicle.length > 0">
+            <table class="table table-hover table-bordered" id="table-user">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã</th>
+                        <th scope="col">ĐVT</th>
+                        <th scope="col">Tổng dung tích</th>
+                        <th scope="col">Loại hình VT</th>
+                        <th scope="col">Thông tin ngăn</th>
+                        <th scope="col" style="width: 60px;"></th>
+                        <th scope="col">Thời gian cập nhật</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listVehicle">
+
+                        <td>{{item.CODE}}</td>
+                        <td>{{item.UNIT}}</td>
+                        <td>{{item.CAPACITY | number}}</td>
+                        <td>{{item.TRANSMODE_CODE}}</td>
+                        <td>
+                            <span *ngFor="let x of item.VehicleCompartment">
+                                {{x.SEQ_NUMBER}} : <span style="font-weight: bold;">{{x.CAPACITY | number}}</span> |
+                            </span>
+                        </td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="ACTIVE" [(ngModel)]="item.ACTIVE"
+                                    (change)="updateVehicle(item)">
+                            </div>
+                        </td>
+                        <td>
+                            <div>Tạo: {{item.CREATE_DATE | date:'dd/MM/yyyy hh:mm'}}</div>
+                            <div>Cập nhật: {{item.UPDATE_DATE | date:'dd/MM/yyyy hh:mm'}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="float-end">
+                <ngb-pagination [pageSize]="filter.PageSize" [collectionSize]="filter.ItemCount"
+                    [(page)]="filter.CurrentPage" [maxSize]="5" (pageChange)="onChangePage($event)"
+                    aria-label="User pagination" class="pagination"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

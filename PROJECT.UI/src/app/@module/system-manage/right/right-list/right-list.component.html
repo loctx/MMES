@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">DANH SÁCH QUYỀN</div>
+    <div class="card-body">
+        <div class="d-flex flex-row">
+            <div class="p-2">
+                <button type="button" class="btn btn-primary" (click)="updateOrderTree()"><i class="bi bi-check-lg"></i> Cập
+                    nhật thứ tự</button>
+            </div>
+            <div class="p-2">
+                <button type="button" class="btn btn-success" routerLink="/SystemManage/Right/Create"><i class="bi bi-plus-lg"></i> Thêm mới</button>
+            </div>
+            <div class="p-2 col-md-4">
+                <ng-select (change)="search($event)">
+                    <ng-option *ngFor="let item of selectSearch" [value]="item?.id">{{item?.name}}</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Gen Tree Right -->
+            <ul id="treeRight" class="ztree"></ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,218 @@
+<form (ngSubmit)="updateSystemConfig()">
+    <div class="card">
+        <div class="card-body">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check2-all"></i> Lưu thông tin</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">THÔNG TIN KẾT NỐI SAP</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Host</label>
+                        <input type="text" class="form-control" name="SAP_HOST" [(ngModel)]="systemConfig.SAP_HOST">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Client</label>
+                        <input type="text" class="form-control" name="SAP_CLIENT" [(ngModel)]="systemConfig.SAP_CLIENT">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">System Number</label>
+                        <input type="text" class="form-control" name="SAP_NUMBER" [(ngModel)]="systemConfig.SAP_NUMBER">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">User SAP</label>
+                        <input type="text" class="form-control" name="SAP_USER_NAME"
+                            [(ngModel)]="systemConfig.SAP_USER_NAME">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password SAP</label>
+                        <input type="password" class="form-control" name="SAP_PASSWORD"
+                            [(ngModel)]="systemConfig.SAP_PASSWORD">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">THÔNG TIN EGAS</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Đường dẫn</label>
+                        <input type="text" class="form-control" name="EGAS_WEBSERVICE"
+                            [(ngModel)]="systemConfig.EGAS_WEBSERVICE">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="EGAS_USER_NAME"
+                            [(ngModel)]="systemConfig.EGAS_USER_NAME">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="EGAS_PASSWORD"
+                            [(ngModel)]="systemConfig.EGAS_PASSWORD">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">THỜI GIAN BỊ LỆCH SO VỚI SMO</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Hệ thống SAP(phút)</label>
+                        <input type="text" class="form-control" name="SAP_TIME_DIFF"
+                            [(ngModel)]="systemConfig.SAP_TIME_DIFF">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Hệ thống TGBX</label>
+                        <input type="text" class="form-control" name="TGBX_TIME_DIFF"
+                            [(ngModel)]="systemConfig.TGBX_TIME_DIFF">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Hệ thống XTTĐ</label>
+                        <input type="text" class="form-control" name="XTTD_TIME_DIFF"
+                            [(ngModel)]="systemConfig.XTTD_TIME_DIFF">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">THÔNG TIN TGBX</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Đường dẫn</label>
+                        <input type="text" class="form-control" name="TGBX_URL" [(ngModel)]="systemConfig.TGBX_URL">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="TGBX_USER_NAME"
+                            [(ngModel)]="systemConfig.TGBX_USER_NAME">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="TGBX_PASSWORD"
+                            [(ngModel)]="systemConfig.TGBX_PASSWORD">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">THÔNG TIN SMS</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Đường dẫn</label>
+                        <input type="text" class="form-control" name="SMS_WEBSERVICE"
+                            [(ngModel)]="systemConfig.SMS_WEBSERVICE">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="SMS_APP" [(ngModel)]="systemConfig.SMS_APP">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="SMS_PASSWORD"
+                            [(ngModel)]="systemConfig.SMS_PASSWORD">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Brand Name</label>
+                        <input type="password" class="form-control" name="SMS_BRAND_NAME"
+                            [(ngModel)]="systemConfig.SMS_BRAND_NAME">
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">THÔNG TIN EMAIL</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">SMTP Host</label>
+                        <input type="text" class="form-control" name="MAIL_SMTPHOST"
+                            [(ngModel)]="systemConfig.MAIL_SMTPHOST">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Port</label>
+                        <input type="text" class="form-control" name="MAIL_PORT" [(ngModel)]="systemConfig.MAIL_PORT">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="MAIL_USER" [(ngModel)]="systemConfig.MAIL_USER">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="MAIL_PASSWORD"
+                            [(ngModel)]="systemConfig.MAIL_PASSWORD">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">THÔNG TIN TGBX API</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Đường dẫn</label>
+                        <input type="text" class="form-control" name="TGBX_API_URL"
+                            [(ngModel)]="systemConfig.TGBX_API_URL">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="TGBX_API_USER_NAME"
+                            [(ngModel)]="systemConfig.TGBX_API_USER_NAME">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="TGBX_API_PASSWORD"
+                            [(ngModel)]="systemConfig.TGBX_API_PASSWORD">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">THÔNG TIN SMO API</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Link web</label>
+                        <input type="text" class="form-control" name="SMO_API_LINK_SMO"
+                            [(ngModel)]="systemConfig.SMO_API_LINK_SMO">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" name="SMO_API_USER_NAME"
+                            [(ngModel)]="systemConfig.SMO_API_USER_NAME">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="SMO_API_PASSWORD"
+                            [(ngModel)]="systemConfig.SMO_API_PASSWORD">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">THÔNG TIN BACKGROUND JOB</div>
+                <div class="card-body">
+                    <div class="col-12">
+                        <label class="form-label">Định kỳ N phút quét trạng thái trên SAP (phút)</label>
+                        <input type="text" class="form-control" name="JOB_STATUS_SAP"
+                            [(ngModel)]="systemConfig.JOB_STATUS_SAP">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Định kỳ N phút quét trạng thái trên TGBX (phút)</label>
+                        <input type="text" class="form-control" name="JOB_STATUS_TGBX"
+                            [(ngModel)]="systemConfig.JOB_STATUS_TGBX">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Định kỳ N phút quét và gửi email (phút)</label>
+                        <input type="text" class="form-control" name="JOB_SEND_EMAIL"
+                            [(ngModel)]="systemConfig.JOB_SEND_EMAIL">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Định kỳ N phút quét và gửi SMS (phút)</label>
+                        <input type="text" class="form-control" name="JOB_SEND_SMS"
+                            [(ngModel)]="systemConfig.JOB_SEND_SMS">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
