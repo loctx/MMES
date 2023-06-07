@@ -17,12 +17,9 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { LoginComponent } from './authentication/login/login.component';
 import * as jQuery from 'jquery';
 import { HeaderInterceptor } from './services/Common/header-interceptor.service';
- 
+ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,14 +29,14 @@ import { HeaderInterceptor } from './services/Common/header-interceptor.service'
     NgSelectModule,
     NgxPaginationModule,
     NgxDocViewerModule,
-
+    ToastrModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["https://localhost:4008/"],
+        allowedDomains: ['https://localhost:4008/'],
         disallowedRoutes: [],
-      }
-  }),
+      },
+    }),
 
     // Modul giữ cho trạng thái router không thay đổi khi chuyển sang router (dùng thuộc tính reuse ở phần router)
     NgCacheRouteReuseModule,
@@ -49,35 +46,41 @@ import { HeaderInterceptor } from './services/Common/header-interceptor.service'
       loader: {
         provide: TranslateLoader,
         useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     // Modul lưu ngôn ngữ vào cache để khi load hoặc tắt thì ngôn ngữ vẫn được giữ nguyên
     TranslateCacheModule.forRoot({
       cacheService: {
         provide: TranslateCacheService,
-        useFactory: (translateService: TranslateService, translateCacheSettings: TranslateCacheSettings) => {
-            return new TranslateCacheService(translateService, translateCacheSettings)
+        useFactory: (
+          translateService: TranslateService,
+          translateCacheSettings: TranslateCacheSettings
+        ) => {
+          return new TranslateCacheService(
+            translateService,
+            translateCacheSettings
+          );
         },
-        deps: [ TranslateService, TranslateCacheSettings ]
+        deps: [TranslateService, TranslateCacheSettings],
       },
       cacheName: 'lang', // tên ngôn ngữ được lưu trong cache.
       cacheMechanism: 'LocalStorage', // nơi lưu trữ, xoá thuộc tính này thì mặc định là 'LocalStorage'.
       cookieExpiry: 1, // default value is 720, a month. Set to a negative value and the cookie becomes a session cookie.
-      cookieAttributes: 'SameSite=Strict; Secure' // no default, optional specification of additional attributes.
-    })
+      cookieAttributes: 'SameSite=Strict; Secure', // no default, optional specification of additional attributes.
+    }),
   ],
   providers: [
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 //thay đổi đường dẫn khi thay đổi domain API để lấy tệp json ngôn ngữ
 export function httpTranslateLoader(http: HttpClient) {
