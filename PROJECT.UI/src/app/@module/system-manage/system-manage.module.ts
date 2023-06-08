@@ -10,11 +10,12 @@ import { UserOnlineComponent } from './user-online/user-online.component';
 import { SystemConfigComponent } from './system-config/system-config.component';
 
 
+
 @NgModule({
   declarations: [
     HistoryLoginComponent,
     UserOnlineComponent,
-    SystemConfigComponent
+    SystemConfigComponent,
   ],
   imports: [
     CommonModule,

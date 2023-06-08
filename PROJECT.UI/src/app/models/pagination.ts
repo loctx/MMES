@@ -1,17 +1,8 @@
 export interface Pagination {
-    CurrentPage: number;
-    TotalPage: number;
-    ItemCount: number;
-    PageSize: number;
-    KeySearch:string;
-    Data: object;
-}
-export interface lstAccount {
   currentPage: number;
   pageSize: number;
   totalRecord: number;
   totalPage: number;
-  data: Account[];
 }
 export interface Account {
   id: number;
@@ -26,4 +17,12 @@ export interface Account {
   updateDay: Date;
   createBy: string;
   updateBy: string;
+}
+
+export interface lstAccount {
+  currentPage: number;
+  pageSize: number;
+  totalRecord: number;
+  totalPage: number;
+  data: Account[];
 }

@@ -1,0 +1,43 @@
+<div id="paging-element" class="row g-0" style="justify-content: center; align-items: center; padding-left: 20px">
+  <div class="col-sm-4 col-xs-12 pageDisplay" style="display: flex">
+    <span> Hiển thị</span>
+    <span class="mx-2">
+      <div style="width: 40px">
+        <select *ngIf="Page == 'InOut'" (change)="selectSizePage($event)">
+          <option value="5">5</option>
+        </select>
+        <select *ngIf="!Page" (change)="selectSizePage($event)">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </span>
+
+    <span>trên {{ Pagination.totalRecord }}</span>
+  </div>
+  <div class="col-sm-8 col-xs-12">
+    <div class="pagination">
+      <a (click)="ChoosePage(1)">&laquo;</a>
+      <a class="displayPage" (click)="ChoosePage(1)" *ngIf="Pagination.currentPage > 1">1</a>
+
+      <a *ngIf="Pagination.currentPage - 2 > 1">...</a>
+
+      <a (click)="ChoosePage(Pagination.currentPage - 1)" *ngIf="Pagination.currentPage - 1 > 1">{{
+        Pagination.currentPage - 1
+      }}</a>
+      <a class="active" *ngIf="Pagination.currentPage">{{ Pagination.currentPage }}</a>
+      <a (click)="ChoosePage(Pagination.currentPage + 1)" *ngIf="Pagination.currentPage + 1 < Pagination.totalPage">{{
+        Pagination.currentPage + 1
+      }}</a>
+      <a *ngIf="Pagination.currentPage + 2 < Pagination.totalPage">...</a>
+      <a
+        class="displayPage"
+        (click)="ChoosePage(Pagination.totalPage)"
+        *ngIf="Pagination.totalPage > 1 && Pagination.currentPage < Pagination.totalPage"
+        >{{ Pagination.totalPage }}</a
+      >
+      <a (click)="ChoosePage(Pagination.totalPage)">&raquo;</a>
+    </div>
+  </div>
+</div>

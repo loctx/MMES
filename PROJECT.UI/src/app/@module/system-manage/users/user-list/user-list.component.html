@@ -1,76 +1,109 @@
-<div class="card">
-    <div class="card-body">
-        <div class="row" style="margin-right: 0">
-            <div class="col-md-4 col-xs-12">
-                <h5 class="card-title">
-                    <i class="bi bi-person-lines-fill"></i>
-                    Danh sách người dùng
-                </h5>
-            </div>
+<div class="card" style="margin-left: 300px">
+  <div class="card-body">
+    <div class="row" style="margin-right: 290px">
+      <div class="col-md-4 col-xs-12">
+        <h5 class="card-title">
+          <i class="bi bi-person-lines-fill"></i>
+          Danh sách người dùng
+        </h5>
+      </div>
 
-            <div class="col-md-8 col-xs-12 d-flex flex-row-reverse card-function">
-                <div>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">
-                        <i class="bi bi-plus-lg"></i> Thêm mới
-                    </button>
-                </div>
-                <div>
-                    <div class="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm"
-                            (keydown.enter)="searchUser($event)" />
-                        <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    </div>
-                </div>
-            </div>
+      <div class="col-md-8 col-xs-12 d-flex flex-row-reverse card-function">
+        <div>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#addUser"
+            (click)="handleAdd()"
+          >
+            <i class="bi bi-plus-lg"></i> Thêm mới
+          </button>
         </div>
-
-        <div *ngIf="listUser && listUser.length > 0" class="border-top">
-            <table class="table table-hover" id="table-user">
-                <thead>
-                    <tr>
-                        <th scope="col" style="width: 46px"></th>
-                        <th scope="col">Tên đăng nhập</th>
-                        <th scope="col">Họ tên</th>
-                        <th scope="col">Chức vụ</th>
-                        <th scope="col">Đơn vị</th>
-                        <th scope="col" style="text-align: center">Trạng thái</th>
-                        <th scope="col" style="text-align: center">Lịch sử</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listUser">
-                        <td>
-                            <img src="../../../../../assets/img/UserLogo.jpg" style="width: 100%; border-radius: 50%" />
-                        </td>
-                        <td [routerLink]="['/User', 'UserDetail', item.USER_NAME]">
-                            {{ item.USER_NAME }}
-                        </td>
-                        <td [routerLink]="['/User', 'UserDetail', item.USER_NAME]">
-                            {{ item.FULL_NAME }}
-                        </td>
-                        <td [routerLink]="['/User', 'UserDetail', item.USER_NAME]">
-                            {{ item.TITLE_CODE }}
-                        </td>
-                        <td [routerLink]="['/User', 'UserDetail', item.USER_NAME]">
-                            {{ item.COMPANY_ID }}
-                        </td>
-                        <td style="text-align: center" [routerLink]="['/User', 'UserDetail', item.USER_NAME]">
-                            <span class="badge bg-success" *ngIf="item.ACTIVE == 'Y'"><i
-                                    class="bi bi-check-circle me-1"></i> Hoạt động</span>
-                            <span class="badge bg-danger" *ngIf="item.ACTIVE == 'N'"><i
-                                    class="bi bi-exclamation-octagon me-1"></i> Khoá</span>
-                        </td>
-                        <td style="text-align: center">
-                            <i class="bi bi-clock-history"></i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="float: right">
-                <ngb-pagination [pageSize]="filter.PageSize" [collectionSize]="filter.ItemCount"
-                    [(page)]="filter.CurrentPage" [maxSize]="5" (pageChange)="onChangePage($event)"
-                    aria-label="User pagination" class="pagination"></ngb-pagination>
-            </div>
+        <div>
+          <div class="input-group search-box">
+             <input
+              type="text"
+              class="form-control"
+              placeholder="Tìm kiếm"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+              [(ngModel)]="PageInfo.Keyword"
+              (ngModelChange)="onSearch($event)" />
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+          </div>
         </div>
+      </div>
     </div>
+
+    <div class="border-top">
+      <table class="table table-hover" id="table-user">
+        <thead>
+          <tr>
+            <th style="width: 50px; text-align: center">Stt</th>
+            <th style="width: 200px">Nhóm</th>
+            <th style="width: 200px">Tài khoản</th>
+            <th>Tên</th>
+            <th style="width: 100px; text-align: center">Trạng thái</th>
+            <th style="width: 150px; text-align: center">-/-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of lstdata.data; index as i">
+            <td style="text-align: center">{{ i + 1 }}</td>
+            <td [routerLink]="['/User', 'UserDetail', item.userName]">
+              {{ showNameFunc(item.groupId) }}
+            </td>
+            <td [routerLink]="['/User', 'UserDetail', item.userName]">
+              {{ item.userName }}
+            </td>
+            <td [routerLink]="['/User', 'UserDetail', item.userName]">
+              {{ item.fullName }}
+            </td>
+            <td style="text-align: center">
+              <img
+                *ngIf="item.state"
+                src="../../../../../assets/img/on.jpg"
+                style="width: 25px; margin-top: -1px"
+              />
+              <img
+                *ngIf="!item.state"
+                src="../../../../../assets/img/off.jpg"
+                style="width: 25px; margin-top: -1px"
+              />
+            </td>
+
+            <td style="text-align: center">
+              <i
+                class="bi bi-pencil-square"
+                style="font-size: 15px; cursor: pointer"
+                (click)="openEdit(item.id)"
+              ></i>
+              &nbsp;
+              <i
+                class="bi bi-trash3"
+                style="font-size: 15px; padding-left: 5px; cursor: pointer"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <div>
+          <app-pagination
+            [Pagination]="Pagination"
+            (changePage)="onChangePage($event)"
+          ></app-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+  <app-right-content 
+        [isOpenForm]="openForm" 
+        (closeForm)="oncloseForm($event)" 
+        (Save)="onSave($event)" 
+        *ngIf="openForm"
+        [customerId] = "customerId"
+        [isCreate]="isCreate"
+  ></app-right-content>
