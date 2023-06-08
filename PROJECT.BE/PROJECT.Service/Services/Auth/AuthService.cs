@@ -23,7 +23,7 @@ namespace PROJECT.BUSINESS.Services.Auth
             if (string.IsNullOrWhiteSpace(loginInfo.UserName) || string.IsNullOrWhiteSpace(loginInfo.Password))
             {
                 this.Status = false;
-                this.MessageObject.Code = "1001";
+                this.MessageObject.Code = "1001"; //Để trống username, mật khẩu
                 return null;
             }
             try
@@ -34,14 +34,14 @@ namespace PROJECT.BUSINESS.Services.Auth
                 if (account == null)
                 {
                     this.Status = false;
-                    this.MessageObject.Code = "1002";
+                    this.MessageObject.Code = "1002"; //Sai username hoặc mật khẩu
                     return null;
                 }
 
                 if (!account.State)
                 {
                     this.Status = false;
-                    this.MessageObject.Code = "1003";
+                    this.MessageObject.Code = "1003"; //Tài khoản bị khóa
                     return null;
                 }
 
