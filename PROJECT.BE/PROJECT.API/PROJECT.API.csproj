@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AD\AccountController.cs" />
     <Compile Remove="Controllers\AD\ConfigTextElementController.cs" />
     <Compile Remove="Controllers\AD\HistoryController.cs" />
     <Compile Remove="Controllers\AD\RoleController.cs" />
@@ -50,12 +51,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PROJECT.Core\PROJECT.Core.csproj" />
-    <ProjectReference Include="..\PROJECT.Service\PROJECT.Service.csproj" />
+    <ProjectReference Include="..\PROJECT.Core\PROJECT.CORE.csproj" />
+    <ProjectReference Include="..\PROJECT.Service\PROJECT.BUSINESS.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\MD\" />
+    <Folder Include="Controllers\AD\" />
   </ItemGroup>
 
 </Project>

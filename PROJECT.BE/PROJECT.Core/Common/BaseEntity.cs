@@ -1,10 +1,10 @@
-﻿namespace PROJECT.Core.Common
+﻿namespace PROJECT.CORE.Common
 {
     public class BaseEntity : IBaseEntity
     {
-        public string? CREATE_BY { get; set; }
-        public string? UPDATE_BY { get; set; }
-        public DateTime? CREATE_DATE { get; set; }
-        public DateTime? UPDATE_DATE { get; set; }
+        public string CreateBy { get; set; }
+        public string UpdateBy { get; set; }
+        public DateTime? CreateDay { get; set; }
+        public DateTime? UpdateDay { get; set; }
     }
 }

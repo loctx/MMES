@@ -2,12 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PROJECT.Core;
-using PROJECT.Service.Commons.Mapping;
-using PROJECT.Service.Interfaces.MD;
+using PROJECT.CORE;
+using PROJECT.BUSINESS.Common.Mapping;
 using System.Reflection;
+using PROJECT.BUSINESS.Services.AD;
 
-namespace PROJECT.Service
+namespace PROJECT.BUSINESS
 {
     public static class ServiceExtension
     {
@@ -18,7 +18,7 @@ namespace PROJECT.Service
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Connection")));
 
             //Add all service
-            var allProviderTypes = Assembly.GetAssembly(typeof(IUnitService))
+            var allProviderTypes = Assembly.GetAssembly(typeof(IAccountService))
              .GetTypes().Where(t => t.Namespace != null).ToList();
             foreach (var intfc in allProviderTypes.Where(t => t.IsInterface))
             {

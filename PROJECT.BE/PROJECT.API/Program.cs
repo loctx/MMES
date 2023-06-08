@@ -6,8 +6,8 @@ using System.Text;
 using ConfigurationManager = PROJECT.API.ConfigurationManager;
 using Microsoft.AspNetCore.Http.Features;
 using PROJECT.API.Hubs;
-using PROJECT.Core;
-using PROJECT.Service;
+using PROJECT.CORE;
+using PROJECT.BUSINESS;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
@@ -62,9 +62,9 @@ builder.Services.AddAuthentication(opt => {
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = ConfigurationManager.AppSetting["JWT:ValidIssuer"],
-        ValidAudience = ConfigurationManager.AppSetting["JWT:ValidAudience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]))
+        ValidIssuer = ConfigurationManager.AppSetting["JWT:Issuer"],
+        ValidAudience = ConfigurationManager.AppSetting["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Key"]))
     };
 });
 

@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using PROJECT.Core.Common;
-using PROJECT.Core.Models.AD;
-using PROJECT.Core.Models.MD;
+using PROJECT.CORE.Common;
+using PROJECT.CORE.Entities.AD;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace PROJECT.Core
+namespace PROJECT.CORE
 {
     public class AppDbContext : DbContext
     {
@@ -62,7 +61,6 @@ namespace PROJECT.Core
                 user = result?.Value;
             }
 
-
             foreach (var entry in this.ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
             {
                 if (entry.Entity is IBaseEntity)
@@ -70,20 +68,20 @@ namespace PROJECT.Core
                     var auditable = entry.Entity as IBaseEntity;
                     if (entry.State == EntityState.Added)
                     {
-                        auditable.CREATE_BY = user;
-                        auditable.CREATE_DATE = TimestampProvider();
+                        auditable.CreateBy = user;
+                        auditable.CreateDay = TimestampProvider();
                     }
                     else
                     {
-                        auditable.UPDATE_BY = user;
-                        auditable.UPDATE_DATE = TimestampProvider();
+                        auditable.UpdateBy = user;
+                        auditable.UpdateDay = TimestampProvider();
                     }
                 }
             }
         }
 
         #region System Manage
-       
+        public DbSet<tblAccount> tblAccount { get; set; }
         #endregion
 
         #region Master Data

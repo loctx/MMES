@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\PO\**" />
-    <EmbeddedResource Remove="Models\PO\**" />
-    <None Remove="Models\PO\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Configuration\MD\" />
-    <Folder Include="Models\AD\" />
   </ItemGroup>
 
 </Project>

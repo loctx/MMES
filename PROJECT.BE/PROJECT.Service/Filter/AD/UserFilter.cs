@@ -1,6 +1,6 @@
-﻿using PROJECT.Service.Filter.Common;
+﻿using PROJECT.BUSINESS.Filter.Common;
 
-namespace PROJECT.Service.Filter.AD
+namespace PROJECT.BUSINESS.Filter.AD
 {
     public class UserFilter : BaseFilter
     {

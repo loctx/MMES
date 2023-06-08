@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PROJECT.Service.Filter.Common
+namespace PROJECT.BUSINESS.Filter.Common
 {
     public class BaseFilter
     {

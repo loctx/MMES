@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PROJECT.Core.Models.MD;
 using System.Reflection;
 using System.Reflection.Metadata;
 
-namespace PROJECT.Core
+namespace PROJECT.CORE
 {
     internal static class ModelBuilderExtensions
     {
