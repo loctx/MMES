@@ -7,16 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\MD\**" />
+    <Compile Remove="Controllers\Common\**" />
     <Compile Remove="Models\**" />
     <Compile Remove="Service\**" />
-    <Content Remove="Controllers\MD\**" />
+    <Content Remove="Controllers\Common\**" />
     <Content Remove="Models\**" />
     <Content Remove="Service\**" />
-    <EmbeddedResource Remove="Controllers\MD\**" />
+    <EmbeddedResource Remove="Controllers\Common\**" />
     <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="Service\**" />
-    <None Remove="Controllers\MD\**" />
+    <None Remove="Controllers\Common\**" />
     <None Remove="Models\**" />
     <None Remove="Service\**" />
   </ItemGroup>

@@ -54,7 +54,7 @@ namespace PROJECT.BUSINESS.Common
                 var entity = _mapper.Map<TEntity>(dto);
                 var entityResult = await this._dbContext.Set<TEntity>().AddAsync(entity);
                 await this._dbContext.SaveChangesAsync();
-                var dtoResult = _mapper.Map<TDto>(entityResult);
+                var dtoResult = _mapper.Map<TDto>(entityResult.Entity);
                 return dtoResult;
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace PROJECT.BUSINESS.Common
                 pagedResponseDto.CurrentPage = filter.CurrentPage;
                 pagedResponseDto.PageSize = filter.PageSize;
                 pagedResponseDto.TotalPage = Convert.ToInt32(Math.Ceiling((double)pagedResponseDto.TotalRecord / (double)pagedResponseDto.PageSize));
-                pagedResponseDto.Data = query.Skip((filter.CurrentPage - 1) * filter.PageSize).Take(filter.PageSize);
+                pagedResponseDto.Data = _mapper.Map<List<TDto>>(query.Skip((filter.CurrentPage - 1) * filter.PageSize).Take(filter.PageSize));
                 return pagedResponseDto;
             }
             catch (Exception ex)

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
+using PROJECT.CORE.Entities.MD;
 using PROJECT.CORE.Entities.SO;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -35,7 +36,7 @@ namespace PROJECT.CORE
         }
 
         public Func<DateTime> TimestampProvider { get; set; } = ()
-            => DateTime.UtcNow;
+            => DateTime.Now;
 
         public override int SaveChanges()
         {
@@ -74,6 +75,8 @@ namespace PROJECT.CORE
                     }
                     else
                     {
+                        this.Entry(auditable).Property(x => x.CreateBy).IsModified = false;
+                        this.Entry(auditable).Property(x => x.CreateDay).IsModified = false;
                         auditable.UpdateBy = user;
                         auditable.UpdateDay = TimestampProvider();
                     }
@@ -87,6 +90,9 @@ namespace PROJECT.CORE
         #endregion
 
         #region Master Data
+        public DbSet<tblItems> tblItems { get; set; }
+        public DbSet<tblMDUnit> tblMDUnit { get; set; }
+
         #endregion
 
         #region Sale Order
