@@ -1,4 +1,5 @@
 ﻿using PROJECT.API.AppCode.Cache;
+using PROJECT.API.AppCode.Logger;
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Common.Class;
 
@@ -46,11 +47,9 @@ namespace PROJECT.API.AppCode.Util
             if (service.Exception != null)
             {
                 transferObject.MessageObject.MessageDetail += service.Exception.ToString();
+                transferObject.MessageObject.LogId += logId;
+                LoggerService.LogError(logId + Environment.NewLine + service.Exception.ToString());
             }
-
-            transferObject.MessageObject.LogId += logId;
-
-            //Ghi log
         }
     }
 }

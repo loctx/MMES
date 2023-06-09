@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,22 +13,40 @@ using System.Text.Json;
 using PROJECT.API.AppCode.Extensions;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using System.Net.Mime;
+using static System.Net.Mime.MediaTypeNames;
+using PROJECT.BUSINESS.Common.Class;
+using PROJECT.API.AppCode.Util;
+using PROJECT.API.AppCode.Enum;
+using NLog;
 
+LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
-{
-    options.InvalidModelStateResponseFactory = context =>
+//builder.Services.AddControllers();
+// Bắt lỗi model validation, dữ liệu đầu vào bị sai 
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
     {
-        var result = new ValidationFailedResult(context.ModelState);
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            return new OkObjectResult(new TransferObject()
+            {
+                Status = false,
+                MessageObject = new MessageObject()
+                {
+                    Code = "1000",
+                    MessageType = MessageType.Error,
+                    Message = MessageUtil.GetMessage("1000"),
+                    MessageDetail = string.Join("; ", context.ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                }
+            });
+        };
+    })
+    .AddXmlSerializerFormatters();
 
-        // TODO: add `using System.Net.Mime;` to resolve MediaTypeNames  
-        result.ContentTypes.Add(MediaTypeNames.Application.Json);
-
-        return result;
-    };
-});
+builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -37,7 +55,7 @@ builder.Services.AddSwaggerGen(options => {
     {
         Version = "V1",
         Title = "WebAPI",
-        Description = "PROJECT WebAPI"
+        Description = "<a href='/log' target = '_blank'>Bấm vào đây để xem log file</a>",
     });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
