@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Util;
-using PROJECT.API.Controllers.Common;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Auth;
 using PROJECT.BUSINESS.Filter.SO;
@@ -12,7 +11,7 @@ namespace PROJECT.API.Controllers.SO
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SaleOrderController : ControllerBase, IControllerBase
+    public class SaleOrderController : ControllerBase
     {
         public readonly ISaleOrderService _service;
         public SaleOrderController(ISaleOrderService service)
