@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
+using PROJECT.CORE.Entities.SO;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace PROJECT.CORE
@@ -82,9 +83,14 @@ namespace PROJECT.CORE
 
         #region System Manage
         public DbSet<tblAccount> tblAccount { get; set; }
+        public DbSet<tblMenu> tblMenu { get; set; }
         #endregion
 
         #region Master Data
+        #endregion
+
+        #region Sale Order
+        public DbSet<tblStoreOrderOperating> tblStoreOrderOperating { get; set; }
         #endregion
 
     }

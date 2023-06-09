@@ -11,6 +11,7 @@ using PROJECT.BUSINESS.Common.Class;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Services.Auth;
 using PROJECT.API.AppCode.Enum;
+using PROJECT.API.AppCode.Extensions;
 
 namespace PROJECT.API.Controllers.Auth
 {
@@ -27,6 +28,7 @@ namespace PROJECT.API.Controllers.Auth
         }
 
         [HttpPost("Login")]
+        //[ValidateModel]
         public async Task<IActionResult> Login([FromBody] LoginDto loginInfo)
         {
             var transferObject = new TransferObject();

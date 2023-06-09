@@ -10,10 +10,25 @@ using PROJECT.CORE;
 using PROJECT.BUSINESS;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using PROJECT.API.AppCode.Extensions;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var result = new ValidationFailedResult(context.ModelState);
+
+        // TODO: add `using System.Net.Mime;` to resolve MediaTypeNames  
+        result.ContentTypes.Add(MediaTypeNames.Application.Json);
+
+        return result;
+    };
+});
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -98,6 +113,9 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/V1/swagger.json", "PROJECT WebAPI");
     });
 }
+
+//app.ConfigureCustomExceptionMiddleware();
+app.UseExceptionHandler("/api/error/Error");
 
 app.UseHttpsRedirection();
 
