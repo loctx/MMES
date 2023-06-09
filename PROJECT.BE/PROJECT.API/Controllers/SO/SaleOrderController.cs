@@ -4,8 +4,10 @@ using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Auth;
+using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
+using PROJECT.CORE.Dtos.SO;
 
 namespace PROJECT.API.Controllers.SO
 {
@@ -33,6 +35,26 @@ namespace PROJECT.API.Controllers.SO
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
                 MessageUtil.GetMessage("2000", _service, transferObject);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] tblStoreOrderOperatingDto saleOrder)
+        {
+            var transferObject = new TransferObject();
+            await _service.Update(saleOrder);
+            if (_service.Status)
+            {
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                MessageUtil.GetMessage("2003", _service, transferObject);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                MessageUtil.GetMessage("2004", _service, transferObject);
             }
             return Ok(transferObject);
         }

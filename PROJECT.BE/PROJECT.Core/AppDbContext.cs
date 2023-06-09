@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.MD;
@@ -19,6 +20,7 @@ namespace PROJECT.CORE
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyAllConfigurations();
+            //modelBuilder.Entity<tblMDUnit>().Property(x => x.CreateDay).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
