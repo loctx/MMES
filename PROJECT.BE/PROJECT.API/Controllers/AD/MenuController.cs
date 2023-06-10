@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PROJECT.API.AppCode.Enum;
+using PROJECT.API.AppCode.Extensions;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Filter.SO;
@@ -31,7 +32,7 @@ namespace PROJECT.API.Controllers.AD
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2000", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             return Ok(transferObject);
         }

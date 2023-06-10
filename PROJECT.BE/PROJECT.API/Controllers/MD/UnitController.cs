@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROJECT.API.AppCode.Enum;
+using PROJECT.API.AppCode.Extensions;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Auth;
@@ -36,7 +37,7 @@ namespace PROJECT.API.Controllers.MD
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2000", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             return Ok(transferObject);
         }
@@ -51,13 +52,13 @@ namespace PROJECT.API.Controllers.MD
                 transferObject.Data = result;
                 transferObject.Status = true;
                 transferObject.MessageObject.MessageType = MessageType.Success;
-                MessageUtil.GetMessage("2002", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             else
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2003", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             return Ok(transferObject);
         }
@@ -71,13 +72,13 @@ namespace PROJECT.API.Controllers.MD
             {
                 transferObject.Status = true;
                 transferObject.MessageObject.MessageType = MessageType.Success;
-                MessageUtil.GetMessage("2003", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             else
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2004", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             return Ok(transferObject);
         }

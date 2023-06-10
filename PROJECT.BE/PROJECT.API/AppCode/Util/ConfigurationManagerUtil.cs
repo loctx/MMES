@@ -1,9 +1,9 @@
-﻿namespace PROJECT.API.AppCode
+﻿namespace PROJECT.API.AppCode.Util
 {
-    static class ConfigurationManager
+    static class ConfigurationManagerUtil
     {
         public static IConfiguration AppSetting { get; set; }
-        static ConfigurationManager()
+        static ConfigurationManagerUtil()
         {
             AppSetting = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
         }

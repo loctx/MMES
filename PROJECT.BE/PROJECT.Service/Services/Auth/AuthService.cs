@@ -28,6 +28,8 @@ namespace PROJECT.BUSINESS.Services.Auth
             }
             try
             {
+                throw new Exception("test");
+
                 var account = this._dbContext.tblAccount.FirstOrDefault(
                     x => x.UserName == loginInfo.UserName &&
                     x.Password == this.CryptographyMD5(loginInfo.Password));

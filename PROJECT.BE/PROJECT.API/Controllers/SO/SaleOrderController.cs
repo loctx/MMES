@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PROJECT.API.AppCode.Enum;
+using PROJECT.API.AppCode.Extensions;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Auth;
@@ -34,7 +35,7 @@ namespace PROJECT.API.Controllers.SO
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2000", _service, transferObject);
+                transferObject.GetMessage("2000", _service);
             }
             return Ok(transferObject);
         }
@@ -48,13 +49,13 @@ namespace PROJECT.API.Controllers.SO
             {
                 transferObject.Status = true;
                 transferObject.MessageObject.MessageType = MessageType.Success;
-                MessageUtil.GetMessage("2003", _service, transferObject);
+                transferObject.GetMessage("2003", _service);
             }
             else
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("2004", _service, transferObject);
+                transferObject.GetMessage("2004", _service);
             }
             return Ok(transferObject);
         }

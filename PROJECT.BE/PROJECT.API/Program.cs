@@ -3,7 +3,6 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using ConfigurationManager = PROJECT.API.ConfigurationManager;
 using Microsoft.AspNetCore.Http.Features;
 using PROJECT.API.Hubs;
 using PROJECT.CORE;
@@ -18,8 +17,18 @@ using PROJECT.BUSINESS.Common.Class;
 using PROJECT.API.AppCode.Util;
 using PROJECT.API.AppCode.Enum;
 using NLog;
+using NLog.Extensions.Logging;
 
-LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+//LogManager.Setup().LoadConfigurationFromFile(Path.Combine(Directory.GetCurrentDirectory(), "nlog.config"));
+var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.json", optional: true)
+                .AddEnvironmentVariables().Build();
+var logger = LogManager.Setup()
+                       .LoadConfigurationFromSection(config)
+                       .GetCurrentClassLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddControllers();
@@ -29,22 +38,9 @@ builder.Services.AddControllers()
     {
         options.InvalidModelStateResponseFactory = context =>
         {
-            return new OkObjectResult(new TransferObject()
-            {
-                Status = false,
-                MessageObject = new MessageObject()
-                {
-                    Code = "1000",
-                    MessageType = MessageType.Error,
-                    Message = MessageUtil.GetMessage("1000"),
-                    MessageDetail = string.Join("; ", context.ModelState.Values
-                                        .SelectMany(x => x.Errors)
-                                        .Select(x => x.ErrorMessage))
-                }
-            });
+            return ExceptionHandler.ExceptionValidationResult(context);
         };
-    })
-    .AddXmlSerializerFormatters();
+    });
 
 builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
@@ -95,9 +91,9 @@ builder.Services.AddAuthentication(opt => {
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = ConfigurationManager.AppSetting["JWT:Issuer"],
-        ValidAudience = ConfigurationManager.AppSetting["JWT:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Key"]))
+        ValidIssuer = ConfigurationManagerUtil.AppSetting["JWT:Issuer"],
+        ValidAudience = ConfigurationManagerUtil.AppSetting["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManagerUtil.AppSetting["JWT:Key"]))
     };
 });
 
@@ -132,8 +128,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.ConfigureCustomExceptionMiddleware();
-app.UseExceptionHandler("/api/error/Error");
+//Truyền httpcontext vào trong TransferObject để lấy thông tin http request
+TransferObjectExtension.SetHttpContextAccessor(app.Services.GetRequiredService<IHttpContextAccessor>());
+
+//Cho phép đọc HttpRequest.Body nhiều lần
+app.EnableRequestBodyRewind();
 
 app.UseHttpsRedirection();
 

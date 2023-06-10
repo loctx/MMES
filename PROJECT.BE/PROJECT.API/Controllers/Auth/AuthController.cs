@@ -31,6 +31,9 @@ namespace PROJECT.API.Controllers.Auth
         //[ValidateModel]
         public async Task<IActionResult> Login([FromBody] LoginDto loginInfo)
         {
+            var a = new TransferObject();
+            a = null;
+            a.Status = false;
             var transferObject = new TransferObject();
             var account = _service.CheckLogin(loginInfo);
             if (_service.Status)
@@ -47,7 +50,7 @@ namespace PROJECT.API.Controllers.Auth
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                MessageUtil.GetMessage("1000", _service, transferObject);
+                transferObject.GetMessage("1000", _service);
             }
             return Ok(transferObject);
         }
