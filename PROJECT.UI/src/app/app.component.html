@@ -1,4 +1,8 @@
-<header id="header" class="header fixed-top d-flex align-items-center" *ngIf="isUserAuthenticated();">
+<router-outlet></router-outlet>
+
+
+
+<!-- <header id="header" class="header fixed-top d-flex align-items-center" *ngIf="isUserAuthenticated();">
 
   <div class="d-flex align-items-center justify-content-between">
     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -10,7 +14,7 @@
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
 
-      <!-- Chuyển đổi ngôn ngữ -->
+      
       <li class="nav-item">
         <div class="nav-link nav-icon">
           <img *ngIf="lang == 'vi'" src="../assets/img/vi.png" style="float: right;width: 26px;" (click)="switchLang('en')">
@@ -50,7 +54,7 @@
             <a href="#">Show all notifications</a>
           </li>
 
-        </ul><!-- End Notification Dropdown Items -->
+        </ul>
 
       </li>
 
@@ -59,7 +63,7 @@
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-chat-left-text"></i>
           <span class="badge bg-success badge-number">3</span>
-        </a><!-- End Messages Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
           <li class="dropdown-header">
@@ -88,9 +92,9 @@
             <a href="#">Show all messages</a>
           </li>
 
-        </ul><!-- End Messages Dropdown Items -->
+        </ul>
 
-      </li><!-- End Messages Nav -->
+      </li>
 
       <li class="nav-item dropdown pe-3">
 
@@ -98,7 +102,7 @@
           <img src="../assets/img/UserLogo.jpg" alt="Profile" class="rounded-circle">
           <span class="d-none d-md-block dropdown-toggle ps-2">{{'HEADER_HELLO' | translate}}
             {{dataUser?.FULL_NAME}}</span>
-        </a><!-- End Profile Iamge Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
@@ -145,13 +149,13 @@
               <span>Đăng xuất</span>
             </a>
           </li>
-        </ul><!-- End Profile Dropdown Items -->
-      </li><!-- End Profile Nav -->
+        </ul>
+      </li>
     </ul>
-  </nav><!-- End Icons Navigation -->
-</header><!-- End Header -->
+  </nav>
+</header>
 
-<!-- ======= Sidebar ======= -->
+
 <aside id="sidebar" class="sidebar" *ngIf="isUserAuthenticated();">
   <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -232,6 +236,5 @@
 </aside>
 
 <main id="main" class="main">
-  <!-- <div id="alert-message"></div> -->
   <router-outlet></router-outlet>
-</main>
+</main> -->

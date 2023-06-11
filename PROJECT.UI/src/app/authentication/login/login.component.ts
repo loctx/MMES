@@ -8,6 +8,8 @@ import { Login } from 'src/app/models/Authentication/login.model';
 import { TranferObject } from 'src/app/models/Common/tranfer-object.model';
 import { environment } from 'src/environments/environment';
 import { ToastrcustomService } from '../../Interceptor/toastrcustom';
+import {GlobalService} from '../../services/Common/global.service';
+
 declare function Message(response: TranferObject): any;
 declare function ShowLoading(): any;
 declare function HideLoading(): any;
@@ -24,7 +26,8 @@ export class LoginComponent {
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private _location: Location,
-    private toastr: ToastrcustomService
+    private toastr: ToastrcustomService,
+    private globalService: GlobalService
   ) {}
 
   invalidLogin?: boolean;
@@ -39,31 +42,24 @@ export class LoginComponent {
   public login = () => {
     ShowLoading();
     this.http
-      .post<TranferObject>(this.apiUrl + 'Account/Login', this.loginRequest, {
+      .post<TranferObject>(this.apiUrl + 'Auth/Login', this.loginRequest, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
       })
       .subscribe({
         next: (response: any) => {
-          if (response.errorCode == '200') {
-            if (response.Message?.MessageType == 'E') {
-              HideLoading();
-              Message(response);
-            } else {
-              localStorage.setItem('jwt', response.access_token);
+          if (response.Status) {
+            localStorage.setItem('jwt', response?.Data?.accessToken);
               // localStorage.setItem("user", JSON.stringify(response.Data.User, null, 2));
               // localStorage.setItem("lstRight", JSON.stringify(response.Data.ListRight, null, 2));
-
+              this.globalService.setUserInfo(response.Data)
               this.invalidLogin = false;
-              this.router.navigate(['']).then(() => {
-                window.location.reload();
-              });
+              this.router.navigate(['master-data/unit'])
               HideLoading();
-            }
           } else {
              HideLoading();
-            this.toastr.showError(response.message);
+            this.toastr.showError(response?.MessageObject?.Message);
           }
         },
       });

@@ -88710,8 +88710,8 @@ function (_super) {
 
     var children = contentGroup.children();
     var targetItem = children[targetItemIndex];
-    var itemCount = children.length;
-    var pCount = !itemCount ? 0 : 1;
+    var TotalPage = children.length;
+    var pCount = !TotalPage ? 0 : 1;
     var result = {
       contentPosition: [contentGroup.x, contentGroup.y],
       pageCount: pCount,
@@ -88737,7 +88737,7 @@ function (_super) {
     // (4) The window is to narrow to contain more than
     // one item, we should make sure that the page can be fliped.
 
-    for (var i = targetItemIndex + 1, winStartItemInfo = targetItemInfo, winEndItemInfo = targetItemInfo, currItemInfo = null; i <= itemCount; ++i) {
+    for (var i = targetItemIndex + 1, winStartItemInfo = targetItemInfo, winEndItemInfo = targetItemInfo, currItemInfo = null; i <= TotalPage; ++i) {
       currItemInfo = getItemInfo(children[i]);
 
       if ( // Half of the last item is out of the window.

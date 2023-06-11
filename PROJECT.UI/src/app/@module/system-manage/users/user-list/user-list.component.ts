@@ -15,10 +15,9 @@ export class UserListComponent implements OnInit {
   filter: UserFilter = {
     CurrentPage: 1,
     TotalPage: 0,
-    ItemCount: 0,
     PageSize: 15,
     IsLoading: true,
-    KeySearch: 'Empty',
+    KeyWord: 'Empty',
     Data: []
   }
 
@@ -36,9 +35,9 @@ export class UserListComponent implements OnInit {
   searchUser(event: any) {
     this.filter.CurrentPage = 1;
     if (event.target.value) {
-      this.filter.KeySearch = event.target.value;
+      this.filter.KeyWord = event.target.value;
     } else {
-      this.filter.KeySearch = "Empty"
+      this.filter.KeyWord = "Empty"
     }
     this._service.getListUser(this.filter)
       .subscribe({

@@ -10,10 +10,6 @@ export class UnitService {
   constructor(private _commonService : CommonService) { }
   
   searchUnit(pagination? : UnitFilter, isLoading?: boolean){
-    return this._commonService.getRequest(`/api/Unit/GetList`, pagination, isLoading)
-  }
-
-  updateUnit(request : T_MD_UNIT){
-    return this._commonService.putRequest(`/api/Unit/Update`, request)
+    return this._commonService.getRequest(`Unit/Search`, pagination, isLoading)
   }
 }

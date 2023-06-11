@@ -15,10 +15,13 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { DischardComponent } from './dischard/dischard.component';
 import { TransmodeComponent } from './transmode/transmode.component';
 import { VendorComponent } from './vendor/vendor.component';
+import { CustomerComponent } from './customer/customer.component';
+import {PaginationComponent} from '../../utils/helper/pagination/pagination.component';
 
 
 @NgModule({
   declarations: [
+    PaginationComponent,
     SaleOfficeComponent,
     UnitComponent,
     MaterialComponent,
@@ -27,6 +30,7 @@ import { VendorComponent } from './vendor/vendor.component';
     DischardComponent,
     TransmodeComponent,
     VendorComponent,
+    CustomerComponent,
   ],
   imports: [
     CommonModule,

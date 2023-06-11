@@ -8913,7 +8913,7 @@ function pushOrConcat(base, toPush) {
     const footerFont = toFont(options.footerFont);
     const titleLineCount = title.length;
     const footerLineCount = footer.length;
-    const bodyLineItemCount = body.length;
+    const bodyLineTotalPage = body.length;
     const padding = toPadding(options.padding);
     let height = padding.height;
     let width = 0;
@@ -8924,7 +8924,7 @@ function pushOrConcat(base, toPush) {
     }
     if (combinedBodyLength) {
         const bodyLineHeight = options.displayColors ? Math.max(boxHeight, bodyFont.lineHeight) : bodyFont.lineHeight;
-        height += bodyLineItemCount * bodyLineHeight + (combinedBodyLength - bodyLineItemCount) * bodyFont.lineHeight + (combinedBodyLength - 1) * options.bodySpacing;
+        height += bodyLineTotalPage * bodyLineHeight + (combinedBodyLength - bodyLineTotalPage) * bodyFont.lineHeight + (combinedBodyLength - 1) * options.bodySpacing;
     }
     if (footerLineCount) {
         height += options.footerMarginTop + footerLineCount * footerFont.lineHeight + (footerLineCount - 1) * options.footerSpacing;

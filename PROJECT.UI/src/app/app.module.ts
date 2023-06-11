@@ -1,10 +1,22 @@
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateCacheModule, TranslateCacheSettings, TranslateCacheService } from 'ngx-translate-cache';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {
+  TranslateCacheModule,
+  TranslateCacheSettings,
+  TranslateCacheService,
+} from 'ngx-translate-cache';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule } from '@angular/forms';
@@ -17,10 +29,20 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { LoginComponent } from './authentication/login/login.component';
 import * as jQuery from 'jquery';
 import { HeaderInterceptor } from './services/Common/header-interceptor.service';
- import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
+import { FooterModule } from './@module/layout/footer/footer.module';
+import { NavbarModule } from './@module/layout/navbar/navbar.module';
+import { SidebarModule } from './@module/layout/sidebar/sidebar.module';
+import { LayoutComponent } from './@module/layout/layout.component';
+import {AuthGuard} from 'src/app/guards/auth-guard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, LayoutComponent],
   imports: [
+    FooterModule,
+    NavbarModule,
+    SidebarModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -69,8 +91,10 @@ import { HeaderInterceptor } from './services/Common/header-interceptor.service'
       cookieExpiry: 1, // default value is 720, a month. Set to a negative value and the cookie becomes a session cookie.
       cookieAttributes: 'SameSite=Strict; Secure', // no default, optional specification of additional attributes.
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
+    AuthGuard,
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -84,9 +108,13 @@ export class AppModule {}
 
 //thay đổi đường dẫn khi thay đổi domain API để lấy tệp json ngôn ngữ
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'https://localhost:4008/api/LanguageTranslate/GetLang/', '.json');
+  return new TranslateHttpLoader(
+    http,
+    'https://localhost:4008/api/LanguageTranslate/GetLang/',
+    '.json'
+  );
 }
 
 export function tokenGetter() {
-  return localStorage.getItem("jwt");
+  return localStorage.getItem('jwt');
 }

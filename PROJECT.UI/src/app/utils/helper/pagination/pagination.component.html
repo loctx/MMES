@@ -1,0 +1,8 @@
+<nav aria-label="Page navigation example" *ngIf="totalPage > 1">
+    <ul class="pagination">
+        <li (click)="decreasePage()" class="page-item" [ngClass]="page === 1 ? 'disabled' : ''"><div class="page-link" >Trang trước</div></li>
+        <li (click)="goToPage(pageNumber)" *ngFor="let pageNumber of getPageNumbers(), index as i" class="page-item"
+            [ngClass]="i == page - 1 ? 'active' : ''"><div class="page-link">{{pageNumber}}</div></li>
+        <li (click)="increasePage()" class="page-item" [ngClass]="page === totalPage ? 'disabled' : ''"><div class="page-link">Trang sau</div></li>
+    </ul>
+</nav>

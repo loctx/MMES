@@ -19,10 +19,9 @@ export class SaleOfficeComponent implements OnInit {
   filter: SaleOfficeFilter = {
     CurrentPage: 1,
     TotalPage: 0,
-    ItemCount: 0,
     PageSize: 15,
     IsLoading: true,
-    KeySearch: "",
+    KeyWord: "",
     Organize: "",
     Data: []
   }
@@ -82,7 +81,7 @@ export class SaleOfficeComponent implements OnInit {
 
   searchSaleOffice(event: any) {
     this.filter.CurrentPage = 1;
-    this.filter.KeySearch = event.target.value;
+    this.filter.KeyWord = event.target.value;
     this.searchSaleOfficeCommon(this.filter)
   }
   onChangePage(event: any) {

@@ -5,56 +5,58 @@ import { UnitService } from 'src/app/services/MD/unit.service';
 
 @Component({
   selector: 'app-unit',
-  templateUrl: './unit.component.html'
+  templateUrl: './unit.component.html',
+  styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
+  breadcrumbList: any[] = [
+    {
+      name: "Trang chủ",
+      path: ""
+    },
+    {
+      name: "Đơn vị tính",
+      path: "/master-data/unit"
+    }
+  ];
+  openDrawer:boolean = false;
   constructor(private _service: UnitService) { }
 
   listUnit: T_MD_UNIT[] = [];
   filter: UnitFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
-    ItemCount: 0,
-    PageSize: 15,
-    IsLoading: true,
-    KeySearch: '',
-    Data: []
+    TotalPage: 1,
+    PageSize: 10,
+    KeyWord: '',
   }
   ngOnInit(): void {
+    this.loadInit();
+  }
+  
+  handleDrawer(open:boolean) {
+    this.openDrawer = open;
+  }
+
+  saveDetail() {
+    this.openDrawer = false;
+  }
+
+  loadInit() {
     this._service.searchUnit(this.filter, true)
       .subscribe({
-        next: (response) => {
-          this.listUnit = response.Data.Data;
-          this.filter = response.Data;
+        next: ({Data}) => {
+          console.log('Data: ', Data);
+          this.listUnit = Data.Data;
+          this.filter = Data
+          console.log(this.filter);
         },
         error: (response) => { console.log(response) }
       });
   }
-  searchUnit(event: any) {
-    this.filter.CurrentPage = 1;
-    this.filter.KeySearch = event.target.value;
-    this._service.searchUnit(this.filter)
-      .subscribe({
-        next: (response) => {
-          this.listUnit = response.Data.Data;
-          this.filter = response.Data;
-        },
-        error: (response) => { console.log(response); }
-      });
-  }
+
   onChangePage(event: any) {
     this.filter.CurrentPage = event;
-    this._service.searchUnit(this.filter)
-      .subscribe({
-        next: (response) => {
-          this.listUnit = response.Data.Data;
-          this.filter = response.Data;
-        },
-        error: (response) => { console.log(response); }
-      });
+    this.loadInit()
   }
-
-  updateUnit(item : T_MD_UNIT){
-    this._service.updateUnit(item);
-  }
+  
 }
