@@ -120,7 +120,7 @@ export class SidebarComponent implements OnInit {
       this.hiddenElement();
     } else {
       this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-        if (res.matches) {
+        if (res.matches && this.sidenav) {
           this.sidenav.mode = 'over';
           this.sidenav?.close();
         } else {

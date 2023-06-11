@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from '../Common/common.service';
-import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
-import { T_MD_UNIT } from 'src/app/models/MD/T_MD_UNIT.model';
+import { UnitFilter, BaseFormUnit } from 'src/app/@filter/MD/unit-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +10,13 @@ export class UnitService {
   
   searchUnit(pagination? : UnitFilter, isLoading?: boolean){
     return this._commonService.getRequest(`Unit/Search`, pagination, isLoading)
+  }
+
+  InsertUnit(parameters? : BaseFormUnit, isLoading?: boolean){
+    return this._commonService.postRequest(`Unit/Insert`, parameters, isLoading)
+  }
+
+  UpdateUnit(parameters? : BaseFormUnit, isLoading?: boolean){
+    return this._commonService.putRequest(`Unit/Update`, parameters, isLoading)
   }
 }
