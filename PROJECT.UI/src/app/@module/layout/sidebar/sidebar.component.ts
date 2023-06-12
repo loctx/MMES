@@ -1,34 +1,7 @@
-// import { Component, OnInit } from "@angular/core";
-// import { TranslateService } from '@ngx-translate/core';
-// import {GlobalService} from 'src/app/services/Common/global.service';
-// import {MatTreeNestedDataSource} from '@angular/material/tree';
-
-// @Component({
-//   selector: "sidebar-cmp",
-//   templateUrl: "sidebar.component.html",
-//   styleUrls: ["./sidebar.component.scss"],
-// })
-// export class SidebarComponent implements OnInit {
-//   show:boolean = true;
-//   dataSource = new MatTreeNestedDataSource<any>();
-//   constructor(public translate: TranslateService, private globalService: GlobalService){
-//     translate.addLangs(['vi', 'en']);
-//     translate.setDefaultLang('vi');
-//     this.globalService.toggleSidebarSubject.subscribe((value) => {
-//       this.show = value
-//     });
-//   }
-// }
-
-
-
-import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/AD/user.service';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {MatSidenav} from '@angular/material/sidenav';
 import {NavigationEnd} from '@angular/router';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {GlobalService} from 'src/app/services/Common/global.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -39,22 +12,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SidebarComponent implements OnInit {
   ROUTE_DATA: any = [];
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
   opened: boolean;
   show: boolean;
   urlAvartar: string = '';
   currentRoute: string = '';
   elem: any;
   loading: boolean = false;
-  dataSource = new MatTreeNestedDataSource<any>();
+  dataSource:any = []
   username: string = '';
   dataRouter: string[] = [];
   constructor(
     private router: Router,
-    private cdr: ChangeDetectorRef,
     private userService: UserService,
-    private observer: BreakpointObserver,
     public translate: TranslateService, private globalService: GlobalService
   ) {
     this.opened = true;
@@ -79,7 +48,6 @@ export class SidebarComponent implements OnInit {
             this.router.navigate(['/Login']);
           }
         }
-        this.hiddenElement();
       }
     });
   }
@@ -111,109 +79,20 @@ export class SidebarComponent implements OnInit {
 
   ngAfterViewInit() {
     this.loadInit();
-    if (
-      this.currentRoute.includes('xhxb-full-screen') ||
-      this.currentRoute.includes('dh-full-screen') ||
-      this.currentRoute.includes('trough-sort') ||
-      this.currentRoute.includes('trough-xr-sort')
-    ) {
-      this.hiddenElement();
-    } else {
-      this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-        if (res.matches && this.sidenav) {
-          this.sidenav.mode = 'over';
-          this.sidenav?.close();
-        } else {
-          if (this.sidenav != undefined) {
-            this.sidenav.mode = 'side';
-            this.sidenav?.open();
-          }
-        }
-        this.cdr.detectChanges();
-      });
-    }
   }
 
   ngOnInit(): void {
-    this.hiddenElement();
     this.globalService.getLoading().subscribe((value) => {
       this.loading = value;
     });
-  }
-
-  hideSubMenu(e: any) {
-    e.stopPropagation();
-    if (e.target.classList.contains('arrow')) {
-      let arrowParent = e.target.parentElement.parentElement;
-      arrowParent.classList.toggle('showMenu');
-      return;
-    } else {
-      let arrowParent = e.target.parentElement.parentElement.parentElement;
-      arrowParent.classList.toggle('showMenu');
-      return;
-    }
-  }
-
-  hideSubMenuChild(e: any) {
-    e.stopPropagation();
-    let arrowParent = e.target.parentElement.parentElement;
-    arrowParent.classList.toggle('showMenuChild');
-  }
-
-  hideMenu() {
-    let sidebar = document.querySelector('.sidebar');
-    sidebar?.classList.toggle('close');
   }
 
   reload() {
     location.reload();
   }
 
-  LogOut() {
-    this.userService.logOut();
-    this.router.navigate(['/Login']); // this.reload()
-  }
-
   openUrl(url: string) {
     this.router.navigate(['/Home/' + url]);
-  }
-
-  hiddenElement() {
-    const headerElement = document.getElementsByClassName('header')[0] as any;
-    const searchElement = document.getElementsByClassName('search-bar')[0] as any;
-    const pagingElement = document.getElementById('paging-element') as any;
-    if (this.currentRoute.includes('xhxb-full-screen') || this.currentRoute.includes('dh-full-screen')) {
-      this.sidenav?.close();
-      if (headerElement) {
-        headerElement.style.display = 'none';
-      }
-      if (searchElement) {
-        searchElement.style.display = 'none';
-      }
-      if (pagingElement) {
-        pagingElement.style.display = 'none';
-      }
-      this.elem = document.documentElement;
-    } else if (this.currentRoute.includes('trough-sort') || this.currentRoute.includes('trough-xr-sort')) {
-      this.sidenav?.close();
-      if (searchElement) {
-        searchElement.style.display = 'none';
-      }
-      if (pagingElement) {
-        pagingElement.style.display = 'none';
-      }
-      this.elem = document.documentElement;
-    } else {
-      if (headerElement) {
-        headerElement.style.display = 'flex';
-      }
-      if (searchElement) {
-        searchElement.style.display = 'flex';
-      }
-      if (pagingElement) {
-        pagingElement.style.display = 'flex';
-      }
-    }
   }
 
   categoryParent() {
@@ -236,7 +115,7 @@ export class SidebarComponent implements OnInit {
         menu.push(item);
       }
     }
-    this.dataSource.data = menu;
+    this.dataSource = menu;
   }
 
   // kiem tra xem list role cua user va list role cua menu/submenu co chung role khong

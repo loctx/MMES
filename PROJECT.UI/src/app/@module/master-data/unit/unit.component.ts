@@ -126,7 +126,6 @@ export class UnitComponent implements OnInit {
           ...Data,
           KeyWord: this.filter.KeyWord,
         };
-        console.log('this.filter: ', this.filter);
       },
       error: (response) => {
         console.log(response);

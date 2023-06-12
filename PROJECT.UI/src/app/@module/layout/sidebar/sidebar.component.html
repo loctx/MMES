@@ -1,110 +1,20 @@
-<!-- <aside [ngClass]="{'sidebar-hidden': !show, 'sidebar-visible': show}" id="sidebar" class="sidebar">
+<aside [ngClass]="{'sidebar-hidden': !show, 'sidebar-visible': show}" id="sidebar" class="sidebar">
 	<ul class="sidebar-nav" id="sidebar-nav">
-		<li class="nav-item">
-			<a class="nav-link collapsed" href="index.html">
-				<i class="bi bi-house"></i>
-				<span>{{'MNU_HOME' | translate }}</span>
+		<li *ngFor="let item of dataSource; index as i" class="nav-item">
+			<a *ngIf="!item?.children || item?.children?.length == 0" class="nav-link collapsed" routerLink="{{ item.url || '#' }}">
+				<i class="bi" [ngClass]="item.icon || ''"></i>
+				<span>{{ item.name }}</span>
 			</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#po-dcch" data-bs-toggle="collapse">
-				<i class="bi bi-journal-text"></i><span>Quản lý kinh doanh</span><i
-					class="bi bi-chevron-down ms-auto"></i>
+			<a *ngIf="item?.children?.length > 0" class="nav-link collapsed" [attr.data-bs-target]="'#po-dcch' + i" data-bs-toggle="collapse">
+				<i class="bi" [ngClass]="item.icon || ''"></i>
+				<span>{{ item.name }}</span>
+				<i class="bi bi-chevron-down ms-auto"></i>
 			</a>
-			<ul id="po-dcch" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-				<li><a routerLink="MasterData/Plant"><i class="bi bi-circle"></i><span>Chi tiết đơn hàng</span></a></li>
-				<li><a routerLink="MasterData/Unit"><i class="bi bi-circle"></i><span>Danh sách đơn hàng</span></a></li>
-			</ul>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#master-data-nav" data-bs-toggle="collapse">
-				<i class="bi bi-journal-text"></i><span>Danh mục</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="master-data-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-				<li><a routerLink="ProjectProfile"><i class="bi bi-circle"></i><span>Khách hàng</span></a></li>
-				<li><a routerLink="MasterData/Unit"><i class="bi bi-circle"></i><span>Đơn vị tính</span></a></li>
-				<li><a routerLink="MasterData/Material"><i class="bi bi-circle"></i><span>Hàng hoá</span></a></li>
-				<li><a routerLink="MasterData/Plant"><i class="bi bi-circle"></i><span>Kho xuất hàng</span></a></li>
-				<li><a routerLink="MasterData/Vehicle"><i class="bi bi-circle"></i><span>Phương tiện</span></a></li>
-			</ul>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#setting-nav" data-bs-toggle="collapse">
-				<i class="bi bi-gear"></i><span>Quản trị hệ thống</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="setting-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-				<li><a routerLink="SystemManage/SystemConfig"><i class="bi bi-circle"></i><span>Cấu hình hệ
-							thống</span></a></li>
-				<li><a routerLink="SystemManage/Organize"><i class="bi bi-circle"></i><span>Cấu trúc tổ chức</span></a>
+			<ul *ngIf="item?.children?.length > 0" [id]="'po-dcch' + i" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+				<li *ngFor="let child of item.children; index as i">
+					<a *ngIf="!child.children || child?.children?.length == 0" routerLink="{{ child.url }}"><i class="bi bi-circle"></i><span>{{ child.name }}</span></a>
 				</li>
-
-				<li>
-					<a routerLink="SystemManage/Users">
-						<i class="bi bi-circle"></i><span>Quản lý người dùng</span>
-					</a>
-				</li>
-				<li>
-					<a routerLink="UserGroup">
-						<i class="bi bi-circle"></i><span>Quản lý nhóm người dùng</span>
-					</a>
-				</li>
-				<li>
-					<a routerLink="SystemManage/Right">
-						<i class="bi bi-circle"></i><span>Quản lý hệ thống quyền</span>
-					</a>
-				</li>
-			</ul>
-		</li>
-
-		<li class="nav-item">
-			<a class="nav-link collapsed" data-bs-target="#activity-nav" data-bs-toggle="collapse">
-				<i class="bi bi-activity"></i><span>Hoạt động</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="activity-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-				<li>
-					<a routerLink="SystemManage/HistoryLogin"><i class="bi bi-circle"></i><span>Lịch sử đăng
-							nhập</span></a>
-				</li>
-				<li>
-					<a routerLink="SystemManage/UserOnline"><i class="bi bi-circle"></i><span>Đang hoạt động</span></a>
-				</li>
-
 			</ul>
 		</li>
 	</ul>
-</aside> -->
-
-
-
-<aside [ngClass]="{'sidebar-hidden': !show, 'sidebar-visible': show}" id="sidebar" class="sidebar">
-	<ul class="nav-links">
-		<div *ngFor="let item of dataSource.data; index as i">
-		  <li (click)="hideSubMenu($event)">
-			<div class="iocn-link">
-			  <a routerLink="{{ item.url || '#' }}" routerLinkActive="active">
-				<i [ngClass]="item.icon || ''"></i>
-				<span class="link_name">{{ item.name }}</span>
-			  </a>
-			  <i class="bx bxs-chevron-down arrow"></i>
-			</div>
-			<ul class="sub-menu">
-			  <li *ngFor="let child of item.children; index as i" (click)="hideSubMenuChild($event)">
-				<a *ngIf="!child.children || child?.children?.length == 0" routerLink="{{ child.url }}" routerLinkActive="active">{{ child.name }}</a>
-	
-				<div *ngIf="child.children && child?.children?.length > 0" class="iocn-link-child">
-				  <a routerLink="{{ child.url || '#' }}" routerLinkActive="active">
-					<span class="link_name-child">{{ child.name }}</span>
-				  </a>
-				  <i style="line-height: 52px; opacity: 0.6;" class="bx bxs-chevron-down arrow"></i>
-				</div>
-				<ul *ngIf="child.children && child?.children?.length > 0" class="sub-menu-child">
-				  <li *ngFor="let element of child.children; index as i">
-					<a routerLink="{{ element.url }}" routerLinkActive="active">{{ element.name }}</a>
-				  </li>
-				</ul>
-			  </li>
-			</ul>
-		  </li>
-		</div>
-	  </ul>
 </aside>
