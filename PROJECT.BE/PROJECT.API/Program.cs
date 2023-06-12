@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using ConfigurationManager = PROJECT.API.ConfigurationManager;
 using Microsoft.AspNetCore.Http.Features;
 using PROJECT.API.Hubs;
 using PROJECT.CORE;
@@ -13,22 +12,37 @@ using System.Text.Json;
 using PROJECT.API.AppCode.Extensions;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using System.Net.Mime;
+using static System.Net.Mime.MediaTypeNames;
+using PROJECT.BUSINESS.Common.Class;
+using PROJECT.API.AppCode.Util;
+using PROJECT.API.AppCode.Enum;
+using NLog;
+using NLog.Extensions.Logging;
+
+//LogManager.Setup().LoadConfigurationFromFile(Path.Combine(Directory.GetCurrentDirectory(), "nlog.config"));
+var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.json", optional: true)
+                .AddEnvironmentVariables().Build();
+var logger = LogManager.Setup()
+                       .LoadConfigurationFromSection(config)
+                       .GetCurrentClassLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
-{
-    options.InvalidModelStateResponseFactory = context =>
+//builder.Services.AddControllers();
+// Bắt lỗi model validation, dữ liệu đầu vào bị sai 
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
     {
-        var result = new ValidationFailedResult(context.ModelState);
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            return ExceptionHandler.ExceptionValidationResult(context);
+        };
+    });
 
-        // TODO: add `using System.Net.Mime;` to resolve MediaTypeNames  
-        result.ContentTypes.Add(MediaTypeNames.Application.Json);
-
-        return result;
-    };
-});
+builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -37,7 +51,7 @@ builder.Services.AddSwaggerGen(options => {
     {
         Version = "V1",
         Title = "WebAPI",
-        Description = "PROJECT WebAPI"
+        Description = "<a href='/log' target = '_blank'>Bấm vào đây để xem log file</a>",
     });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -77,9 +91,9 @@ builder.Services.AddAuthentication(opt => {
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = ConfigurationManager.AppSetting["JWT:Issuer"],
-        ValidAudience = ConfigurationManager.AppSetting["JWT:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Key"]))
+        ValidIssuer = ConfigurationManagerUtil.AppSetting["JWT:Issuer"],
+        ValidAudience = ConfigurationManagerUtil.AppSetting["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManagerUtil.AppSetting["JWT:Key"]))
     };
 });
 
@@ -114,8 +128,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.ConfigureCustomExceptionMiddleware();
-app.UseExceptionHandler("/api/error/Error");
+//Truyền httpcontext vào trong TransferObject để lấy thông tin http request
+TransferObjectExtension.SetHttpContextAccessor(app.Services.GetRequiredService<IHttpContextAccessor>());
+
+//Cho phép đọc HttpRequest.Body nhiều lần
+app.EnableRequestBodyRewind();
 
 app.UseHttpsRedirection();
 

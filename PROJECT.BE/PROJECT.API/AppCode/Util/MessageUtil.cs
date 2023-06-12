@@ -1,4 +1,5 @@
 ﻿using PROJECT.API.AppCode.Cache;
+using PROJECT.API.AppCode.Logger;
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Common.Class;
 
@@ -28,29 +29,27 @@ namespace PROJECT.API.AppCode.Util
             return obj != null ? obj.Message : code;
         }
 
-        public static void GetMessage(string msgCode, IBaseService service, TransferObject transferObject, params object[] paramObject)
-        {
-            var logId = "LID" + DateTime.Now.ToString("yyMMddHHmmssFF");
-            var code = msgCode;
-            if (!string.IsNullOrWhiteSpace(service.MessageObject.Code))
-            {
-                code = service.MessageObject.Code;
-            }
-            transferObject.MessageObject.Code = code;
-            transferObject.MessageObject.Message = MessageUtil.GetMessage(code);
-            if (!string.IsNullOrWhiteSpace(transferObject.MessageObject.Message))
-            {
-                transferObject.MessageObject.Message = string.Format(transferObject.MessageObject.Message, paramObject);
-            }
+        //public static void GetMessage(string msgCode, IBaseService service, TransferObject transferObject, params object[] paramObject)
+        //{
+        //    var logId = "LID" + DateTime.Now.ToString("yyMMddHHmmssFF");
+        //    var code = msgCode;
+        //    if (!string.IsNullOrWhiteSpace(service.MessageObject.Code))
+        //    {
+        //        code = service.MessageObject.Code;
+        //    }
+        //    transferObject.MessageObject.Code = code;
+        //    transferObject.MessageObject.Message = MessageUtil.GetMessage(code);
+        //    if (!string.IsNullOrWhiteSpace(transferObject.MessageObject.Message))
+        //    {
+        //        transferObject.MessageObject.Message = string.Format(transferObject.MessageObject.Message, paramObject);
+        //    }
 
-            if (service.Exception != null)
-            {
-                transferObject.MessageObject.MessageDetail += service.Exception.ToString();
-            }
-
-            transferObject.MessageObject.LogId += logId;
-
-            //Ghi log
-        }
+        //    if (service.Exception != null)
+        //    {
+        //        transferObject.MessageObject.MessageDetail += service.Exception.ToString();
+        //        transferObject.MessageObject.LogId += logId;
+        //        LoggerService.LogError(logId + Environment.NewLine + service.Exception.ToString());
+        //    }
+        //}
     }
 }

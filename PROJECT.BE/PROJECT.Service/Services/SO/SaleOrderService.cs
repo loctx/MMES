@@ -50,5 +50,19 @@ namespace PROJECT.BUSINESS.Services.AD
             }
         }
 
+        public override async Task Update(tblStoreOrderOperatingDto saleOrder)
+        {
+            try
+            {
+                var saleOrderInDB = await this._dbContext.tblStoreOrderOperating.FindAsync(saleOrder.Id);
+                this._mapper.Map(saleOrder, saleOrderInDB);
+                await this._dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                this.Status = false;
+                this.Exception = ex;
+            }
+        }
     }
 }
