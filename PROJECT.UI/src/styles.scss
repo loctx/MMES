@@ -1,6 +1,5 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
-@import '../node_modules/ngx-toastr/toastr';
-
+@import "../node_modules/ngx-toastr/toastr";
 
 html,
 body {
@@ -8,7 +7,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Nunito", sans-serif !important;
 }
 
 .cpn-container {
@@ -164,7 +163,6 @@ body {
       font-size: 18px;
       font-weight: 500;
       color: #012970;
-      font-family: "Poppins", sans-serif;
     }
     .form-control {
       display: block;
@@ -232,4 +230,8 @@ form {
   .was-validated :invalid ~ .invalid-tooltip {
     display: block;
   }
+}
+
+h1, h2, h3, h4, h5, p, span, div, ul, li, th, td, tr, a {
+  font-family: "Nunito", sans-serif !important;
 }

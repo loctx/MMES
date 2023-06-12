@@ -55,18 +55,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //LoadScript
-    // this.loadScript('./assets/vendor/bootstrap/js/bootstrap.bundle.min.js');
-    // this.loadScript('./assets/vendor/quill/quill.min.js');
-    // this.loadScript('./assets/vendor/simple-datatables/simple-datatables.js');
-    // this.loadScript('./assets/vendor/tinymce/tinymce.min.js');
-    // this.loadScript('./assets/vendor/php-email-form/validate.js');
-    // this.loadScript('./assets/js/main.js');
-    // this.loadScript('./assets/js/global.js');
-    // this.loadScript('./assets/select2/select2.min.js');
-    // this.loadScript('./assets/zTree/jquery.ztree.core-3.5.min.js');
-    // this.loadScript('./assets/zTree/jquery.ztree.excheck-3.5.min.js');
-    // this.loadScript('./assets/zTree/jquery.ztree.exedit-3.5.min.js');
-    // this.loadScript('./assets/zTree/jquery.ztree.exhide-3.5.min.js'); 
+    this.loadScript('./assets/vendor/bootstrap/js/bootstrap.bundle.min.js');
+    this.loadScript('./assets/vendor/quill/quill.min.js');
+    this.loadScript('./assets/vendor/simple-datatables/simple-datatables.js');
+    this.loadScript('./assets/vendor/tinymce/tinymce.min.js');
+    this.loadScript('./assets/vendor/php-email-form/validate.js');
+    this.loadScript('./assets/js/main.js');
+    this.loadScript('./assets/js/global.js');
+    this.loadScript('./assets/select2/select2.min.js');
+    this.loadScript('./assets/zTree/jquery.ztree.core-3.5.min.js');
+    this.loadScript('./assets/zTree/jquery.ztree.excheck-3.5.min.js');
+    this.loadScript('./assets/zTree/jquery.ztree.exedit-3.5.min.js');
+    this.loadScript('./assets/zTree/jquery.ztree.exhide-3.5.min.js'); 
 
     const token = localStorage.getItem("jwt");
     if (!token || this.jwtHelper.isTokenExpired(token)) {
@@ -78,15 +78,15 @@ export class AppComponent implements OnInit {
   }
   title = 'PMS';
 
-  // loadScript(url: string) {
-  //   const body = <HTMLDivElement> document.body;
-  //   const script = document.createElement('script');
-  //   script.innerHTML = '';
-  //   script.src = url;
-  //   script.async = false;
-  //   script.defer = true;
-  //   body.appendChild(script);
-  // }
+  loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
+  }
 
   switchLang(lang: string) {
     this.translate.use(lang);
