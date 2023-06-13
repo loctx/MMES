@@ -10,15 +10,17 @@
 
             <div class="col-md-8 col-xs-12 d-flex flex-row-reverse card-function">
                 <div>
-                    <button type="button" class="btn btn-success" (click)="handleDrawer(true)">
+                    <button type="button" class="btn btn-success" (click)="onOpenDrawer()">
                         <i class="bi bi-plus-lg"></i> Thêm mới
                     </button>
                 </div>
                 <div>
                     <div class="input-group search-box">
-                        <input type="text" class="form-control" [(ngModel)]="filter.KeyWord" placeholder="Nhập từ khóa tìm kiếm" />
-                    <span (click)="loadInit()" class="input-group-text"><i class="bi bi-search"></i></span>
-                    <span (click)="loadInit(1, true)" class="input-group-text"><i class="bi bi-arrow-clockwise"></i></span>
+                        <input type="text" class="form-control" [(ngModel)]="filter.KeyWord"
+                            placeholder="Nhập từ khóa tìm kiếm" />
+                        <span (click)="loadInit()" class="input-group-text"><i class="bi bi-search"></i></span>
+                        <span (click)="loadInit(1, true)" class="input-group-text"><i
+                                class="bi bi-arrow-clockwise"></i></span>
                         &nbsp;
                     </div>
                 </div>
@@ -28,13 +30,13 @@
         <table class="table table-hover table-click-row border-top" id="table-user">
             <thead>
                 <tr>
-                    <th scope="col" class="align-center" width = 100px>STT</th>
-                    <th scope="col" class="" width = 150px>Mã đơn vị tính</th>
+                    <th scope="col" class="align-center" width=100px>STT</th>
+                    <th scope="col" class="" width=150px>Mã đơn vị tính</th>
                     <th scope="col" class="">Tên đơn vị tính</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listUnit, index as i" (click)="handleDrawer(true, item)">
+                <tr *ngFor="let item of listUnit, index as i" (click)="onOpenDrawer(item)">
                     <td class="align-center">{{i + 1}}</td>
                     <td class="">{{item.Code}}</td>
                     <td class="">{{item.Name}}</td>
@@ -42,79 +44,33 @@
             </tbody>
         </table>
         <div class="float-end">
-            <app-pagination [pageSize]="filter.PageSize" [totalPage]="filter.TotalPage"
-                [(page)]="filter.CurrentPage" (pageChange)="onChangePage($event)"></app-pagination>
+            <app-pagination [pageSize]="filter.PageSize" [totalPage]="filter.TotalPage" [(page)]="filter.CurrentPage"
+                (pageChange)="onChangePage($event)"></app-pagination>
         </div>
     </div>
 </div>
 
 <!-- drawer -->
-
-<div class="drawer-content-wrapper col-lg-4 col-xs-12" [ngClass]="openDrawer ? 'open-drawer' : 'close-drawer'">
-    <div class="card" style="height: calc(100vh - 50px)">
-        <div class="card-body">
-            <div class="row border-bottom">
-                <div class="col-7">
-                    <div class="card-title">
-                        <i class="bi bi-plus-lg"></i>
-                        Thêm mới đơn vị tính
-                    </div>
-                </div>
-    
-                <div class="col-5 card-function align-right">
-                    <button type="button" class="btn btn-primary">
-                        <i class="bi bi-check2-all"></i> Lưu thông tin
-                    </button>
-                    &nbsp;
-                    <button type="button" class="btn btn-warning" (click)="handleDrawer(false)">
-                        <i class="bi bi-close"></i> Hủy
-                    </button>
-                </div>
+<app-drawer [formGroup]="unitForm" [edit]="edit" [openDrawer]="openDrawer" (onEdit)="onEdit()" (onCreate)="onCreate()"
+    (onClose)="onCloseDrawer()" [title]="titleDrawer">
+    <div class="mb-3">
+        <label for="inputText" class="col-form-label">Mã đơn vị<span class="text-danger ms-1">*</span></label>
+        <div>
+            <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
+                formControlName="code">
+            <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
+                <div *ngIf="f['code']['errors']['required']">Không được để trống</div>
             </div>
         </div>
     </div>
-
-    <!-- <form [formGroup]="unitForm" *ngIf="unitForm" (ngSubmit)="saveDetail()">
-        <div class="drawer-header">
-            <div class="drawer-header-title"><button (click)="handleDrawer(false)" type="button"
-                    aria-label="Close" class="drawer-close"><span role="img" aria-label="close"
-                        class="anticon anticon-close"><svg viewBox="64 64 896 896" focusable="false" data-icon="close"
-                            width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                            <path
-                                d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                            </path>
-                        </svg></span></button>
-                <div class="drawer-title">{{edit ? 'Chỉnh sửa' : 'Thêm mới'}}</div>
-            </div>
-            <div class="drawer-extra">
-                <div class="space-align-center">
-                    <div class="space-item"><button (click)="handleDrawer(false)" type="button"
-                            class="btn-default"><span>Huỷ</span></button></div>
-                    <div class="space-item"><button type="submit" class="btn-primary"><span>Lưu</span></button></div>
-                </div>
+    <div class="mb-3">
+        <label for="inputEmail" class="col-form-label">Tên đơn vị<span class="text-danger ms-1">*</span></label>
+        <div>
+            <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
+                formControlName="name">
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
             </div>
         </div>
-        <div class="drawer-body">
-            <div class="row mb-3">
-                <label for="inputText" class="col-sm-3 col-form-label">Mã đơn vị<span class="text-danger ms-1">*</span></label>
-                <div class="col-sm-9">
-                    <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
-                        formControlName="code">
-                    <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
-                        <div *ngIf="f['code']['errors']['required']">Không được để trống</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputEmail" class="col-sm-3 col-form-label">Tên đơn vị<span class="text-danger ms-1">*</span></label>
-                <div class="col-sm-9">
-                    <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
-                    formControlName="name">
-                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                        <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form> -->
-</div>
+    </div>
+</app-drawer>

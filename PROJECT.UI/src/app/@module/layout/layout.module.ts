@@ -5,7 +5,6 @@ import { LayoutRoutes } from './layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MasterDataModule } from '../master-data/master-data.module';
 import { SystemManageModule } from '../system-manage/system-manage.module';
-
 @NgModule({
   imports: [
     CommonModule,

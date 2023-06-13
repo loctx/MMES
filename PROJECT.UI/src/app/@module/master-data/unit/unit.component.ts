@@ -23,9 +23,9 @@ export class UnitComponent implements OnInit {
   ];
   unitForm: FormGroup;
   submitted: boolean = false;
-  openDrawer: boolean = false;
   edit: boolean = true;
   titleDrawer: string = 'Thêm mới';
+  openDrawer: boolean = false;
   constructor(
     private _service: UnitService,
     private _fb: FormBuilder,
@@ -53,9 +53,9 @@ export class UnitComponent implements OnInit {
     this.loadInit();
   }
 
-  handleDrawer(open: boolean, item: T_MD_UNIT | null = null) {
+  onOpenDrawer(item: T_MD_UNIT | null = null) {
     this.edit = item ? true : false;
-    this.openDrawer = open;
+    this.openDrawer = true;
     if (item) {
       this.unitForm?.get('code')?.setValue(item?.Code);
       this.unitForm?.get('name')?.setValue(item?.Name);
@@ -63,54 +63,61 @@ export class UnitComponent implements OnInit {
       this.unitForm?.get('code')?.setValue('');
       this.unitForm?.get('name')?.setValue('');
     }
-    if (!open) {
-      this.submitted = false;
-    }
   }
 
-  saveDetail() {
+  onCloseDrawer() {
+    this.openDrawer = false;
+    this.unitForm?.get('code')?.setValue('');
+    this.unitForm?.get('name')?.setValue('');
+    this.submitted = false;
+  }
+
+  onCreate() {
     this.submitted = true;
     if (this.unitForm.invalid) {
       return;
     }
+    this._service
+      .InsertUnit(
+        {
+          code: this.unitForm.value.code.trim(),
+          name: this.unitForm.value.name.trim(),
+        },
+        false
+      )
+      .subscribe(
+        (data) => {
+          this.unitForm?.get('code')?.setValue('');
+          this.unitForm?.get('name')?.setValue('');
+          this.loadInit();
+        },
+        (error) => {
+          console.log('error: ', error);
+        }
+      );
+  }
 
-    if (this.edit) {
-      this._service
-        .UpdateUnit(
-          {
-            code: this.unitForm.value.code.trim(),
-            name: this.unitForm.value.name.trim(),
-          },
-          false
-        )
-        .subscribe(
-          (data) => {
-            this.loadInit();
-          },
-          (error) => {
-            console.log('error: ', error);
-          }
-        );
-    } else {
-      this._service
-        .InsertUnit(
-          {
-            code: this.unitForm.value.code.trim(),
-            name: this.unitForm.value.name.trim(),
-          },
-          false
-        )
-        .subscribe(
-          (data) => {
-            this.unitForm?.get('code')?.setValue('');
-            this.unitForm?.get('name')?.setValue('');
-            this.loadInit();
-          },
-          (error) => {
-            console.log('error: ', error);
-          }
-        );
+  onEdit() {
+    this.submitted = true;
+    if (this.unitForm.invalid) {
+      return;
     }
+    this._service
+      .UpdateUnit(
+        {
+          code: this.unitForm.value.code.trim(),
+          name: this.unitForm.value.name.trim(),
+        },
+        false
+      )
+      .subscribe(
+        (data) => {
+          this.loadInit();
+        },
+        (error) => {
+          console.log('error: ', error);
+        }
+      );
   }
 
   loadInit(CurrentPage: number = 1, refresh: boolean = false) {

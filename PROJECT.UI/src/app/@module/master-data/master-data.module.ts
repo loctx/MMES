@@ -19,9 +19,12 @@ import { CustomerComponent } from './customer/customer.component';
 import {PaginationComponent} from '../../utils/helper/pagination/pagination.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { DrawerComponent } from '../components/drawer/drawer.component';
+
 
 @NgModule({
   declarations: [
+    DrawerComponent,
     PaginationComponent,
     SaleOfficeComponent,
     UnitComponent,
