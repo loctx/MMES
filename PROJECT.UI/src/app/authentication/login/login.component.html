@@ -7,16 +7,15 @@
                     <div class="card mb-3 card-login">
                         <div class="card-body">
 
-                            <div class="pt-4 pb-2">
-                                <img src="../assets/img/logo-1.png" style="margin: 0px 34%;width: 32%;">
-                                <h5 class="card-title text-center pb-0 fs-4">{{'LOGIN_TITLE' | translate}}</h5>
-                                <p class="text-center small">{{'LOGIN_SUB_TITLE' | translate}}</p>
+                            <div class="pt-4 pb-2" style="margin-bottom: 40px;">
+                                <img src="../assets/img/logo.png" style="margin: 0px 34%;width: 32%;">
+                                <!-- <h5 class="card-title text-center pb-0 fs-4">HỆ THỐNG QUẢN TRỊ SẢN XUẤT KINH DOANH</h5> -->
                             </div>
 
                             <form class="row g-3 needs-validation" (ngSubmit)="login()" novalidate>
 
                                 <div class="col-12">
-                                    <label for="yourUsername"  class="form-label">{{'LOGIN_USERNAME' | translate}}</label>
+                                    <label for="yourUsername"  class="form-label">Tên đăng nhập</label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text" id="inputGroupPrepend"><i
                                                 class="bi bi-person-fill"></i></span>
@@ -27,7 +26,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="yourPassword" class="form-label">{{'LOGIN_PASSWORD' | translate}}</label>
+                                    <label for="yourPassword" class="form-label">Mật khẩu</label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-key-fill"></i></span>
                                         <input type="password" name="password" class="form-control" id="yourPassword" [(ngModel)]="loginRequest.password"
@@ -40,7 +39,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" value="true"
                                             id="rememberMe">
-                                        <label class="form-check-label" for="rememberMe">{{'LOGIN_REMEMBER' | translate}}</label>
+                                        <label class="form-check-label" for="rememberMe">Ghi nhớ</label>
                                     </div>
                                 </div>
                                 <div class="col-12">

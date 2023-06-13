@@ -28,12 +28,8 @@ namespace PROJECT.API.Controllers.Auth
         }
 
         [HttpPost("Login")]
-        //[ValidateModel]
         public async Task<IActionResult> Login([FromBody] LoginDto loginInfo)
         {
-            var a = new TransferObject();
-            a = null;
-            a.Status = false;
             var transferObject = new TransferObject();
             var account = _service.CheckLogin(loginInfo);
             if (_service.Status)

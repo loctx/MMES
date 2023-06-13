@@ -14,25 +14,24 @@ export class PlantComponent implements OnInit {
   filter: PlantFilter = {
     CurrentPage: 1,
     TotalPage: 0,
-    ItemCount: 0,
     PageSize: 15,
     IsLoading: true,
-    KeySearch: '',
+    KeyWord: '',
     Data: []
   }
   ngOnInit(): void {
-    this._service.searchPlant(this.filter, true)
-      .subscribe({
-        next: (response) => {
-          this.listPlant = response.Data.Data;
-          this.filter = response.Data;
-        },
-        error: (response) => { console.log(response) }
-      });
+    // this._service.searchPlant(this.filter, true)
+    //   .subscribe({
+    //     next: (response) => {
+    //       this.listPlant = response.Data.Data;
+    //       this.filter = response.Data;
+    //     },
+    //     error: (response) => { console.log(response) }
+    //   });
   }
   searchPlant(event: any) {
     this.filter.CurrentPage = 1;
-    this.filter.KeySearch = event.target.value;
+    this.filter.KeyWord = event.target.value;
     this._service.searchPlant(this.filter)
       .subscribe({
         next: (response) => {

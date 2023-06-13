@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate {
   constructor(private jwtHelper: JwtHelperService, private router: Router) {
   }
   canActivate() {
-
     //lấy Token jwt hiện có trong bộ nhớ Session
     const token = localStorage.getItem("jwt");
 

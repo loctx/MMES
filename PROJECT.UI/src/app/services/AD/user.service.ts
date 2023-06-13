@@ -26,8 +26,18 @@ export class UserService {
   requestOptions = { headers: this.headers };
   apiUrl: string = environment.baseApiUrl;
 
+  getMenuOfUser(userName: string) {
+    return this._common
+      .getRequest(`Menu/getMenuOfUser?userName=${userName}`)
+  }
+
+  logOut() {
+    localStorage.removeItem('UserInfo');
+    localStorage.removeItem('userRights');
+  }
+
   getListUser(pagination? : Pagination){
-    var url = `/api/User/GetList?CurrentPage=${pagination?.CurrentPage}&PageSize=${pagination?.PageSize}&KeySearch=${pagination?.KeySearch}`
+    var url = `/api/User/GetList?CurrentPage=${pagination?.CurrentPage}&PageSize=${pagination?.PageSize}&KeyWord=${pagination?.KeyWord}`
     return this._common.getRequest(url)
   }
 

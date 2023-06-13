@@ -14,10 +14,9 @@ export class VendorComponent implements OnInit {
   filter: VendorFilter = {
     CurrentPage: 1,
     TotalPage: 0,
-    ItemCount: 0,
     PageSize: 15,
     IsLoading: true,
-    KeySearch: '',
+    KeyWord: '',
     Data: []
   }
   ngOnInit(): void {
@@ -32,7 +31,7 @@ export class VendorComponent implements OnInit {
   }
   searchVendor(event: any) {
     this.filter.CurrentPage = 1;
-    this.filter.KeySearch = event.target.value;
+    this.filter.KeyWord = event.target.value;
     this._service.searchVendor(this.filter)
       .subscribe({
         next: (response) => {

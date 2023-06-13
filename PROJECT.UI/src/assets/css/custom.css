@@ -138,6 +138,7 @@ td {
 
 .btn {
   font-size: 13px !important;
+  border-radius: 2px !important;
 }
 
 .page-link {

@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
   lang = localStorage.getItem('lang');
   token = localStorage.getItem("jwt");
   constructor(public translate: TranslateService, translateCache: TranslateCacheService,public cookie: CookieService, private router: Router,private jwtHelper : JwtHelperService ){
-    translate.addLangs(['vi', 'en']);
-    translate.setDefaultLang('vi');
-    translateCache.init();
-    this.startConnection();
-    if (this.token && !this.jwtHelper.isTokenExpired(this.token)) {
-      this.startConnection();
-    }
+    // translate.addLangs(['vi', 'en']);
+    // translate.setDefaultLang('vi');
+    // translateCache.init();
+    // this.startConnection();
+    // if (this.token && !this.jwtHelper.isTokenExpired(this.token)) {
+    //   this.startConnection();
+    // }
   }
   
 
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // LoadScript
+    //LoadScript
     this.loadScript('./assets/vendor/bootstrap/js/bootstrap.bundle.min.js');
     this.loadScript('./assets/vendor/quill/quill.min.js');
     this.loadScript('./assets/vendor/simple-datatables/simple-datatables.js');

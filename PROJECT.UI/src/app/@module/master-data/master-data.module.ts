@@ -15,10 +15,14 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { DischardComponent } from './dischard/dischard.component';
 import { TransmodeComponent } from './transmode/transmode.component';
 import { VendorComponent } from './vendor/vendor.component';
-
+import { CustomerComponent } from './customer/customer.component';
+import {PaginationComponent} from '../../utils/helper/pagination/pagination.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
+    PaginationComponent,
     SaleOfficeComponent,
     UnitComponent,
     MaterialComponent,
@@ -27,15 +31,18 @@ import { VendorComponent } from './vendor/vendor.component';
     DischardComponent,
     TransmodeComponent,
     VendorComponent,
+    CustomerComponent,
   ],
   imports: [
+    ToastrModule,
     CommonModule,
     MasterDataRoutingModule,
     NgbModule,
     NgxPaginationModule,
     FormsModule,
     NgSelectModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ]
 })
 export class MasterDataModule { }
