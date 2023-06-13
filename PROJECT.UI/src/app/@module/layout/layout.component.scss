@@ -10,10 +10,10 @@
         position: absolute;
         right: 0px;
         width: calc(100% - 300px);
-        top: 60px;
-        padding: 20px;
+        top: 50px;
+        padding-left: 10px;
         transition: width 0.3s ease-in-out;
-        background: #f6f9fe;
+        background: white;
         min-height: calc(100vh - 50px);
         &.full-width {
             width: 100%;

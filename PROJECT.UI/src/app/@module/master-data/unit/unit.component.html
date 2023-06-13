@@ -1,69 +1,53 @@
-<div class="cpn-container">
-    <!-- Header -->
-    <div class="pagetitle">
-        <h5 class="card-title pt-1 pb-0">Đơn vị tính</h5>
-        <nav>
-            <ol class="breadcrumb">
-                <li *ngFor="let item of breadcrumbList" class="breadcrumb-item"><a
-                        routerLink="{{item.path}}">{{item.name}}</a></li>
-            </ol>
-        </nav>
-    </div>
-    <!-- Body -->
+<div class="card" style="height: calc(100vh - 50px)">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <div class="card-title">
+                    <i class="bi bi-journal-text"></i>
+                    Danh sách đơn vị tính
+                </div>
+            </div>
 
-    <div class="cpn-content">
-        <div class="d-flex border-bottom  flex-wrap">
-            <div class="d-flex flex-row-reverse card-function flex-grow-1">
+            <div class="col-md-8 col-xs-12 d-flex flex-row-reverse card-function">
                 <div>
-                    <button (click)="handleDrawer(true)" type="button" class="btn btn-create">
-                        <i class="bi bi-plus-circle-dotted"></i> Thêm mới
+                    <button type="button" class="btn btn-success" (click)="handleDrawer(true)">
+                        <i class="bi bi-plus-lg"></i> Thêm mới
                     </button>
                 </div>
-            </div>
-        </div>
-
-        <div class="d-flex flex-row p-1 pb-0 border-bottom flex-wrap">
-            <div class="d-flex flex-row flex-grow-3 p-l-2 mb-1">
-                <div class="input-group search-box">
-                    <input type="text" class="form-control" [(ngModel)]="filter.KeyWord" placeholder="Nhập từ khóa tìm kiếm" />
+                <div>
+                    <div class="input-group search-box">
+                        <input type="text" class="form-control" [(ngModel)]="filter.KeyWord" placeholder="Nhập từ khóa tìm kiếm" />
                     <span (click)="loadInit()" class="input-group-text"><i class="bi bi-search"></i></span>
                     <span (click)="loadInit(1, true)" class="input-group-text"><i class="bi bi-arrow-clockwise"></i></span>
+                        &nbsp;
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="p-2">
-            <table class="table table-hover table-click-row" id="table-user">
-                <thead>
-                    <tr>
-                        <th scope="col" class="align-center">STT</th>
-                        <th scope="col" class="align-center">Mã đơn vị</th>
-                        <th scope="col" class="align-center">Tên đơn vị</th>
-                        <th scope="col" class="align-center">Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listUnit, index as i" (click)="handleDrawer(true, item)">
-                        <td class="align-center">{{i + 1}}</td>
-                        <td class="align-center">{{item.Code}}</td>
-                        <td class="align-center">{{item.Name}}</td>
-                        <td class="align-center">
-                            <div class="form-check form-switch hard-center">
-                                <input disabled class="form-check-input" type="checkbox" name="ACTIVE"
-                                    [(ngModel)]="item.ACTIVE">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="float-end">
-                <app-pagination [pageSize]="filter.PageSize" [totalPage]="filter.TotalPage"
-                    [(page)]="filter.CurrentPage" (pageChange)="onChangePage($event)"></app-pagination>
-            </div>
+        <table class="table table-hover table-click-row border-top" id="table-user">
+            <thead>
+                <tr>
+                    <th scope="col" class="align-center" width = 100px>STT</th>
+                    <th scope="col" class="" width = 150px>Mã đơn vị tính</th>
+                    <th scope="col" class="">Tên đơn vị tính</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listUnit, index as i" (click)="handleDrawer(true, item)">
+                    <td class="align-center">{{i + 1}}</td>
+                    <td class="">{{item.Code}}</td>
+                    <td class="">{{item.Name}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="float-end">
+            <app-pagination [pageSize]="filter.PageSize" [totalPage]="filter.TotalPage"
+                [(page)]="filter.CurrentPage" (pageChange)="onChangePage($event)"></app-pagination>
         </div>
+        
     </div>
 </div>
-
 
 <!-- drawer -->
 

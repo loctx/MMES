@@ -5,15 +5,3 @@
 .sidebar-visible {
   transform: translateX(0);
 }
-
-.sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  height: 100%;
-  width: 300px;
-  background: #ffffff;
-  z-index: 100;
-  transition: all 0.5s ease;
-  padding: 20px;
-}

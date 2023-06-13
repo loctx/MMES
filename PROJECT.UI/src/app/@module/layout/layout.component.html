@@ -4,7 +4,7 @@
     </div>
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
-        <div class="content" [ngClass]="openSidebar ? '' : 'full-width'">
+        <div class="content container-fluid" [ngClass]="openSidebar ? '' : 'full-width'">
             <router-outlet></router-outlet>
         </div>
         <footer-cmp></footer-cmp>
