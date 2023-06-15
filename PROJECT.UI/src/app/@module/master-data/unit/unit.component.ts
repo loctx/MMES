@@ -6,6 +6,7 @@ import { utils } from 'src/app/utils/utils';
 import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitFormCreateComponent } from './unit-form-create/unit-form-create.component';
+import { UnitFormEditComponent } from './unit-form-edit/unit-form-edit.component';
 
 @Component({
   selector: 'app-unit',
@@ -44,13 +45,16 @@ export class UnitComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    //this.loadInit();
+    this.loadInit();
   }
 
   openCreate() {
     this.drawerService.open(UnitFormCreateComponent);
   }
   
+  openEdit() {
+    this.drawerService.open(UnitFormEditComponent);
+  }
 
   // onOpenDrawer(item: T_MD_UNIT | null = null) {
   //   this.edit = item ? true : false;

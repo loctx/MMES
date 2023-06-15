@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listUnit, index as i">
+                <tr *ngFor="let item of listUnit, index as i" (click)="openEdit()">
                     <td class="align-center">{{i + 1}}</td>
                     <td class="">{{item.Code}}</td>
                     <td class="">{{item.Name}}</td>
@@ -49,27 +49,3 @@
         </div>
     </div>
 </div>
-<!-- drawer -->
-<!-- <app-drawer [formGroup]="unitForm" [edit]="edit" [openDrawer]="openDrawer" (onEdit)="onEdit()" (onCreate)="onCreate()"
-    (onClose)="onCloseDrawer()" [title]="titleDrawer">
-    <div class="mb-3">
-        <label for="inputText" class="col-form-label">Mã đơn vị<span class="text-danger ms-1">*</span></label>
-        <div>
-            <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
-                formControlName="code">
-            <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
-                <div *ngIf="f['code']['errors']['required']">Không được để trống</div>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3">
-        <label for="inputEmail" class="col-form-label">Tên đơn vị<span class="text-danger ms-1">*</span></label>
-        <div>
-            <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text" class="form-control"
-                formControlName="name">
-            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
-            </div>
-        </div>
-    </div>
-</app-drawer> -->
