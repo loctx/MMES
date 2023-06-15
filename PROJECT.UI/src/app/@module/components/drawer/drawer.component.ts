@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-drawer',
@@ -7,30 +6,15 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./drawer.component.scss']
 })
 export class DrawerComponent {
-  @Input() formGroup!: FormGroup;
-  @Input() title!: string;
-  @Input() edit!: boolean;
-  @Input() openDrawer!: boolean;
-  @Output() onEdit: EventEmitter<void> = new EventEmitter<void>();
-  @Output() onCreate: EventEmitter<void> = new EventEmitter<void>();
-  @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
-  @Output() onOpen: EventEmitter<void> = new EventEmitter<void>();
+  openDrawer:boolean = false;
+  @ViewChild('contentContainer', { read: ViewContainerRef, static: true }) contentContainer!: ViewContainerRef;
 
-  onSubmitForm(): void {
-    if(this.edit && this.onEdit) {
-      this.onEdit!.emit();
-    } else if(this.onCreate) {
-      this.onCreate!.emit();
-    }
+  setContent(componentRef: ComponentRef<any>) {
+    this.contentContainer.clear();
+    this.contentContainer.insert(componentRef.hostView);
   }
 
-  onCloseDrawer(): void {
-    if(this.onClose) {
-      this.onClose!.emit();
-    }
-  }
-
-  ngOnDestroy() {
+  close() {
     this.openDrawer = false;
   }
 }

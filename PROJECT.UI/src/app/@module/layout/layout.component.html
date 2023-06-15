@@ -5,6 +5,7 @@
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
         <div class="content container-fluid" [ngClass]="openSidebar ? '' : 'full-width'">
+            <app-drawer></app-drawer>
             <router-outlet></router-outlet>
         </div>
         <footer-cmp></footer-cmp>

@@ -19,12 +19,10 @@ import { CustomerComponent } from './customer/customer.component';
 import {PaginationComponent} from '../../utils/helper/pagination/pagination.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { DrawerComponent } from '../components/drawer/drawer.component';
-
+import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-create.component';
 
 @NgModule({
   declarations: [
-    DrawerComponent,
     PaginationComponent,
     SaleOfficeComponent,
     UnitComponent,
@@ -35,6 +33,7 @@ import { DrawerComponent } from '../components/drawer/drawer.component';
     TransmodeComponent,
     VendorComponent,
     CustomerComponent,
+    UnitFormCreateComponent,
   ],
   imports: [
     ToastrModule,
@@ -46,6 +45,6 @@ import { DrawerComponent } from '../components/drawer/drawer.component';
     NgSelectModule,
     TranslateModule,
     ReactiveFormsModule
-  ]
+  ],
 })
 export class MasterDataModule { }

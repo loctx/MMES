@@ -36,9 +36,11 @@ import { SidebarModule } from './@module/layout/sidebar/sidebar.module';
 import { LayoutComponent } from './@module/layout/layout.component';
 import {AuthGuard} from 'src/app/guards/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.component';
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LayoutComponent],
+  declarations: [AppComponent, LoginComponent, LayoutComponent, DrawerComponent],
   imports: [
     FooterModule,
     NavbarModule,

@@ -10,7 +10,7 @@
 
             <div class="col-md-8 col-xs-12 d-flex flex-row-reverse card-function">
                 <div>
-                    <button type="button" class="btn btn-success" (click)="onOpenDrawer()">
+                    <button type="button" class="btn btn-success" (click)="openCreate()">
                         <i class="bi bi-plus-lg"></i> Thêm mới
                     </button>
                 </div>
@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listUnit, index as i" (click)="onOpenDrawer(item)">
+                <tr *ngFor="let item of listUnit, index as i">
                     <td class="align-center">{{i + 1}}</td>
                     <td class="">{{item.Code}}</td>
                     <td class="">{{item.Name}}</td>
@@ -49,9 +49,8 @@
         </div>
     </div>
 </div>
-
 <!-- drawer -->
-<app-drawer [formGroup]="unitForm" [edit]="edit" [openDrawer]="openDrawer" (onEdit)="onEdit()" (onCreate)="onCreate()"
+<!-- <app-drawer [formGroup]="unitForm" [edit]="edit" [openDrawer]="openDrawer" (onEdit)="onEdit()" (onCreate)="onCreate()"
     (onClose)="onCloseDrawer()" [title]="titleDrawer">
     <div class="mb-3">
         <label for="inputText" class="col-form-label">Mã đơn vị<span class="text-danger ms-1">*</span></label>
@@ -73,4 +72,4 @@
             </div>
         </div>
     </div>
-</app-drawer>
+</app-drawer> -->
