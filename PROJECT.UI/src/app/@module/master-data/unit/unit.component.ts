@@ -31,9 +31,6 @@ export class UnitComponent implements OnInit {
   constructor(
     private _service: UnitService,
     private drawerService: DrawerService,
-    private _fb: FormBuilder,
-    private utils: utils,
-    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   listUnit: T_MD_UNIT[] = [];
@@ -49,79 +46,25 @@ export class UnitComponent implements OnInit {
   }
 
   openCreate() {
-    this.drawerService.open(UnitFormCreateComponent);
+    this.drawerService.open(UnitFormCreateComponent).subscribe((result) => {
+      if(result?.Status) {
+        this.loadInit();
+      }
+    });
   }
   
-  openEdit() {
-    this.drawerService.open(UnitFormEditComponent);
+  
+  openEdit(item:any) {
+    this.drawerService.setData({
+      code: item.Code,
+      name: item.Name
+    });
+    this.drawerService.open(UnitFormEditComponent).subscribe((result) => {
+      if(result?.Status) {
+        this.loadInit();
+      }
+    });
   }
-
-  // onOpenDrawer(item: T_MD_UNIT | null = null) {
-  //   this.edit = item ? true : false;
-  //   this.openDrawer = true;
-  //   if (item) {
-  //     this.unitForm?.get('code')?.setValue(item?.Code);
-  //     this.unitForm?.get('name')?.setValue(item?.Name);
-  //   } else {
-  //     this.unitForm?.get('code')?.setValue('');
-  //     this.unitForm?.get('name')?.setValue('');
-  //   }
-  // }
-
-  // onCloseDrawer() {
-  //   this.openDrawer = false;
-  //   this.unitForm?.get('code')?.setValue('');
-  //   this.unitForm?.get('name')?.setValue('');
-  //   this.submitted = false;
-  // }
-
-  // onCreate() {
-  //   this.submitted = true;
-  //   if (this.unitForm.invalid) {
-  //     return;
-  //   }
-  //   this._service
-  //     .InsertUnit(
-  //       {
-  //         code: this.unitForm.value.code.trim(),
-  //         name: this.unitForm.value.name.trim(),
-  //       },
-  //       false
-  //     )
-  //     .subscribe(
-  //       (data) => {
-  //         this.unitForm?.get('code')?.setValue('');
-  //         this.unitForm?.get('name')?.setValue('');
-  //         this.loadInit();
-  //       },
-  //       (error) => {
-  //         console.log('error: ', error);
-  //       }
-  //     );
-  // }
-
-  // onEdit() {
-  //   this.submitted = true;
-  //   if (this.unitForm.invalid) {
-  //     return;
-  //   }
-  //   this._service
-  //     .UpdateUnit(
-  //       {
-  //         code: this.unitForm.value.code.trim(),
-  //         name: this.unitForm.value.name.trim(),
-  //       },
-  //       false
-  //     )
-  //     .subscribe(
-  //       (data) => {
-  //         this.loadInit();
-  //       },
-  //       (error) => {
-  //         console.log('error: ', error);
-  //       }
-  //     );
-  // }
 
   loadInit(CurrentPage: number = 1, refresh: boolean = false) {
     this.filter = {

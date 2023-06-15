@@ -20,6 +20,7 @@ import {PaginationComponent} from '../../utils/helper/pagination/pagination.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-create.component';
+import { UnitFormEditComponent } from './unit/unit-form-edit/unit-form-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-creat
     VendorComponent,
     CustomerComponent,
     UnitFormCreateComponent,
+    UnitFormEditComponent
   ],
   imports: [
     ToastrModule,

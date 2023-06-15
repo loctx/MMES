@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
           if (this.currentRoute.includes('xhxb-full-screen') || this.currentRoute.includes('dh-full-screen')) {
             return;
           } else {
-            //this.router.navigate(['/Login']);
+            this.router.navigate(['/Login']);
           }
         }
       }

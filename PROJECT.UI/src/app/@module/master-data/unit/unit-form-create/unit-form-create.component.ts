@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { T_MD_UNIT } from 'src/app/models/MD/T_MD_UNIT.model';
 import { UnitService } from 'src/app/services/MD/unit.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
-import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
-
+import {DrawerService} from 'src/app/services/Common/drawer.service';
 @Component({
   selector: 'app-unit-form-create',
   templateUrl: './unit-form-create.component.html',
@@ -13,12 +11,12 @@ import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
 export class UnitFormCreateComponent {
   unitForm: FormGroup;
   submitted: boolean = false;
-  edit: boolean = true;
 
   constructor(
     private _service: UnitService,
     private _fb: FormBuilder,
-    private utils: utils
+    private utils: utils,
+    private drawerService: DrawerService
   ) {
     this.unitForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
@@ -28,5 +26,37 @@ export class UnitFormCreateComponent {
 
   get f() {
     return this.unitForm.controls;
+  }
+
+  close() {
+    this.drawerService.close();
+    this.unitForm?.get('code')?.setValue('');
+    this.unitForm?.get('name')?.setValue('');
+  }
+
+  onCreate() {
+    this.submitted = true;
+    if (this.unitForm.invalid) {
+      return;
+    }
+    this._service
+      .InsertUnit(
+        {
+          code: this.unitForm.value.code.trim(),
+          name: this.unitForm.value.name.trim(),
+        },
+        false
+      )
+      .subscribe(
+        (data) => {
+          this.drawerService.returnData(data);
+          this.submitted = false;
+          this.unitForm?.get('code')?.setValue('');
+          this.unitForm?.get('name')?.setValue('');
+        },
+        (error) => {
+          console.log('error: ', error);
+        }
+      );
   }
 }

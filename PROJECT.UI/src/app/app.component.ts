@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem("jwt");
     if (!token || this.jwtHelper.isTokenExpired(token)) {
       localStorage.clear();
-      //this.router.navigate(['Login']);
+      this.router.navigate(['Login']);
     }
 
     enableProdMode()

@@ -1,5 +1,4 @@
 import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
-
 @Component({
   selector: 'app-drawer',
   templateUrl: './drawer.component.html',
