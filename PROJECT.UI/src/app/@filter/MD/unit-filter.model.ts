@@ -1,3 +1,3 @@
-import { BaseFilter } from "../Common/base-filter.model";
+import { BaseFilter } from '../Common/base-filter.model';
 
 export class UnitFilter extends BaseFilter {}

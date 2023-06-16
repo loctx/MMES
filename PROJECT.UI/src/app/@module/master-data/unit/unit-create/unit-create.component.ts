@@ -40,7 +40,7 @@ export class UnitCreateComponent {
       return;
     }
     this._service
-      .InsertUnit(
+      .Insert(
         {
           code: this.unitForm.value.code.trim(),
           name: this.unitForm.value.name.trim(),

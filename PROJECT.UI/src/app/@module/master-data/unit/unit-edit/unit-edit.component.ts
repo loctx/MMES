@@ -47,7 +47,7 @@ export class UnitEditComponent {
       return;
     }
     this._service
-      .UpdateUnit(
+      .Update(
         {
           code: this.unitForm.value.code.trim(),
           name: this.unitForm.value.name.trim(),

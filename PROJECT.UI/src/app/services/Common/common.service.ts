@@ -5,10 +5,9 @@ import { environment } from 'src/environments/environment';
 import { TranferObject } from 'src/app/models/Common/tranfer-object.model';
 import { share } from 'rxjs';
 import { METHOD } from 'src/app/utils/constant/index';
-import {HandleResponse} from 'src/app/utils/utils';
+import { HandleResponse } from 'src/app/utils/utils';
 declare function ShowLoading(): any;
 declare function HideLoading(): any;
-
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +15,12 @@ declare function HideLoading(): any;
 export class CommonService {
   apiUrl: string = environment.baseApiUrl;
 
-  constructor(private http: HttpClient, private handleResponse: HandleResponse) {}
+  constructor(
+    private http: HttpClient,
+    private handleResponse: HandleResponse
+  ) {}
 
-  getRequest(
-    url: string,
-    params?: any,
-    isLoading?: boolean
-  ): Observable<TranferObject> {
+  getRequest(url: string, params?: any): Observable<TranferObject> {
     var tranferObject = this.http
       .get<TranferObject>(this.apiUrl + url, { params: params })
       .pipe(share());
@@ -35,11 +33,7 @@ export class CommonService {
     return tranferObject;
   }
 
-  postRequest(
-    url: string,
-    request: any,
-    isLoading?: boolean
-  ): Observable<TranferObject> {
+  postRequest(url: string, request: any): Observable<TranferObject> {
     var tranferObject = this.http
       .post<TranferObject>(this.apiUrl + url, request)
       .pipe(share());
@@ -51,11 +45,7 @@ export class CommonService {
     return tranferObject;
   }
 
-  putRequest(
-    url: string,
-    request: any,
-    isLoading?: boolean,
-  ): Observable<TranferObject> {
+  putRequest(url: string, request: any): Observable<TranferObject> {
     var tranferObject = this.http
       .put<TranferObject>(this.apiUrl + url, request)
       .pipe(share());
@@ -67,7 +57,7 @@ export class CommonService {
     return tranferObject;
   }
 
-  deleteRequest(url: string, isLoading?: boolean): Observable<TranferObject> {
+  deleteRequest(url: string): Observable<TranferObject> {
     var tranferObject = this.http
       .delete<TranferObject>(this.apiUrl + url)
       .pipe(share());

@@ -5,6 +5,7 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitCreateComponent } from '../unit-create/unit-create.component';
 import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 
 @Component({
   selector: 'app-unit-index',
@@ -12,6 +13,12 @@ import { PaginationResult } from 'src/app/models/Common/pagination.model';
   styleUrls: ['./unit-index.component.css'],
 })
 export class UnitIndexComponent implements OnInit {
+  constructor(
+    private _service: UnitService,
+    private drawerService: DrawerService
+  ) {}
+
+  //Khai báo biến
   breadcrumbList: any[] = [
     {
       name: 'Trang chủ',
@@ -22,16 +29,10 @@ export class UnitIndexComponent implements OnInit {
       path: '/master-data/unit',
     },
   ];
-
-  constructor(
-    private _service: UnitService,
-    private drawerService: DrawerService
-  ) {}
-
   paginationResult!: PaginationResult;
+  filter = new BaseFilter();
 
-  filterList = new UnitFilter();
-
+  //Khai báo hàm
   ngOnInit(): void {
     this.loadInit();
   }
@@ -57,13 +58,13 @@ export class UnitIndexComponent implements OnInit {
       });
   }
 
-  searchUnit(currentPage: number = 1, refresh: boolean = false) {
-    this.filterList = {
-      ...this.filterList,
-      keyWord: refresh ? '' : this.filterList.keyWord,
+  search(currentPage: number = 1, refresh: boolean = false) {
+    this.filter = {
+      ...this.filter,
+      keyWord: refresh ? '' : this.filter.keyWord,
       currentPage: currentPage,
     };
-    this._service.searchUnit(this.filterList, true).subscribe({
+    this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
       },
@@ -74,10 +75,10 @@ export class UnitIndexComponent implements OnInit {
   }
 
   loadInit() {
-    this.searchUnit();
+    this.search();
   }
 
   onChangePage(event: any) {
-    this.searchUnit(event);
+    this.search(event);
   }
 }
