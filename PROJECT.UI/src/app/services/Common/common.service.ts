@@ -22,14 +22,11 @@ export class CommonService {
     params?: any,
     isLoading?: boolean
   ): Observable<TranferObject> {
-    if (isLoading) ShowLoading();
-
     var tranferObject = this.http
       .get<TranferObject>(this.apiUrl + url, { params: params })
       .pipe(share());
     tranferObject.subscribe({
       next: (response) => {
-        HideLoading();
         if (response.MessageObject?.MessageType == 'E') {
           Message(response);
         }
@@ -43,7 +40,6 @@ export class CommonService {
     request: any,
     isLoading?: boolean
   ): Observable<TranferObject> {
-    if (isLoading) ShowLoading();
     var tranferObject = this.http
       .post<TranferObject>(this.apiUrl + url, request)
       .pipe(share());
@@ -58,7 +54,6 @@ export class CommonService {
         Message(response)
       },
     });
-    HideLoading();
     return tranferObject;
   }
 
@@ -68,7 +63,6 @@ export class CommonService {
     isLoading?: boolean,
     isMessage?: boolean
   ): Observable<TranferObject> {
-    if (isLoading) ShowLoading();
     var tranferObject = this.http
       .put<TranferObject>(this.apiUrl + url, request)
       .pipe(share());
@@ -83,12 +77,10 @@ export class CommonService {
         if (isMessage) Message(response);
       },
     });
-    HideLoading();
     return tranferObject;
   }
 
   deleteRequest(url: string, isLoading?: boolean): Observable<TranferObject> {
-    if (isLoading) ShowLoading();
     var tranferObject = this.http
       .delete<TranferObject>(this.apiUrl + url)
       .pipe(share());
@@ -103,7 +95,6 @@ export class CommonService {
         Message(response);
       },
     });
-    HideLoading();
     return tranferObject;
   }
 }
