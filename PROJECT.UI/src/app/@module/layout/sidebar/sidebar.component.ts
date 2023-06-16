@@ -33,8 +33,8 @@ export class SidebarComponent implements OnInit {
     this.globalService.rightSubject.subscribe((item) => {
       this.loadInit();
     });
-    translate.addLangs(['vi', 'en']);
-    translate.setDefaultLang('vi');
+    // translate.addLangs(['vi', 'en']);
+    // translate.setDefaultLang('vi');
     this.globalService.toggleSidebarSubject.subscribe((value) => {
       this.show = value
     });
@@ -56,6 +56,7 @@ export class SidebarComponent implements OnInit {
     try {
       if (this.username) {
         this.userService.getMenuOfUser(this.username).subscribe(({Data}:any) => {
+          debugger;
           this.ROUTE_DATA = Data?.Children;
           const flatten = (Children:any, getChildren:any, level?:any, parent?:any) => Array.prototype.concat.apply(
             Children.map((x:any) => ({ ...x, level: level || 1, parent: parent || null })), 

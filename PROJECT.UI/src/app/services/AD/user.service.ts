@@ -37,7 +37,7 @@ export class UserService {
   }
 
   getListUser(pagination? : UserFilter){
-    var url = `/api/User/GetList?CurrentPage=${pagination?.CurrentPage}&PageSize=${pagination?.PageSize}&KeyWord=${pagination?.KeyWord}`
+    var url = `/api/User/GetList?CurrentPage=${pagination?.currentPage}&PageSize=${pagination?.pageSize}&KeyWord=${pagination?.keyWord}`
     return this._common.getRequest(url)
   }
 

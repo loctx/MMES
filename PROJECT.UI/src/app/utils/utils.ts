@@ -16,14 +16,14 @@ export class utils {
 
 export class HandleResponse {
   showMessage(response: any, method: string) {
-    if (response?.MessageObject?.Code !== '') {
-      const res = response?.MessageObject;
-      switch (res.MessageType) {
+    if (response?.messageObject?.code !== '') {
+      const res = response?.messageObject;
+      switch (res.messageType) {
         case 'S':
           if(method != METHOD.GET) {
             Swal.fire({
               icon: 'success',
-              title: response?.MessageObject?.Message,
+              title: response?.messageObject?.message,
               position: 'top-end',
               showConfirmButton: false,
               timer: 3000,
@@ -34,9 +34,9 @@ export class HandleResponse {
         case 'W':
           Swal.fire({
             icon: 'warning',
-            title: res.Message,
-            text: res.MessageDetail,
-            footer: `LogID: ${res.LogId}`,
+            title: res.message,
+            text: res.messageDetail,
+            footer: `LogID: ${res.logId}`,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
@@ -45,9 +45,9 @@ export class HandleResponse {
         case 'E':
           Swal.fire({
             icon: 'error',
-            title: res.Message,
-            text: res.MessageDetail,
-            footer: `LogID: ${res.LogId}`,
+            title: res.message,
+            text: res.messageDetail,
+            footer: `LogID: ${res.logId}`,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,

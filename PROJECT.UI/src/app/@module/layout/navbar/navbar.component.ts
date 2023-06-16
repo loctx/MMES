@@ -17,9 +17,9 @@ export class NavbarComponent implements OnInit {
   lang = localStorage.getItem('lang');
   token = localStorage.getItem("jwt");
   constructor(public translate: TranslateService, translateCache: TranslateCacheService,  private globalService: GlobalService){
-    translate.addLangs(['vi', 'en']);
-    translate.setDefaultLang('vi');
-    translateCache.init();
+    // translate.addLangs(['vi', 'en']);
+    // translate.setDefaultLang('vi');
+    // translateCache.init();
   }
   ngOnInit(): void {
     

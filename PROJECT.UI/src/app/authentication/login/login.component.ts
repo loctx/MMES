@@ -50,15 +50,15 @@ export class LoginComponent {
       .subscribe({
         next: (response: any) => {
         document.getElementById("indeterminate-progress-bar-login")!.style.display = "none";
-          if (response.Status) {
-            localStorage.setItem('jwt', response?.Data?.accessToken);
+          if (response.status) {
+            localStorage.setItem('jwt', response?.data?.accessToken);
               // localStorage.setItem("user", JSON.stringify(response.Data.User, null, 2));
               // localStorage.setItem("lstRight", JSON.stringify(response.Data.ListRight, null, 2));
-              this.globalService.setUserInfo(response.Data)
+              this.globalService.setUserInfo(response.data)
               this.invalidLogin = false;
               this.router.navigate(['master-data/unit'])
           } else {
-            this.toastr.showError(response?.MessageObject?.Message);
+            this.toastr.showError(response?.messageObject?.message);
           }
         },
       });

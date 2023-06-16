@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <div class="input-group search-box">
-                        <input type="text" class="form-control" [(ngModel)]="filterList.KeyWord"
+                        <input type="text" class="form-control" [(ngModel)]="filterList.keyWord"
                             placeholder="Nhập từ khóa tìm kiếm" />
                         <span (click)="searchUnit()" class="input-group-text"><i class="bi bi-search"></i></span>
                         <span (click)="searchUnit(1, true)" class="input-group-text"><i
@@ -35,18 +35,18 @@
                     <th scope="col" class="">Tên đơn vị tính</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let item of dataUnit.Data, index as i" >
-                    <td class="align-center">{{ (dataUnit.CurrentPage - 1) * dataUnit.PageSize + i + 1}}</td>
+            <tbody *ngIf="paginationResult">
+                <tr *ngFor="let item of paginationResult.data, index as i">
+                    <td class="align-center">{{ (paginationResult.currentPage - 1) * paginationResult.pageSize + i + 1}}</td>
                     <td class="">
-                        <span href="#" (click)="openEdit(item)" class="cursor-pointer text-primary">{{item.Code}}</span>
+                        <span href="#" (click)="openEdit(item)" class="cursor-pointer text-primary">{{item.code}}</span>
                     </td>
-                    <td class="">{{item.Name}}</td>
+                    <td class="">{{item.name}}</td>
                 </tr>
             </tbody>
         </table>
-        <div class="float-end">
-            <app-pagination [pageSize]="dataUnit.PageSize" [totalRecord]="dataUnit.TotalRecord" [totalPage]="dataUnit.TotalPage" [(page)]="dataUnit.CurrentPage"
+        <div class="float-end" *ngIf="paginationResult">
+            <app-pagination [pageSize]="paginationResult.pageSize" [totalRecord]="paginationResult.totalRecord" [totalPage]="paginationResult.totalPage" [(page)]="paginationResult.currentPage"
                 (pageChange)="onChangePage($event)"></app-pagination>
         </div>
     </div>

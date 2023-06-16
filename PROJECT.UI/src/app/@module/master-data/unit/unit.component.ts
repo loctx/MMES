@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { T_MD_UNIT_RESPONSE } from 'src/app/models/MD/T_MD_UNIT.model';
 import { UnitService } from 'src/app/services/MD/unit.service';
 import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitFormCreateComponent } from './unit-form-create/unit-form-create.component';
 import { UnitFormEditComponent } from './unit-form-edit/unit-form-edit.component';
+import { PaginationResult } from 'src/app/models/Common/pagination.model';
 
 @Component({
   selector: 'app-unit',
@@ -28,20 +28,9 @@ export class UnitComponent implements OnInit {
     private drawerService: DrawerService,
   ) {}
 
-  dataUnit: T_MD_UNIT_RESPONSE = {
-    CurrentPage: 1,
-    PageSize: 10,
-    TotalPage: 1,
-    TotalRecord: 1,
-    KeyWord: '',
-    Data:[],
-  } 
-
-  filterList:UnitFilter = {
-    CurrentPage: 1,
-    PageSize: 10,
-    KeyWord: ''
-  }
+  paginationResult!: PaginationResult;
+  
+  filterList = new UnitFilter();
 
   ngOnInit(): void {
     this.loadInit();
@@ -57,24 +46,24 @@ export class UnitComponent implements OnInit {
   
   openEdit(item:any) {
     this.drawerService.open(UnitFormEditComponent, {
-      code: item.Code,
-      name: item.Name
+      code: item.code,
+      name: item.name
     }).subscribe((result) => {
-      if(result?.Status) {
+      if(result?.status) {
         this.loadInit();
       }
     });
   }
 
-  searchUnit(CurrentPage: number = 1, refresh: boolean = false) {
+  searchUnit(currentPage: number = 1, refresh: boolean = false) {
     this.filterList = {
       ...this.filterList,
-      KeyWord: refresh ? '' : this.filterList.KeyWord,
-      CurrentPage: CurrentPage,
+      keyWord: refresh ? '' : this.filterList.keyWord,
+      currentPage: currentPage,
     };
     this._service.searchUnit(this.filterList, true).subscribe({
-      next: ({ Data }) => {
-        this.dataUnit = Data;
+      next: ({ data }) => {
+        this.paginationResult = data;
       },
       error: (response) => {
         console.log(response);

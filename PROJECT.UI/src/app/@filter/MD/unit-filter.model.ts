@@ -1,6 +1,6 @@
 import { BaseFilter } from "../Common/base-filter.model";
 
-export interface UnitFilter extends BaseFilter {}
+export class UnitFilter extends BaseFilter {}
 
 export interface UnitFormParams {
     code: string,

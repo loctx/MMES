@@ -6,16 +6,8 @@ import { UnitComponent } from './unit/unit.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SaleOfficeComponent } from './sale-office/sale-office.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
-import { MaterialComponent } from './material/material.component';
-import { PlantComponent } from './plant/plant.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
-import { DischardComponent } from './dischard/dischard.component';
-import { TransmodeComponent } from './transmode/transmode.component';
-import { VendorComponent } from './vendor/vendor.component';
-import { CustomerComponent } from './customer/customer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-create.component';
@@ -24,15 +16,7 @@ import {SharedModule} from '../share.modules';
 
 @NgModule({
   declarations: [
-    SaleOfficeComponent,
     UnitComponent,
-    MaterialComponent,
-    PlantComponent,
-    VehicleComponent,
-    DischardComponent,
-    TransmodeComponent,
-    VendorComponent,
-    CustomerComponent,
     UnitFormCreateComponent,
     UnitFormEditComponent
   ],

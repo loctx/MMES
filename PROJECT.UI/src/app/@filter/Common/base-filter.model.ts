@@ -1,6 +1,5 @@
-export interface BaseFilter {
-    CurrentPage: number;
-    PageSize: number;
-    KeyWord:string;
-    IsLoading?: boolean;
+export class BaseFilter {
+    currentPage: number = 1;
+    pageSize: number = 20;
+    keyWord:string = "";
 }

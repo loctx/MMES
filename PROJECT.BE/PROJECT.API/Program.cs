@@ -77,7 +77,7 @@ builder.Services.AddSwaggerGen(options => {
 
 builder.Services.Configure<JsonOptions>(options =>
 {
-    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    //options.JsonSerializerOptions.PropertyNamingPolicy = null;
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
