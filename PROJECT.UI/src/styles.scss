@@ -50,7 +50,7 @@ body {
 form {
   .is-invalid.ng-invalid {
     border: 1px solid #dc3545 !important;
-    border-radius: 4px !important;
+    border-radius: 2px !important;
   }
   .is-invalid ~ .invalid-feedback,
   .is-invalid ~ .invalid-tooltip,
@@ -1294,4 +1294,48 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.indeterminate-progress-bar {
+  /* Color */
+  background-color: white;
+
+  /* Rounded border */
+  // border-radius: 9999px;
+
+  /* Size */
+  height: 4px;
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.indeterminate-progress-bar__progress {
+  /* Color */
+  background-color: #ff4081;
+
+  /* Rounded border */
+  border-radius: 9999px;
+
+  /* Absolute position */
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 50%;
+
+  /* Move the bar infinitely */
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-name: indeterminate-progress-bar;
+}
+
+@keyframes indeterminate-progress-bar {
+  from {
+      left: -50%;
+  }
+  to {
+      left: 100%;
+  }
 }
