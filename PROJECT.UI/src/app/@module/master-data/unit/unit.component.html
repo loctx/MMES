@@ -36,8 +36,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listUnit, index as i" >
-                    <td class="align-center">{{ (filter.CurrentPage - 1) * filter.PageSize + i + 1}}</td>
+                <tr *ngFor="let item of dataUnit.Data, index as i" >
+                    <td class="align-center">{{ (dataUnit.CurrentPage - 1) * dataUnit.PageSize + i + 1}}</td>
                     <td class="">
                         <span href="#" (click)="openEdit(item)" class="cursor-pointer text-primary">{{item.Code}}</span>
                     </td>
