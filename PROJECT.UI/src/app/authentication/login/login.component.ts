@@ -26,7 +26,7 @@ export class LoginComponent {
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private _location: Location,
-    private toastr: ToastrcustomService,
+    private toastr: ToastrcustomService,                                                                                                                                   
     private globalService: GlobalService
   ) {}
 
@@ -40,7 +40,7 @@ export class LoginComponent {
   };
 
   public login = () => {
-    ShowLoading();
+    document.getElementById("indeterminate-progress-bar-login")!.style.display = "block";
     this.http
       .post<TranferObject>(this.apiUrl + 'Auth/Login', this.loginRequest, {
         headers: new HttpHeaders({
@@ -49,6 +49,7 @@ export class LoginComponent {
       })
       .subscribe({
         next: (response: any) => {
+        document.getElementById("indeterminate-progress-bar-login")!.style.display = "none";
           if (response.Status) {
             localStorage.setItem('jwt', response?.Data?.accessToken);
               // localStorage.setItem("user", JSON.stringify(response.Data.User, null, 2));
@@ -56,9 +57,7 @@ export class LoginComponent {
               this.globalService.setUserInfo(response.Data)
               this.invalidLogin = false;
               this.router.navigate(['master-data/unit'])
-              HideLoading();
           } else {
-             HideLoading();
             this.toastr.showError(response?.MessageObject?.Message);
           }
         },

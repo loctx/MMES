@@ -1312,6 +1312,16 @@ h6 {
   z-index: 2000;
 }
 
+#indeterminate-progress-bar-login {
+  background-color: white;
+  height: 4px;
+  position: sticky;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2000;
+  display: none;
+}
+
 .indeterminate-progress-bar__progress {
   /* Color */
   background-color: #ff4081;

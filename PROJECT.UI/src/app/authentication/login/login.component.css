@@ -18,7 +18,7 @@
     flex-direction: column;
     box-shadow: 0 5px 45px rgba(0, 0, 0, 0.15);
     background-color: white;
-    border-radius: 8px;
+    border-radius: 2px;
 }
 .card-login {
     box-shadow: none;
