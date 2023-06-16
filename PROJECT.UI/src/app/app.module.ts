@@ -34,13 +34,18 @@ import { FooterModule } from './@module/layout/footer/footer.module';
 import { NavbarModule } from './@module/layout/navbar/navbar.module';
 import { SidebarModule } from './@module/layout/sidebar/sidebar.module';
 import { LayoutComponent } from './@module/layout/layout.component';
-import {AuthGuard} from 'src/app/guards/auth-guard.service';
+import { AuthGuard } from 'src/app/guards/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.component';
 import { HandleResponse } from 'src/app/utils/utils';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LayoutComponent, DrawerComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    LayoutComponent,
+    DrawerComponent,
+  ],
   imports: [
     FooterModule,
     NavbarModule,

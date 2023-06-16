@@ -96,6 +96,20 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# Table
+--------------------------------------------------------------*/
+
+table{
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
+
+table th,td{
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+  line-height: 30px !important;
+  font-size: 13px !important;
+}
+
+/*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
 #main {
@@ -1349,3 +1363,5 @@ h6 {
       left: 100%;
   }
 }
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

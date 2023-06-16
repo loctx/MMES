@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../share.modules';
+import { MatTableModule } from '@angular/material/table';
 import { UnitEditComponent } from './unit/unit-edit/unit-edit.component';
 import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
 import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
@@ -20,6 +21,7 @@ import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
     SharedModule,
     ToastrModule,
     CommonModule,
+    MatTableModule,
     MasterDataRoutingModule,
     NgbModule,
     NgxPaginationModule,

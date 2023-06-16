@@ -1,0 +1,9 @@
+.list-container{
+    height: calc(100vh - 165px);
+    max-width: 100%;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}

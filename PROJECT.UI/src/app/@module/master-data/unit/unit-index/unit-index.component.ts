@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UnitService } from 'src/app/services/MD/unit.service';
-import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitCreateComponent } from '../unit-create/unit-create.component';
 import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
-
 @Component({
   selector: 'app-unit-index',
   templateUrl: './unit-index.component.html',
@@ -29,6 +27,7 @@ export class UnitIndexComponent implements OnInit {
       path: '/master-data/unit',
     },
   ];
+  displayedColumns: string[] = ['index', 'code', 'name'];
   paginationResult!: PaginationResult;
   filter = new BaseFilter();
 
@@ -39,7 +38,7 @@ export class UnitIndexComponent implements OnInit {
 
   openCreate() {
     this.drawerService.open(UnitCreateComponent).subscribe((result) => {
-      if (result?.Status) {
+      if (result?.status) {
         this.loadInit();
       }
     });

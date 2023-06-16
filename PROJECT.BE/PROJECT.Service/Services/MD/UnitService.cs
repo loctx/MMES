@@ -2,6 +2,7 @@
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Dtos.MD;
+using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
 using PROJECT.CORE;
@@ -18,7 +19,7 @@ namespace PROJECT.BUSINESS.Services.MD
 {
     public interface IUnitService : IGenericService<tblMDUnit, tblMDUnitDto>
     {
-        Task<PagedResponseDto> Search(UnitFilter filter);
+        Task<PagedResponseDto> Search(BaseFilter filter);
     }
     public class UnitService : GenericService<tblMDUnit, tblMDUnitDto>, IUnitService
     {
@@ -26,7 +27,7 @@ namespace PROJECT.BUSINESS.Services.MD
         {
         }
 
-        public async Task<PagedResponseDto> Search(UnitFilter filter)
+        public async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             try
             {
@@ -38,6 +39,7 @@ namespace PROJECT.BUSINESS.Services.MD
                         x.Name.Contains(filter.KeyWord)
                     );
                 }
+                query = query.OrderBy(x => x.Code);
                 return await this.Paging(query, filter);
             }
             catch (Exception ex)

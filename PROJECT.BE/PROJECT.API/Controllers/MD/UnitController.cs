@@ -7,6 +7,7 @@ using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Auth;
 using PROJECT.BUSINESS.Dtos.MD;
+using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
 using PROJECT.BUSINESS.Services.MD;
@@ -25,7 +26,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> Search([FromQuery] UnitFilter filter)
+        public async Task<IActionResult> Search([FromQuery] BaseFilter filter)
         {
             var transferObject = new TransferObject();
             var result = await _service.Search(filter);
