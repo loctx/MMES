@@ -4,11 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 @Component({
-  selector: 'app-unit-form-edit',
-  templateUrl: './unit-form-edit.component.html',
-  styleUrls: ['./unit-form-edit.component.css'],
+  selector: 'app-unit-edit',
+  templateUrl: './unit-edit.component.html',
+  styleUrls: ['./unit-edit.component.css'],
 })
-export class UnitFormEditComponent {
+export class UnitEditComponent {
   unitForm: FormGroup;
   submitted: boolean = false;
   code: string = '';

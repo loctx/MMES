@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitFormEditComponent } from './unit-form-edit.component';
+import { UnitListComponent } from './unit-list.component';
 
-describe('UnitFormEditComponent', () => {
-  let component: UnitFormEditComponent;
-  let fixture: ComponentFixture<UnitFormEditComponent>;
+describe('UnitListComponent', () => {
+  let component: UnitListComponent;
+  let fixture: ComponentFixture<UnitListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UnitFormEditComponent ]
+      declarations: [ UnitListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UnitFormEditComponent);
+    fixture = TestBed.createComponent(UnitListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { UnitService } from 'src/app/services/MD/unit.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
-import {DrawerService} from 'src/app/services/Common/drawer.service';
+import { DrawerService } from 'src/app/services/Common/drawer.service';
 @Component({
-  selector: 'app-unit-form-create',
-  templateUrl: './unit-form-create.component.html',
-  styleUrls: ['./unit-form-create.component.css']
+  selector: 'app-unit-create',
+  templateUrl: './unit-create.component.html',
+  styleUrls: ['./unit-create.component.css'],
 })
-export class UnitFormCreateComponent {
+export class UnitCreateComponent {
   unitForm: FormGroup;
   submitted: boolean = false;
 

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MasterDataRoutingModule } from './master-data-routing.module';
-import { UnitComponent } from './unit/unit.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -10,16 +9,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-create.component';
-import { UnitFormEditComponent } from './unit/unit-form-edit/unit-form-edit.component';
-import {SharedModule} from '../share.modules';
+import { SharedModule } from '../share.modules';
+import { UnitListComponent } from './unit/unit-list/unit-list.component';
+import { UnitEditComponent } from './unit/unit-edit/unit-edit.component';
+import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
 
 @NgModule({
-  declarations: [
-    UnitComponent,
-    UnitFormCreateComponent,
-    UnitFormEditComponent
-  ],
+  declarations: [UnitListComponent, UnitEditComponent, UnitCreateComponent],
   imports: [
     SharedModule,
     ToastrModule,
@@ -30,7 +26,7 @@ import {SharedModule} from '../share.modules';
     FormsModule,
     NgSelectModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
-export class MasterDataModule { }
+export class MasterDataModule {}

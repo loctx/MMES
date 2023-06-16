@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UnitComponent } from './unit/unit.component';
+import { UnitListComponent } from './unit/unit-list/unit-list.component';
 
-const routes: Routes = [
-  { path: 'unit', component: UnitComponent },
-];
+const routes: Routes = [{ path: 'unit', component: UnitListComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MasterDataRoutingModule { }
+export class MasterDataRoutingModule {}
