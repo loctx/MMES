@@ -18,12 +18,10 @@ export class SaleOfficeComponent implements OnInit {
   listSaleOffice: T_MD_SALEOFFICE[] = [];
   filter: SaleOfficeFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: "",
     Organize: "",
-    Data: []
   }
 
   ngOnInit(): void {

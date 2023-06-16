@@ -14,7 +14,6 @@ import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.compon
 export class DrawerService {
   private drawerRef!: ComponentRef<DrawerComponent> | undefined;
   private resultSubject: Subject<any> = new Subject<any>();
-  private data: any = {};
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -22,7 +21,7 @@ export class DrawerService {
     private injector: Injector
   ) {}
 
-  open(component: any) {
+  open(component: any, data:any = {}) {
     if (!this.drawerRef) {
       const componentFactory =
         this.componentFactoryResolver.resolveComponentFactory(DrawerComponent);
@@ -37,8 +36,8 @@ export class DrawerService {
     const componentRef = componentFactory.create(this.injector);
     const instance = componentRef.instance as any;
     if (instance) {
-      Object.keys(this.data).forEach((key) => {
-        instance[key] = this.data[key];
+      Object.keys(data).forEach((key) => {
+        instance[key] = data[key];
       });
     }
     drawerComponent.setContent(componentRef);
@@ -58,10 +57,6 @@ export class DrawerService {
         this.drawerRef = undefined;
       }, 600);
     }
-  }
-
-  setData(data: any) {
-    this.data = data;
   }
 
   returnData(data?: any) {

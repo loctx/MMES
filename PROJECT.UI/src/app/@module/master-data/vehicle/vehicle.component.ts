@@ -13,11 +13,9 @@ export class VehicleComponent implements OnInit {
   listVehicle: T_MD_VEHICLE[] = [];
   filter: VehicleFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     this._service.searchVehicle(this.filter, true)

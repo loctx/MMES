@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserFilter } from 'src/app/@filter/AD/user-filter.model';
-import { T_AD_USER } from 'src/app/models/AD/T_AD_USER.model';
+import { T_AD_USER_RESPONSE } from 'src/app/models/AD/T_AD_USER.model';
 import { UserService } from 'src/app/services/AD/user.service';
 declare function Message(response :any) :any
 
@@ -11,14 +11,19 @@ declare function Message(response :any) :any
 export class UserListComponent implements OnInit {
   constructor(private _service: UserService) { }
 
-  listUser: T_AD_USER[] = [];
+  listUser: T_AD_USER_RESPONSE = {
+    CurrentPage: 1,
+    PageSize: 10,
+    TotalPage: 1,
+    TotalRecord: 1,
+    KeyWord: '',
+    Data:[],
+  }
   filter: UserFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: 'Empty',
-    Data: []
   }
 
   ngOnInit(): void {
@@ -53,8 +58,8 @@ export class UserListComponent implements OnInit {
     this._service.getListUser(this.filter)
       .subscribe({
         next: (response) => {
-          this.listUser = response.Data.Data;
-          this.filter = response.Data;
+          console.log('response: ', response);
+          //this.listUser = response;
         },
         error: (response) => { console.log(response); }
       });

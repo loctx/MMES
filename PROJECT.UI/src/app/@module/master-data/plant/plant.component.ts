@@ -13,11 +13,9 @@ export class PlantComponent implements OnInit {
   listPlant: T_MD_PLANT[] = [];
   filter: PlantFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     // this._service.searchPlant(this.filter, true)

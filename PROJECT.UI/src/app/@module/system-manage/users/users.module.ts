@@ -7,6 +7,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {SharedModule} from '../../share.modules';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
        UserListComponent,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     UsersRoutingModule,
     NgbModule,

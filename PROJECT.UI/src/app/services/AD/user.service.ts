@@ -8,7 +8,7 @@ import { T_AD_USER_RIGHT } from 'src/app/models/AD/T_AD_USER_RIGHT.model';
 import { T_AD_USER_USER_GROUP } from 'src/app/models/AD/T_AD_USER_USER_GROUP.model';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonService } from '../Common/common.service';
-import { Pagination } from 'src/app/models/Common/pagination.model';
+import { UserFilter } from 'src/app/@filter/AD/user-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class UserService {
     localStorage.removeItem('userRights');
   }
 
-  getListUser(pagination? : Pagination){
+  getListUser(pagination? : UserFilter){
     var url = `/api/User/GetList?CurrentPage=${pagination?.CurrentPage}&PageSize=${pagination?.PageSize}&KeyWord=${pagination?.KeyWord}`
     return this._common.getRequest(url)
   }

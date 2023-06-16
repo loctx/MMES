@@ -13,11 +13,9 @@ export class MaterialComponent implements OnInit {
   listMaterial: T_MD_MATERIAL[] = [];
   filter: MaterialFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     this._service.searchMaterial(this.filter, true)
