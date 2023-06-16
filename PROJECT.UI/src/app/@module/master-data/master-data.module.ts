@@ -10,12 +10,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../share.modules';
-import { UnitListComponent } from './unit/unit-list/unit-list.component';
 import { UnitEditComponent } from './unit/unit-edit/unit-edit.component';
 import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
+import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
 
 @NgModule({
-  declarations: [UnitListComponent, UnitEditComponent, UnitCreateComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent],
   imports: [
     SharedModule,
     ToastrModule,

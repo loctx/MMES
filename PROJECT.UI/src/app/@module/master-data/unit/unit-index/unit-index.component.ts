@@ -7,11 +7,11 @@ import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
 
 @Component({
-  selector: 'app-unit-list',
-  templateUrl: './unit-list.component.html',
-  styleUrls: ['./unit-list.component.css'],
+  selector: 'app-unit-index',
+  templateUrl: './unit-index.component.html',
+  styleUrls: ['./unit-index.component.css'],
 })
-export class UnitListComponent implements OnInit {
+export class UnitIndexComponent implements OnInit {
   breadcrumbList: any[] = [
     {
       name: 'Trang chủ',
