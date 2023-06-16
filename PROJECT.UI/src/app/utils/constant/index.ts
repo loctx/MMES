@@ -1,11 +1,15 @@
-import {listZones} from './zone';
-import {lstPartnersGroups, lstProviderType} from './partner';
-import {lstProductionPlanSteps, PRODUCTION_PLAN_STEP} from './production-plan';
-import {lstProductionProposalSteps} from './production-proposal';
-import {MODULE_CODES} from './module';
-import {MODULE_TYPE_CODES} from './module-type';
-import {ROLES_IDS} from './role';
-import {ACCESS_RIGHTS} from './access-right';
+import { listZones } from './zone';
+import { lstPartnersGroups, lstProviderType } from './partner';
+import {
+  lstProductionPlanSteps,
+  PRODUCTION_PLAN_STEP,
+} from './production-plan';
+import { lstProductionProposalSteps } from './production-proposal';
+import { MODULE_CODES } from './module';
+import { MODULE_TYPE_CODES } from './module-type';
+import { ROLES_IDS } from './role';
+import { ACCESS_RIGHTS } from './access-right';
+import { METHOD } from './method-api';
 
 export {
   listZones,
@@ -18,4 +22,5 @@ export {
   ROLES_IDS,
   PRODUCTION_PLAN_STEP,
   ACCESS_RIGHTS,
+  METHOD,
 };

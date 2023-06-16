@@ -1,13 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { TranferObject } from 'src/app/models/Common/tranfer-object.model';
 import { share } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { METHOD } from 'src/app/utils/constant/index';
+import {HandleResponse} from 'src/app/utils/utils';
 declare function ShowLoading(): any;
 declare function HideLoading(): any;
-declare function Message(response: TranferObject): any;
+
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ declare function Message(response: TranferObject): any;
 export class CommonService {
   apiUrl: string = environment.baseApiUrl;
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private handleResponse: HandleResponse) {}
 
   getRequest(
     url: string,
@@ -30,9 +31,7 @@ export class CommonService {
     tranferObject.subscribe({
       next: (response) => {
         HideLoading();
-        if (response.MessageObject?.MessageType == 'E') {
-          Message(response);
-        }
+        this.handleResponse.showMessage(response, METHOD.GET);
       },
     });
     return tranferObject;
@@ -49,13 +48,7 @@ export class CommonService {
       .pipe(share());
     tranferObject.subscribe({
       next: (response) => {
-        if (response?.Status) {
-          this.toastrService.success('Thêm mới thành công !');
-        }
-        if (response.MessageObject?.MessageType == 'E') {
-          this.toastrService.error(response.MessageObject?.Message);
-        }
-        Message(response)
+        this.handleResponse.showMessage(response, METHOD.POST);
       },
     });
     HideLoading();
@@ -66,7 +59,6 @@ export class CommonService {
     url: string,
     request: any,
     isLoading?: boolean,
-    isMessage?: boolean
   ): Observable<TranferObject> {
     if (isLoading) ShowLoading();
     var tranferObject = this.http
@@ -74,13 +66,7 @@ export class CommonService {
       .pipe(share());
     tranferObject.subscribe({
       next: (response) => {
-        if (response?.Status) {
-          this.toastrService.success('Chỉnh sửa thành công !');
-        }
-        if (response.MessageObject?.MessageType == 'E') {
-          this.toastrService.error(response.MessageObject?.Message);
-        }
-        if (isMessage) Message(response);
+        this.handleResponse.showMessage(response, METHOD.PUT);
       },
     });
     HideLoading();
@@ -94,13 +80,7 @@ export class CommonService {
       .pipe(share());
     tranferObject.subscribe({
       next: (response) => {
-        if (response?.Status) {
-          this.toastrService.success('Xoá thành công !');
-        }
-        if (response.MessageObject?.MessageType == 'E') {
-          this.toastrService.error(response.MessageObject?.Message);
-        }
-        Message(response);
+        this.handleResponse.showMessage(response, METHOD.DELETE);
       },
     });
     HideLoading();

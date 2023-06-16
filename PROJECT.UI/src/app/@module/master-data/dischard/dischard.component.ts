@@ -13,11 +13,9 @@ export class DischardComponent implements OnInit {
   listDischard: T_MD_DISCHARD[] = [];
   filter: DischardFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     this._service.searchDischard(this.filter, true)

@@ -16,15 +16,14 @@ import { DischardComponent } from './dischard/dischard.component';
 import { TransmodeComponent } from './transmode/transmode.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { CustomerComponent } from './customer/customer.component';
-import {PaginationComponent} from '../../utils/helper/pagination/pagination.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { UnitFormCreateComponent } from './unit/unit-form-create/unit-form-create.component';
 import { UnitFormEditComponent } from './unit/unit-form-edit/unit-form-edit.component';
+import {SharedModule} from '../share.modules';
 
 @NgModule({
   declarations: [
-    PaginationComponent,
     SaleOfficeComponent,
     UnitComponent,
     MaterialComponent,
@@ -38,6 +37,7 @@ import { UnitFormEditComponent } from './unit/unit-form-edit/unit-form-edit.comp
     UnitFormEditComponent
   ],
   imports: [
+    SharedModule,
     ToastrModule,
     CommonModule,
     MasterDataRoutingModule,

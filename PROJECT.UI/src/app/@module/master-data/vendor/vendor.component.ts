@@ -13,11 +13,9 @@ export class VendorComponent implements OnInit {
   listVendor: T_MD_VENDOR[] = [];
   filter: VendorFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     this._service.searchVendor(this.filter, true)

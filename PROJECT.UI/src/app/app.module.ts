@@ -37,7 +37,7 @@ import { LayoutComponent } from './@module/layout/layout.component';
 import {AuthGuard} from 'src/app/guards/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.component';
-
+import { HandleResponse } from 'src/app/utils/utils';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, LayoutComponent, DrawerComponent],
@@ -96,6 +96,7 @@ import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.compon
     BrowserAnimationsModule,
   ],
   providers: [
+    HandleResponse,
     AuthGuard,
     CookieService,
     {

@@ -1,8 +1,6 @@
-import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
-import { T_MD_UNIT } from 'src/app/models/MD/T_MD_UNIT.model';
+import { Component, OnInit } from '@angular/core';
+import { T_MD_UNIT_RESPONSE } from 'src/app/models/MD/T_MD_UNIT.model';
 import { UnitService } from 'src/app/services/MD/unit.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { utils } from 'src/app/utils/utils';
 import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitFormCreateComponent } from './unit-form-create/unit-form-create.component';
@@ -25,21 +23,25 @@ export class UnitComponent implements OnInit {
     },
   ];
 
-  titleDrawer: string = 'Thêm mới';
-  openDrawer: boolean = false;
-
   constructor(
     private _service: UnitService,
     private drawerService: DrawerService,
   ) {}
 
-  listUnit: T_MD_UNIT[] = [];
-  filter: UnitFilter = {
+  dataUnit: T_MD_UNIT_RESPONSE = {
     CurrentPage: 1,
-    TotalPage: 1,
     PageSize: 10,
+    TotalPage: 1,
+    TotalRecord: 1,
     KeyWord: '',
-  };
+    Data:[],
+  } 
+
+  filterList:UnitFilter = {
+    CurrentPage: 1,
+    PageSize: 10,
+    KeyWord: ''
+  }
 
   ngOnInit(): void {
     this.loadInit();
@@ -53,32 +55,26 @@ export class UnitComponent implements OnInit {
     });
   }
   
-  
   openEdit(item:any) {
-    this.drawerService.setData({
+    this.drawerService.open(UnitFormEditComponent, {
       code: item.Code,
       name: item.Name
-    });
-    this.drawerService.open(UnitFormEditComponent).subscribe((result) => {
+    }).subscribe((result) => {
       if(result?.Status) {
         this.loadInit();
       }
     });
   }
 
-  loadInit(CurrentPage: number = 1, refresh: boolean = false) {
-    this.filter = {
-      ...this.filter,
-      KeyWord: refresh ? '' : this.filter.KeyWord,
+  searchUnit(CurrentPage: number = 1, refresh: boolean = false) {
+    this.filterList = {
+      ...this.filterList,
+      KeyWord: refresh ? '' : this.filterList.KeyWord,
       CurrentPage: CurrentPage,
     };
-    this._service.searchUnit(this.filter, true).subscribe({
+    this._service.searchUnit(this.filterList, true).subscribe({
       next: ({ Data }) => {
-        this.listUnit = Data.Data;
-        this.filter = {
-          ...Data,
-          KeyWord: this.filter.KeyWord,
-        };
+        this.dataUnit = Data;
       },
       error: (response) => {
         console.log(response);
@@ -86,7 +82,11 @@ export class UnitComponent implements OnInit {
     });
   }
 
+  loadInit() {
+    this.searchUnit()
+  }
+
   onChangePage(event: any) {
-    this.loadInit(event);
+    this.searchUnit(event);
   }
 }

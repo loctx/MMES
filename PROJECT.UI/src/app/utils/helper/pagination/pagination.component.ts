@@ -13,6 +13,7 @@ import {
 export class PaginationComponent {
   @Input() pageSize: number = 10;
   @Input() totalPage: number = 1;
+  @Input() totalRecord: number = 1;
   @Input() page:number = 1;
   @Output() pageChange = new EventEmitter<number>();
 

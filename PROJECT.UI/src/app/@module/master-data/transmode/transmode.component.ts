@@ -13,11 +13,9 @@ export class TransmodeComponent implements OnInit {
   listTransmode: T_MD_TRANSMODE[] = [];
   filter: TransmodeFilter = {
     CurrentPage: 1,
-    TotalPage: 0,
     PageSize: 15,
     IsLoading: true,
     KeyWord: '',
-    Data: []
   }
   ngOnInit(): void {
     this._service.searchTransmode(this.filter, true)

@@ -16,10 +16,10 @@
                 </div>
                 <div>
                     <div class="input-group search-box">
-                        <input type="text" class="form-control" [(ngModel)]="filter.KeyWord"
+                        <input type="text" class="form-control" [(ngModel)]="filterList.KeyWord"
                             placeholder="Nhập từ khóa tìm kiếm" />
-                        <span (click)="loadInit()" class="input-group-text"><i class="bi bi-search"></i></span>
-                        <span (click)="loadInit(1, true)" class="input-group-text"><i
+                        <span (click)="searchUnit()" class="input-group-text"><i class="bi bi-search"></i></span>
+                        <span (click)="searchUnit(1, true)" class="input-group-text"><i
                                 class="bi bi-arrow-clockwise"></i></span>
                         &nbsp;
                     </div>
@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of listUnit, index as i" (click)="openEdit(item)">
+                <tr *ngFor="let item of dataUnit.Data, index as i" (click)="openEdit(item)">
                     <td class="align-center">{{i + 1}}</td>
                     <td class="">{{item.Code}}</td>
                     <td class="">{{item.Name}}</td>
@@ -44,7 +44,7 @@
             </tbody>
         </table>
         <div class="float-end">
-            <app-pagination [pageSize]="filter.PageSize" [totalPage]="filter.TotalPage" [(page)]="filter.CurrentPage"
+            <app-pagination [pageSize]="dataUnit.PageSize" [totalRecord]="dataUnit.TotalRecord" [totalPage]="dataUnit.TotalPage" [(page)]="dataUnit.CurrentPage"
                 (pageChange)="onChangePage($event)"></app-pagination>
         </div>
     </div>

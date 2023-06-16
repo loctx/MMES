@@ -1,4 +1,4 @@
-import { T_AD_ORGANIZE } from "./T_AD_ORGANIZE.model";
+import { Pagination } from '../Common/pagination.model';
 
 export interface T_AD_USER{
     USER_NAME: string;
@@ -23,4 +23,8 @@ export interface T_AD_USER{
     CREATE_DATE: Date;
     UPDATE_BY:string;
     UPDATE_DATE: Date;
+}
+
+export interface T_AD_USER_RESPONSE extends Pagination {
+  Data: T_AD_USER[];
 }
