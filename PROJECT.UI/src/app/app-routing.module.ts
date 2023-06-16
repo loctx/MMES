@@ -5,7 +5,6 @@ import { LayoutComponent } from 'src/app/@module/layout/layout.component';
 import { AuthGuard } from 'src/app/guards/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Upload', pathMatch: 'full' },
   { path: 'Login', component: LoginComponent },
   {
     path: ':path',

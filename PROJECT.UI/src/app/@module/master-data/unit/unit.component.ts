@@ -14,17 +14,6 @@ import { UnitFormEditComponent } from './unit-form-edit/unit-form-edit.component
   styleUrls: ['./unit.component.scss'],
 })
 export class UnitComponent implements OnInit {
-  breadcrumbList: any[] = [
-    {
-      name: 'Trang chủ',
-      path: '',
-    },
-    {
-      name: 'Đơn vị tính',
-      path: '/master-data/unit',
-    },
-  ];
-
   titleDrawer: string = 'Thêm mới';
   openDrawer: boolean = false;
 
@@ -52,7 +41,6 @@ export class UnitComponent implements OnInit {
       }
     });
   }
-  
   
   openEdit(item:any) {
     this.drawerService.setData({
