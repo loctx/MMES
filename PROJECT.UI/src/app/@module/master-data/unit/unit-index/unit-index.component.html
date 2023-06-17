@@ -16,7 +16,7 @@
                 </div>
                 <div *ngIf="filter">
                     <div class="input-group search-box">
-                        <input type="text" class="form-control" [(ngModel)]="filter.keyWord"
+                        <input type="text" class="form-control" [(ngModel)]="filter.keyWord" (keyup.enter)="search();"
                             placeholder="Nhập từ khóa tìm kiếm" />
                         <span (click)="search()" class="input-group-text"><i class="bi bi-search"></i></span>
                         <span (click)="search(1, true)" class="input-group-text"><i
