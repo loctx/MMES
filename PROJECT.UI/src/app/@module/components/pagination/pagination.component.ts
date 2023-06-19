@@ -19,24 +19,23 @@ export class PaginationComponent {
   @Output() pageSizeChange = new EventEmitter<number>();
 
   pageSizes: number[] = [10, 20, 50, 100];
-
+  pagesToShow:number = 4; // Số trang hiển thị trên thanh pagination
   get visiblePages(): number[] {
-    const pagesToShow = 4; // Số trang hiển thị trên thanh pagination
     let pages: number[] = [];
     let startPage: number;
     let endPage: number;
   
-    if (this.totalPage <= pagesToShow) {
+    if (this.totalPage <= this.pagesToShow) {
       // Hiển thị tất cả các trang nếu tổng số trang ít hơn hoặc bằng số trang hiển thị
       pages = this.getPageNumbers();
     } else {
       // Xác định vị trí bắt đầu và kết thúc của trang hiển thị
-      const offset = Math.floor(pagesToShow / 2);
+      const offset = Math.floor(this.pagesToShow / 2);
       if (this.page <= offset) {
         startPage = 1;
-        endPage = pagesToShow;
+        endPage = this.pagesToShow;
       } else if (this.page + offset >= this.totalPage) {
-        startPage = this.totalPage - pagesToShow + 1;
+        startPage = this.totalPage - this.pagesToShow + 1;
         endPage = this.totalPage;
       } else {
         startPage = this.page - offset;
