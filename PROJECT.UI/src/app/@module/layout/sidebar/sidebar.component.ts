@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit {
     this.opened = true;
     this.show = true;
     const UserInfo = this.globalService.getUserInfo();
-    this.username = UserInfo?.accountInfo?.UserName;
+    this.username = UserInfo?.userName;
     this.globalService.rightSubject.subscribe((item) => {
       this.loadInit();
     });
@@ -55,16 +55,16 @@ export class SidebarComponent implements OnInit {
   loadInit() {
     try {
       if (this.username) {
-        this.userService.getMenuOfUser(this.username).subscribe(({Data}:any) => {
-          debugger;
-          this.ROUTE_DATA = Data?.Children;
-          const flatten = (Children:any, getChildren:any, level?:any, parent?:any) => Array.prototype.concat.apply(
-            Children.map((x:any) => ({ ...x, level: level || 1, parent: parent || null })), 
-            Children.map((x:any) => flatten(getChildren(x) || [], getChildren, (level || 1) + 1, x.id))
+        this.userService.getMenuOfUser(this.username).subscribe(({data}:any) => {
+          console.log('Data: ', data);
+          this.ROUTE_DATA = data?.children;
+          const flatten = (children:any, getChildren:any, level?:any, parent?:any) => Array.prototype.concat.apply(
+            children.map((x:any) => ({ ...x, level: level || 1, parent: parent || null })), 
+            children.map((x:any) => flatten(getChildren(x) || [], getChildren, (level || 1) + 1, x.id))
           );
           const extractChildren = (x:any) => x.Children;
 
-          this.dataRouter = Data?.Children.reduce((result:any, item:any) => {
+          this.dataRouter = data?.children.reduce((result:any, item:any) => {
             return [
               ...result,
               ...flatten(extractChildren(item) || [], extractChildren).map(x => delete x.Children && x)
@@ -104,25 +104,24 @@ export class SidebarComponent implements OnInit {
     for (let j = 0; j < this.ROUTE_DATA.length; j++) {
       if (!this.ROUTE_DATA[j]['roles'] || this.intersectArray(this.ROUTE_DATA[j]['roles'], listRole) > -1) {
         var item: any = {};
-        item['name'] = this.ROUTE_DATA[j]['Name'];
-        item['icon'] = this.ROUTE_DATA[j]['Icon'];
-        item['url'] = this.ROUTE_DATA[j]['Url'];
+        item['name'] = this.ROUTE_DATA[j]['name'];
+        item['icon'] = this.ROUTE_DATA[j]['icon'];
+        item['url'] = this.ROUTE_DATA[j]['url'];
 
-        if (this.ROUTE_DATA[j]['Children'] && this.ROUTE_DATA[j]['Children']?.length > 0) {
-          item['children'] = this.categoryChild(listRole, this.ROUTE_DATA[j]['Children']);
+        if (this.ROUTE_DATA[j]['children'] && this.ROUTE_DATA[j]['children']?.length > 0) {
+          item['children'] = this.categoryChild(listRole, this.ROUTE_DATA[j]['children']);
         } else {
-          item['url'] = this.ROUTE_DATA[j]['Url'];
+          item['url'] = this.ROUTE_DATA[j]['url'];
         }
         menu.push(item);
       }
     }
     this.dataSource = menu;
+    console.log('this.dataSource: ', this.dataSource);
   }
 
   // kiem tra xem list role cua user va list role cua menu/submenu co chung role khong
   intersectArray(arr1: any, arr2: any) {
-    //arr1.sort();
-    //arr2.sort();
     for (var i = 0; i < arr1.length; i += 1) {
       if (arr2.indexOf(arr1[i]) > -1) {
         return 1;
@@ -136,11 +135,11 @@ export class SidebarComponent implements OnInit {
     for (let i = 0; i < subRoute.length; i++) {
       if (!subRoute[i]['roles'] || this.intersectArray(subRoute[i]['roles'], listRole) > -1) {
         var subItem: any = {};
-        subItem['name'] = subRoute[i]['Name'];
-        if (subRoute[i]['Children'] && subRoute[i]['Children']?.length > 0) {
-          subItem['children'] = this.categoryChild(listRole, subRoute[i]['Children']);
+        subItem['name'] = subRoute[i]['name'];
+        if (subRoute[i]['children'] && subRoute[i]['children']?.length > 0) {
+          subItem['children'] = this.categoryChild(listRole, subRoute[i]['children']);
         } else {
-          subItem['url'] = subRoute[i]['Url'];
+          subItem['url'] = subRoute[i]['url'];
         }
         subMenu.push(subItem);
       }

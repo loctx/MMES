@@ -6,11 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import {SharedModule} from '../share.modules';
+import { AccountGroupComponent } from './account-group/account-group.component';
 
 
 @NgModule({
   declarations: [
 
+  
+    AccountGroupComponent
   ],
   imports: [
     CommonModule,

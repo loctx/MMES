@@ -295,6 +295,19 @@ table th,td{
   box-shadow: 0px 0 40px rgba(1, 41, 112, 0.1);
 }
 
+.d-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-gap {
+  gap: 5px;
+}
+
+.d-space-bw {
+  justify-content: space-between;
+}
+
 .card-header,
 .card-footer {
   border-color: #ebeef4;
@@ -304,7 +317,6 @@ table th,td{
 }
 
 .card-title {
-  padding: 20px 0 10px 0;
   font-size: 15px;
   font-weight: 500;
   color: #012970;
@@ -684,13 +696,14 @@ table th,td{
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 9px 14px -2px rgba(0, 0, 0, 0.2) !important;
   background-color: #fff;
+  padding-top: 20px;
 }
 
-@media (max-width: 1199px) {
-  .sidebar {
-    left: -300px;
-  }
-}
+// @media (max-width: 1199px) {
+//   .sidebar {
+//     left: -300px;
+//   }
+// }
 
 .sidebar::-webkit-scrollbar {
   width: 5px;
