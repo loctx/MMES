@@ -40,6 +40,7 @@ export class GlobalService {
   }
 
   setUserInfo(value:any) {
+    console.log('value: ', value);
     localStorage.setItem("UserInfo", JSON.stringify(value));
   }
 

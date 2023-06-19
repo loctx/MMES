@@ -52,9 +52,10 @@ export class LoginComponent {
         document.getElementById("indeterminate-progress-bar-login")!.style.display = "none";
           if (response.status) {
             localStorage.setItem('jwt', response?.data?.accessToken);
+            console.log('response: ', response);
               // localStorage.setItem("user", JSON.stringify(response.Data.User, null, 2));
               // localStorage.setItem("lstRight", JSON.stringify(response.Data.ListRight, null, 2));
-              this.globalService.setUserInfo(response.data)
+              this.globalService.setUserInfo(response.data?.accountInfo)
               this.invalidLogin = false;
               this.router.navigate(['master-data/unit'])
           } else {
