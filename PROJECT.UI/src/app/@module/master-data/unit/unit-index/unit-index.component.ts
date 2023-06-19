@@ -67,7 +67,6 @@ export class UnitIndexComponent implements OnInit {
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
-        this.paginationResult.totalPage = 15
       },
       error: (response) => {
         console.log(response);
