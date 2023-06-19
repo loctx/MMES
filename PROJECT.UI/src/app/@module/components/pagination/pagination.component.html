@@ -24,7 +24,7 @@
             <option *ngFor="let size of pageSizes" [value]="size">{{ size }} / page</option>
           </select>
     </div>
-    <div *ngIf="totalPage > 1" class="go-to-page">
+    <div *ngIf="totalPage > 1 && totalPage > pagesToShow" class="go-to-page">
         Go to
         <input type="number" (blur)="onInputBlur($event)" />
         Page
