@@ -19,7 +19,6 @@ namespace PROJECT.BUSINESS.Services.MD
 {
     public interface IUnitService : IGenericService<tblMdUnit, tblUnitDto>
     {
-        Task<PagedResponseDto> Search(BaseFilter filter);
     }
     public class UnitService : GenericService<tblMdUnit, tblUnitDto>, IUnitService
     {

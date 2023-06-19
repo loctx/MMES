@@ -7,6 +7,7 @@ namespace PROJECT.BUSINESS.Common
 {
     public interface IGenericService<TEntity, TDto> : IBaseService
     {
+        Task<PagedResponseDto> Search(BaseFilter filter);
         Task<IList<TDto>> GetAll();
         Task<TDto> GetById(object id);
         Task<TDto> Add(TDto dto);
