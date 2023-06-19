@@ -1,5 +1,6 @@
-.list-container{
-    height: calc(100vh - 165px);
+.list-container {
+    height: auto;
+    max-height: calc(100vh - 190px);
     max-width: 100%;
     overflow: auto;
 }

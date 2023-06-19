@@ -1,4 +1,4 @@
-<div class="card" style="height: calc(100vh - 50px)">
+<div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-4 col-xs-12">
@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" [(ngModel)]="filter.keyWord" (keyup.enter)="search();"
                             placeholder="Nhập từ khóa tìm kiếm" />
                         <span (click)="search()" class="input-group-text"><i class="bi bi-search"></i></span>
-                        <span (click)="search(1, true)" class="input-group-text"><i
+                        <span (click)="search(1, filter.pageSize ,true)" class="input-group-text"><i
                                 class="bi bi-arrow-clockwise"></i></span>
                         &nbsp;
                     </div>
@@ -58,7 +58,7 @@
         <div class="float-end" *ngIf="paginationResult">
             <app-pagination [pageSize]="paginationResult.pageSize" [totalRecord]="paginationResult.totalRecord"
                 [totalPage]="paginationResult.totalPage" [(page)]="paginationResult.currentPage"
-                (pageChange)="onChangePage($event)"></app-pagination>
+                (pageChange)="onChangePage($event)" (pageSizeChange)="pageSizeChange($event)"></app-pagination>
         </div>
         <!-- <table class="table table-hover table-click-row border-top" id="table-user">
             <thead>

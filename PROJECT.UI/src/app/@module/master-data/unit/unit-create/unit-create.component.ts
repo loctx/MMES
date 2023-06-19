@@ -6,7 +6,7 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 @Component({
   selector: 'app-unit-create',
   templateUrl: './unit-create.component.html',
-  styleUrls: ['./unit-create.component.css'],
+  styleUrls: ['./unit-create.component.scss'],
 })
 export class UnitCreateComponent {
   unitForm: FormGroup;

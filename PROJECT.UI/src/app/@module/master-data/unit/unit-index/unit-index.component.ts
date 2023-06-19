@@ -57,10 +57,11 @@ export class UnitIndexComponent implements OnInit {
       });
   }
 
-  search(currentPage: number = 1, refresh: boolean = false) {
+  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
+      pageSize: pageSize || this.filter.pageSize,
       currentPage: currentPage,
     };
     this._service.search(this.filter, true).subscribe({
@@ -77,7 +78,12 @@ export class UnitIndexComponent implements OnInit {
     this.search();
   }
 
-  onChangePage(event: any) {
-    this.search(event);
+  onChangePage(pageNumber: number) {
+    this.search(pageNumber);
+  }
+
+  pageSizeChange(pageSize: number) {
+    this.filter.pageSize = pageSize;
+    this.search(1, pageSize);
   }
 }
