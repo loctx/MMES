@@ -44,7 +44,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert([FromBody] tblMDUnitDto unit)
+        public async Task<IActionResult> Insert([FromBody] tblUnitDto unit)
         {
             var transferObject = new TransferObject();
             var result = await _service.Add(unit);
@@ -53,19 +53,19 @@ namespace PROJECT.API.Controllers.MD
                 transferObject.Data = result;
                 transferObject.Status = true;
                 transferObject.MessageObject.MessageType = MessageType.Success;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0100", _service);
             }
             else
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0101", _service);
             }
             return Ok(transferObject);
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] tblMDUnitDto unit)
+        public async Task<IActionResult> Update([FromBody] tblUnitDto unit)
         {
             var transferObject = new TransferObject();
             await _service.Update(unit);
@@ -73,13 +73,13 @@ namespace PROJECT.API.Controllers.MD
             {
                 transferObject.Status = true;
                 transferObject.MessageObject.MessageType = MessageType.Success;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0103", _service);
             }
             else
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0104", _service);
             }
             return Ok(transferObject);
         }

@@ -25,7 +25,7 @@ namespace PROJECT.BUSINESS.Dtos.AD
         public List<tblMenuDto> Children { get; set; }
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<tblMenu, tblMenuDto>().ReverseMap();
+            profile.CreateMap<tblAdMenu, tblMenuDto>().ReverseMap();
         }
     }
 }

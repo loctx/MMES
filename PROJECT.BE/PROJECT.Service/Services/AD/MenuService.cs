@@ -6,12 +6,12 @@ using PROJECT.CORE.Entities.AD;
 
 namespace PROJECT.BUSINESS.Services.AD
 {
-    public interface IMenuService : IGenericService<tblMenu, tblMenuDto>
+    public interface IMenuService : IGenericService<tblAdMenu, tblMenuDto>
     {
         Task<tblMenuDto> BuildDataForTree();
     }
 
-    public class MenuService : GenericService<tblMenu, tblMenuDto>, IMenuService
+    public class MenuService : GenericService<tblAdMenu, tblMenuDto>, IMenuService
     {
         public MenuService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {

@@ -17,11 +17,11 @@ using System.Threading.Tasks;
 
 namespace PROJECT.BUSINESS.Services.MD
 {
-    public interface IUnitService : IGenericService<tblMDUnit, tblMDUnitDto>
+    public interface IUnitService : IGenericService<tblMdUnit, tblUnitDto>
     {
         Task<PagedResponseDto> Search(BaseFilter filter);
     }
-    public class UnitService : GenericService<tblMDUnit, tblMDUnitDto>, IUnitService
+    public class UnitService : GenericService<tblMdUnit, tblUnitDto>, IUnitService
     {
         public UnitService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
@@ -31,7 +31,7 @@ namespace PROJECT.BUSINESS.Services.MD
         {
             try
             {
-                var query = this._dbContext.tblMDUnit.AsQueryable();
+                var query = this._dbContext.tblMdUnit.AsQueryable();
                 if (!string.IsNullOrWhiteSpace(filter.KeyWord))
                 {
                     query = query.Where(x =>
@@ -50,7 +50,7 @@ namespace PROJECT.BUSINESS.Services.MD
             }
         }
 
-        public override async Task<tblMDUnitDto> Add(tblMDUnitDto dto)
+        public override async Task<tblUnitDto> Add(tblUnitDto dto)
         {
             try
             {

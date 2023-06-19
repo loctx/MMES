@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Entities.AD
 {
-    public class tblMenu : BaseEntity
+    public class tblAdMenu : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

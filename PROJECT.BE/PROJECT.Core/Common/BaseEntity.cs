@@ -6,7 +6,7 @@ namespace PROJECT.CORE.Common
     {
         public string CreateBy { get; set; }
         public string UpdateBy { get; set; }
-        public DateTime? CreateDay { get; set; }
-        public DateTime? UpdateDay { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }

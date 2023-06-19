@@ -73,27 +73,27 @@ namespace PROJECT.CORE
                     if (entry.State == EntityState.Added)
                     {
                         auditable.CreateBy = user;
-                        auditable.CreateDay = TimestampProvider();
+                        auditable.CreateDate = TimestampProvider();
                     }
                     else
                     {
                         this.Entry(auditable).Property(x => x.CreateBy).IsModified = false;
-                        this.Entry(auditable).Property(x => x.CreateDay).IsModified = false;
+                        this.Entry(auditable).Property(x => x.CreateDate).IsModified = false;
                         auditable.UpdateBy = user;
-                        auditable.UpdateDay = TimestampProvider();
+                        auditable.UpdateDate = TimestampProvider();
                     }
                 }
             }
         }
 
         #region System Manage
-        public DbSet<tblAccount> tblAccount { get; set; }
-        public DbSet<tblMenu> tblMenu { get; set; }
+        public DbSet<tblAdAccount> tblAdAccount { get; set; }
+        public DbSet<tblAdMenu> tblAdMenu { get; set; }
         #endregion
 
         #region Master Data
         public DbSet<tblItems> tblItems { get; set; }
-        public DbSet<tblMDUnit> tblMDUnit { get; set; }
+        public DbSet<tblMdUnit> tblMdUnit { get; set; }
 
         #endregion
 

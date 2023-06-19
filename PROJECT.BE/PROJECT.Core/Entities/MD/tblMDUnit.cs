@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Entities.MD
 {
-    public class tblMDUnit : BaseEntity
+    public class tblMdUnit : BaseEntity
     {
         [Required]
         [MaxLength(20)]

@@ -16,11 +16,9 @@ namespace PROJECT.BUSINESS.Dtos.AD
         public string FullName { get; set; }
         public int GroupId { get; set; }
         public bool State { get; set; } = true;
-        public string DeviceId { get; set; }
-        public DateTime? DeviceIdDayUpdate { get; set; }
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<tblAccount, tblAccountDto>().ReverseMap();
+            profile.CreateMap<tblAdAccount, tblAccountDto>().ReverseMap();
         }
     }
 }

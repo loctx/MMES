@@ -7,12 +7,12 @@ using PROJECT.CORE.Entities.AD;
 
 namespace PROJECT.BUSINESS.Services.Auth
 {
-    public interface IAuthService : IGenericService<tblAccount, tblAccountDto>
+    public interface IAuthService : IGenericService<tblAdAccount, tblAccountDto>
     {
         tblAccountDto CheckLogin(LoginDto loginInfo);
     }
 
-    public class AuthService : GenericService<tblAccount, tblAccountDto>, IAuthService
+    public class AuthService : GenericService<tblAdAccount, tblAccountDto>, IAuthService
     {
         public AuthService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
@@ -28,7 +28,7 @@ namespace PROJECT.BUSINESS.Services.Auth
             }
             try
             {
-                var account = this._dbContext.tblAccount.FirstOrDefault(
+                var account = this._dbContext.tblAdAccount.FirstOrDefault(
                     x => x.UserName == loginInfo.UserName &&
                     x.Password == this.CryptographyMD5(loginInfo.Password));
                 if (account == null)

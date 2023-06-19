@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PROJECT.BUSINESS.Dtos.MD
 {
-    public class tblMDUnitDto : IMapFrom
+    public class tblUnitDto : IMapFrom
     {
         public string Code { get; set; }
 
@@ -20,7 +20,7 @@ namespace PROJECT.BUSINESS.Dtos.MD
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<tblMDUnit, tblMDUnitDto>().ReverseMap();
+            profile.CreateMap<tblMdUnit, tblUnitDto>().ReverseMap();
         }
     }
 }
