@@ -98,6 +98,10 @@ namespace PROJECT.CORE
         public DbSet<tblMdItemType> tblMdItemType { get; set; }
         public DbSet<tblMdStock> tblMdStock { get; set; }
         public DbSet<tblMdPartner> tblMdPartner { get; set; }
+        public DbSet<tblMdPourType> tblMdPourType { get; set; }
+        public DbSet<tblMdOrderType> tblMdOrderType { get; set; }
+        public DbSet<tblMdStone> tblMdStone { get; set; }
+        public DbSet<tblMdSand> tblMdSand { get; set; }
 
         #endregion
 
