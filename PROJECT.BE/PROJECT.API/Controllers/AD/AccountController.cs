@@ -3,6 +3,7 @@ using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.AD;
+using PROJECT.BUSINESS.Filter.AD;
 using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.BUSINESS.Services.AD;
 
@@ -19,7 +20,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpGet("Search")]
-        public async Task<IActionResult> Search([FromQuery] BaseFilter filter)
+        public async Task<IActionResult> Search([FromQuery] AccountFilter filter)
         {
             var transferObject = new TransferObject();
             var result = await _service.Search(filter);
@@ -37,10 +38,10 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpGet("GetDetail")]
-        public async Task<IActionResult> GetDetail(Guid code)
+        public async Task<IActionResult> GetDetail(string userName)
         {
             var transferObject = new TransferObject();
-            var result = await _service.GetById(code);
+            var result = await _service.GetById(userName);
             if (_service.Status)
             {
                 transferObject.Data = result;
