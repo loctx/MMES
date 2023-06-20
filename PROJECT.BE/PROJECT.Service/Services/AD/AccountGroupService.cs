@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Common;
@@ -53,6 +54,24 @@ namespace PROJECT.BUSINESS.Services.AD
                     return null;
                 }
                 return await base.Add(dto);
+            }
+            catch (Exception ex)
+            {
+                this.Status = false;
+                this.Exception = ex;
+                return null;
+            }
+        }
+
+        public override async Task<tblAccountGroupDto> GetById(object id)
+        {
+            try
+            {
+                var entity = await this._dbContext.tblAdAccountGroup
+                    .Where(x => x.Id == (Guid)id)
+                    .Include(x => x.ListAccount).FirstOrDefaultAsync();
+
+                return _mapper.Map<tblAccountGroupDto>(entity);
             }
             catch (Exception ex)
             {

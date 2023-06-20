@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Entities.AD
 {
-    public class tblAdAccountGroup : BaseEntity
+    public class tblAdRight : BaseEntity
     {
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public bool State { get; set; } = true;
-        public string Notes { get; set; }
-        public virtual List<tblAdAccount> ListAccount { get; set; }
+        public string Id { get; set; }
 
+        public string Name { get; set; }
+
+        public string PId { get; set; }
+
+        public int OrderNumber { get; set; }
     }
 }

@@ -11,7 +11,6 @@ namespace PROJECT.CORE.Entities.AD
 {
     public class tblAdMenu : BaseEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
 

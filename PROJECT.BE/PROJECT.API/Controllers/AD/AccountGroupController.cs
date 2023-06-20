@@ -44,6 +44,24 @@ namespace PROJECT.API.Controllers.MD
             return Ok(transferObject);
         }
 
+        [HttpGet("GetDetail")]
+        public async Task<IActionResult> GetDetail(Guid code)
+        {
+            var transferObject = new TransferObject();
+            var result = await _service.GetById(code);
+            if (_service.Status)
+            {
+                transferObject.Data = result;
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("2000", _service);
+            }
+            return Ok(transferObject);
+        }
+
         [HttpPost("Insert")]
         public async Task<IActionResult> Insert([FromBody] tblAccountGroupDto accountGroup)
         {
@@ -104,5 +122,7 @@ namespace PROJECT.API.Controllers.MD
             }
             return Ok(transferObject);
         }
+
+
     }
 }
