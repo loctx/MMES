@@ -21,4 +21,8 @@ export class UnitService {
   Update(parameters?: UnitModel, isLoading?: boolean) {
     return this._commonService.putRequest(`Unit/Update`, parameters);
   }
+
+  Delete(parameters?: UnitModel, isLoading?: boolean) {
+    return this._commonService.deleteRequest(`Unit/Delete`, parameters);
+  }
 }

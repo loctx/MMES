@@ -4,15 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 @Component({
-  selector: 'app-unit-edit',
-  templateUrl: './unit-edit.component.html',
-  styleUrls: ['./unit-edit.component.scss'],
+  selector: 'app-account-group-create',
+  templateUrl: './account-group-create.component.html',
+  styleUrls: ['./account-group-create.component.scss'],
 })
-export class UnitEditComponent {
+export class AccountGroupCreateComponent {
   unitForm: FormGroup;
   submitted: boolean = false;
-  code: string = '';
-  name: string = '';
 
   constructor(
     private _service: UnitService,
@@ -30,24 +28,19 @@ export class UnitEditComponent {
     return this.unitForm.controls;
   }
 
-  ngOnInit() {
-    this.unitForm?.get('code')?.setValue(this.code);
-    this.unitForm?.get('name')?.setValue(this.name);
-  }
-
   close() {
     this.drawerService.close();
     this.unitForm?.get('code')?.setValue('');
     this.unitForm?.get('name')?.setValue('');
   }
 
-  onEdit() {
+  onCreate() {
     this.submitted = true;
     if (this.unitForm.invalid) {
       return;
     }
     this._service
-      .Update(
+      .Insert(
         {
           code: this.unitForm.value.code.trim(),
           name: this.unitForm.value.name.trim(),
@@ -58,6 +51,8 @@ export class UnitEditComponent {
         (data) => {
           this.drawerService.returnData(data);
           this.submitted = false;
+          this.unitForm?.get('code')?.setValue('');
+          this.unitForm?.get('name')?.setValue('');
         },
         (error) => {
           console.log('error: ', error);
