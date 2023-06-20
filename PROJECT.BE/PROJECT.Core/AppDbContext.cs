@@ -94,6 +94,7 @@ namespace PROJECT.CORE
         #region Master Data
         public DbSet<tblItems> tblItems { get; set; }
         public DbSet<tblMdUnit> tblMdUnit { get; set; }
+        public DbSet<tblMdItemType> tblMdItemType { get; set; }
 
         #endregion
 
