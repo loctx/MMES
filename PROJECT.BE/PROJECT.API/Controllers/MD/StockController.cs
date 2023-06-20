@@ -17,10 +17,10 @@ namespace PROJECT.API.Controllers.MD
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemTypeController : ControllerBase
+    public class StockController : ControllerBase
     {
-        public readonly IItemTypeService _service;
-        public ItemTypeController(IItemTypeService service)
+        public readonly IStockService _service;
+        public StockController(IStockService service)
         {
             _service = service;
         }
@@ -44,7 +44,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert([FromBody] tblItemTypeDto unit)
+        public async Task<IActionResult> Insert([FromBody] tblStockDto unit)
         {
             var transferObject = new TransferObject();
             var result = await _service.Add(unit);
@@ -65,7 +65,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] tblItemTypeDto unit)
+        public async Task<IActionResult> Update([FromBody] tblStockDto unit)
         {
             var transferObject = new TransferObject();
             await _service.Update(unit);
@@ -85,7 +85,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] tblItemTypeDto unit)
+        public async Task<IActionResult> Delete([FromBody] tblStockDto unit)
         {
             var transferObject = new TransferObject();
             await _service.Delete(unit);
