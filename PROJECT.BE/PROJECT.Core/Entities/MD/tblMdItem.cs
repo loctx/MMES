@@ -11,7 +11,7 @@ namespace PROJECT.CORE.Entities.MD
     public class tblItems : BaseEntity
     {
         [Key]
-        public int ItemId { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -21,23 +21,10 @@ namespace PROJECT.CORE.Entities.MD
         [MaxLength(225)]
         public string Name { get; set; }
 
-        // [Required]
-        // [MaxLength(50)]
-        // public Guid PartnerId { get; set; }
-
         [Required]
         public string UnitCode { get; set; }
 
-        public double? Price { get; set; }
-
-        public string Note { get; set; }
-
-        public bool State { get; set; } = true;
-
-        public bool? IsDeleted { get; set; } = true;
-
-        public bool? IsFinishedProduct { get; set; } = true;
-
-        public int Type { get; set; }
+        [Required]
+        public string TypeCode { get; set; }
     }
 }
