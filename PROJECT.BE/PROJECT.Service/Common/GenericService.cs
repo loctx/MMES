@@ -7,6 +7,8 @@ using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Filter.Common;
 using DocumentFormat.OpenXml.VariantTypes;
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 
 namespace PROJECT.BUSINESS.Common
 {
@@ -16,6 +18,42 @@ namespace PROJECT.BUSINESS.Common
         public GenericService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
 
+        }
+
+        /// <summary>
+        /// Lấy ra thuộc tính được thiết lập là key trong DTO
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        private PropertyInfo GetKeyField(TDto dto)
+        {
+            PropertyInfo keyProperty = null;
+            Type t = dto.GetType();
+            foreach (PropertyInfo pi in t.GetProperties())
+            {
+                object[] attrs = pi.GetCustomAttributes(typeof(KeyAttribute), false);
+                if (attrs != null && attrs.Length == 1)
+                {
+                    keyProperty = pi;
+                    break;
+                }
+            }
+            return keyProperty;
+        }
+
+        /// <summary>
+        /// Lấy giá trị của thuộc tính được thiết lập là key trong DTO
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        private object GetValueOfKeyField(TDto dto, PropertyInfo keyProperty)
+        {
+            object value = null;
+            if (keyProperty != null)
+            {
+                value = keyProperty.GetValue(dto, null);
+            }
+            return value;
         }
 
         public virtual async Task<PagedResponseDto> Search(BaseFilter filter)
@@ -57,6 +95,21 @@ namespace PROJECT.BUSINESS.Common
         {
             try
             {
+                var keyField = this.GetKeyField(dto);
+                if (keyField == null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2002";
+                    return null;
+                }
+                var keyValue = this.GetValueOfKeyField(dto, keyField);
+                var entityInDB = await this._dbContext.Set<TEntity>().FindAsync(keyValue);
+                if (entityInDB != null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2001";
+                    return null;
+                }
                 var entity = _mapper.Map<TEntity>(dto);
                 var entityResult = await this._dbContext.Set<TEntity>().AddAsync(entity);
                 await this._dbContext.SaveChangesAsync();
@@ -100,9 +153,22 @@ namespace PROJECT.BUSINESS.Common
         {
             try
             {
-                var entity = _mapper.Map<TEntity>(dto);
-                this._dbContext.Entry(entity).State = EntityState.Modified;
-                //this._dbContext.Set<TEntity>().Update(entity);
+                var keyField = this.GetKeyField(dto);
+                if (keyField == null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2002";
+                    return;
+                }
+                var keyValue = this.GetValueOfKeyField(dto, keyField);
+                var entityInDB = await this._dbContext.Set<TEntity>().FindAsync(keyValue);
+                if (entityInDB == null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2003";
+                    return;
+                }
+                this._mapper.Map(dto, entityInDB);
                 await this._dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -121,7 +187,9 @@ namespace PROJECT.BUSINESS.Common
                 pagedResponseDto.CurrentPage = filter.CurrentPage;
                 pagedResponseDto.PageSize = filter.PageSize;
                 pagedResponseDto.TotalPage = Convert.ToInt32(Math.Ceiling((double)pagedResponseDto.TotalRecord / (double)pagedResponseDto.PageSize));
-                pagedResponseDto.Data = _mapper.Map<List<TDto>>(query.Skip((filter.CurrentPage - 1) * filter.PageSize).Take(filter.PageSize));
+                var result = query.Skip((filter.CurrentPage - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+                //this._dbContext.Dispose();
+                pagedResponseDto.Data = _mapper.Map<List<TDto>>(result);
                 return pagedResponseDto;
             }
             catch (Exception ex)

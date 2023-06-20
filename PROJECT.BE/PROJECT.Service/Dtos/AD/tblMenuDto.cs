@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace PROJECT.BUSINESS.Dtos.AD
 {
     public class tblMenuDto : IMapFrom
     {
+        [Key]
         public string Id { get; set; }
 
         public string Name { get; set; }

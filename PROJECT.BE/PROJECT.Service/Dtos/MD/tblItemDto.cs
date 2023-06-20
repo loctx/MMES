@@ -16,6 +16,7 @@ namespace PROJECT.BUSINESS.Dtos.MD
     {
         public Guid Id { get; set; }
 
+        [Key]
         public string Code { get; set; }
 
         public string Name { get; set; }
