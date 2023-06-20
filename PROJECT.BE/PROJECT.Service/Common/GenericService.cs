@@ -12,10 +12,10 @@ namespace PROJECT.BUSINESS.Common
 {
     public abstract class GenericService<TEntity, TDto> : BaseService, IGenericService<TEntity, TDto> where TDto : class where TEntity : class
     {
-        
+
         public GenericService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
-            
+
         }
 
         public virtual async Task<PagedResponseDto> Search(BaseFilter filter)
