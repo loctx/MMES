@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Entities.MD
 {
-    public class tblItems : BaseEntity
+    public class tblMdItem : BaseEntity
     {
-        [Key]
         public Guid Id { get; set; }
 
+        [Key]
         [Required]
         [MaxLength(50)]
         public string Code { get; set; }
