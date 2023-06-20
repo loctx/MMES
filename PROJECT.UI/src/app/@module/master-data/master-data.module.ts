@@ -14,9 +14,13 @@ import { UnitEditComponent } from './unit/unit-edit/unit-edit.component';
 import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
 import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
 import { MatTableModule } from '@angular/material/table';
+import { ProductIndexComponent } from './product/product-index/product-index.component';
+import { ProductCreateComponent } from './product/product-create/product-create.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, ProductIndexComponent, ProductCreateComponent, ProductEditComponent],
   imports: [
     MatTableModule,
     SharedModule,
@@ -29,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
     NgSelectModule,
     TranslateModule,
     ReactiveFormsModule,
+    MatSelectModule
   ],
 })
 export class MasterDataModule {}
