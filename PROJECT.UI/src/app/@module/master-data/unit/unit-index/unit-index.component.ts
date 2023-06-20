@@ -91,7 +91,7 @@ export class UnitIndexComponent implements OnInit {
 
   deleteUnit(item:UnitModel) {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
+      title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',
       icon: 'warning',
       showCancelButton: true,

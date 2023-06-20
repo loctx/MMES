@@ -304,8 +304,32 @@ table th,td{
   gap: 5px;
 }
 
+.d-gap-5 {
+  gap: 5px;
+}
+
+.d-gap-10 {
+  gap: 10px;
+}
+
+.d-gap-15 {
+  gap: 15px;
+}
+
+.d-gap-20 {
+  gap: 20px;
+}
+
 .d-space-bw {
   justify-content: space-between;
+}
+
+.d-space-ct {
+  justify-content: center;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .card-header,
