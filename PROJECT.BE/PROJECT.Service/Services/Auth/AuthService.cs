@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PROJECT.BUSINESS.Common;
+using PROJECT.BUSINESS.Common.Util;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Auth;
 using PROJECT.CORE;
@@ -30,7 +31,7 @@ namespace PROJECT.BUSINESS.Services.Auth
             {
                 var account = this._dbContext.tblAdAccount.FirstOrDefault(
                     x => x.UserName == loginInfo.UserName &&
-                    x.Password == this.CryptographyMD5(loginInfo.Password));
+                    x.Password == Utils.CryptographyMD5(loginInfo.Password));
                 if (account == null)
                 {
                     this.Status = false;
@@ -53,19 +54,6 @@ namespace PROJECT.BUSINESS.Services.Auth
                 this.Exception = ex;
                 return null;
             }
-        }
-
-        private string CryptographyMD5(string source)
-        {
-            System.Security.Cryptography.MD5CryptoServiceProvider objMD5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(source);
-            byte[] bytHash = objMD5.ComputeHash(buffer);
-            string result = "";
-            foreach (byte a in bytHash)
-            {
-                result += int.Parse(a.ToString(), System.Globalization.NumberStyles.HexNumber).ToString();
-            }
-            return result;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace PROJECT.BUSINESS.Dtos.MD
 {
     public class tblStockDto : IMapFrom
     {
+        [Key]
         public string Code { get; set; }
 
         public string Name { get; set; }

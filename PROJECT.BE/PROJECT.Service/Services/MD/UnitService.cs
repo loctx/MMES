@@ -48,26 +48,5 @@ namespace PROJECT.BUSINESS.Services.MD
                 return null;
             }
         }
-
-        public override async Task<tblUnitDto> Add(tblUnitDto dto)
-        {
-            try
-            {
-                var find = await this.GetById(dto.Code);
-                if (find != null)
-                {
-                    this.Status = false;
-                    this.MessageObject.Code = "2001"; // Mã key đã tồn tại
-                    return null;
-                }
-                return await base.Add(dto);
-            }
-            catch (Exception ex)
-            {
-                this.Status = false;
-                this.Exception = ex;
-                return null;
-            }
-        }
     }
 }

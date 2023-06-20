@@ -1,18 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
-using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.AD;
-using PROJECT.BUSINESS.Dtos.Auth;
-using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Filter.Common;
-using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
-using PROJECT.BUSINESS.Services.MD;
-using PROJECT.CORE.Entities.MD;
 
 namespace PROJECT.API.Controllers.MD
 {
