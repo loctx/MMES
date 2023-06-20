@@ -83,5 +83,25 @@ namespace PROJECT.API.Controllers.MD
             }
             return Ok(transferObject);
         }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete([FromBody] tblItemTypeDto unit)
+        {
+            var transferObject = new TransferObject();
+            await _service.Delete(unit);
+            if (_service.Status)
+            {
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0105", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0106", _service);
+            }
+            return Ok(transferObject);
+        }
     }
 }
