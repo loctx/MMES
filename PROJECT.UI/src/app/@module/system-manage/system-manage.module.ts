@@ -13,12 +13,14 @@ import { AccountGroupIndexComponent } from './account-group/account-group-index/
 import { AccountGroupEditComponent } from './account-group/account-group-edit/account-group-edit.component';
 import { AccountGroupCreateComponent } from './account-group/account-group-create/account-group-create.component';
 import { MatTableModule } from '@angular/material/table';
+import { AccountIndexComponent } from './account/account-index/account-index.component';
 
 @NgModule({
   declarations: [
     AccountGroupIndexComponent,
     AccountGroupEditComponent,
-    AccountGroupCreateComponent
+    AccountGroupCreateComponent,
+    AccountIndexComponent
   ],
   imports: [
     MatTableModule,
