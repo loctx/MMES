@@ -100,6 +100,7 @@ namespace PROJECT.CORE
         public DbSet<tblMdPartner> tblMdPartner { get; set; }
         public DbSet<tblMdPourType> tblMdPourType { get; set; }
         public DbSet<tblMdOrderType> tblMdOrderType { get; set; }
+        public DbSet<tblMdStone> tblMdStone { get; set; }
 
         #endregion
 
