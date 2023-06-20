@@ -53,7 +53,6 @@ export class AccountGroupEditComponent {
     this._service.GetDetail(this.id, false).subscribe(
       ({data}) => {
         this.listMember = data.listAccount;
-        console.log('this.listMember: ', this.listMember);
       },
       (error) => {
         console.log('error: ', error);
