@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UnitService } from 'src/app/services/MD/unit.service';
+import { AccountGroupService } from 'src/app/services/AD/account-group.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
@@ -9,41 +9,45 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
   styleUrls: ['./account-group-create.component.scss'],
 })
 export class AccountGroupCreateComponent {
-  unitForm: FormGroup;
+  accountGroupForm: FormGroup;
   submitted: boolean = false;
 
   constructor(
-    private _service: UnitService,
+    private _service: AccountGroupService,
     private _fb: FormBuilder,
     private utils: utils,
     private drawerService: DrawerService
   ) {
-    this.unitForm = this._fb.group({
-      code: ['', [Validators.required, this.utils.trimSpace]],
+    this.accountGroupForm = this._fb.group({
       name: ['', [Validators.required, this.utils.trimSpace]],
+      notes: '',
+      state: 'true',
     });
   }
 
   get f() {
-    return this.unitForm.controls;
+    return this.accountGroupForm.controls;
   }
 
   close() {
     this.drawerService.close();
-    this.unitForm?.get('code')?.setValue('');
-    this.unitForm?.get('name')?.setValue('');
+    this.accountGroupForm?.get('name')?.setValue('');
+    this.accountGroupForm?.get('notes')?.setValue('');
+    this.accountGroupForm?.get('state')?.setValue('true');
   }
 
   onCreate() {
     this.submitted = true;
-    if (this.unitForm.invalid) {
+    if (this.accountGroupForm.invalid) {
       return;
     }
+    console.log(this.accountGroupForm.value);
     this._service
       .Insert(
         {
-          code: this.unitForm.value.code.trim(),
-          name: this.unitForm.value.name.trim(),
+          name: this.accountGroupForm.value.name.trim(),
+          notes: this.accountGroupForm.value.notes.trim(),
+          state: this.accountGroupForm.value.state === 'true',
         },
         false
       )
@@ -51,8 +55,9 @@ export class AccountGroupCreateComponent {
         (data) => {
           this.drawerService.returnData(data);
           this.submitted = false;
-          this.unitForm?.get('code')?.setValue('');
-          this.unitForm?.get('name')?.setValue('');
+          this.accountGroupForm?.get('name')?.setValue('');
+          this.accountGroupForm?.get('notes')?.setValue('');
+          this.accountGroupForm?.get('state')?.setValue('true');
         },
         (error) => {
           console.log('error: ', error);

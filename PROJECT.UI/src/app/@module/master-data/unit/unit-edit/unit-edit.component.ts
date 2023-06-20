@@ -21,8 +21,8 @@ export class UnitEditComponent {
     private drawerService: DrawerService
   ) {
     this.unitForm = this._fb.group({
-      code: ['', [Validators.required, this.utils.trimSpace]],
-      name: ['', [Validators.required, this.utils.trimSpace]],
+      code: [{ value: "", disabled: true }],
+      name: ["", [Validators.required, this.utils.trimSpace]]
     });
   }
 
@@ -49,7 +49,7 @@ export class UnitEditComponent {
     this._service
       .Update(
         {
-          code: this.unitForm.value.code.trim(),
+          code: this.code.trim(),
           name: this.unitForm.value.name.trim(),
         },
         false
