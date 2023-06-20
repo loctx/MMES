@@ -8,6 +8,9 @@ import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { AccountService } from 'src/app/services/AD/account.service';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { AccountCreateComponent } from '../account-create/account-create.component';
+import { AccountGroupService } from 'src/app/services/AD/account-group.service';
+import Swal from 'sweetalert2';
+import { AccountEditComponent } from '../account-edit/account-edit.component';
 
 @Component({
   selector: 'app-account-index',
@@ -21,6 +24,7 @@ export class AccountIndexComponent implements OnInit {
     'accountGroup',
     'userName',
     'fullName',
+    'state',
     'actions',
   ];
   filter = new AccountFilter();
@@ -30,7 +34,11 @@ export class AccountIndexComponent implements OnInit {
     { name: 'Đã kích hoạt', value: true },
     { name: 'Chưa kích hoạt', value: false },
   ];
-  constructor(private _as: AccountService, private _ds: DrawerService) {}
+  constructor(
+    private _as: AccountService,
+    private _ds: DrawerService,
+    private _ags: AccountGroupService
+  ) {}
   ngOnInit(): void {
     this.loadInit();
     this.getAllGroup();
@@ -56,7 +64,7 @@ export class AccountIndexComponent implements OnInit {
 
   getAllGroup() {
     this.filterGroup.pageSize = 100;
-    this._as.searchAccountGroup(this.filterGroup).subscribe({
+    this._ags.search(this.filterGroup).subscribe({
       next: ({ data }) => {
         this.optionsGroup = data.data;
       },
@@ -93,11 +101,40 @@ export class AccountIndexComponent implements OnInit {
   }
 
   openEdit(item: any) {
-    console.log(item, 'item');
+    this._ds
+      .open(AccountEditComponent, {
+        userName: item.userName,
+        fullName: item.fullName,
+        state: item.state,
+        groupId: item.groupId,
+      })
+      .subscribe((result) => {
+        if (result?.status) {
+          this.loadInit();
+        }
+      });
   }
 
-  deleteUnit(item: any) {
-    console.log(item, 'item');
+  deleteItem(item: any) {
+    Swal.fire({
+      title: 'Bạn muốn xóa dữ liệu này?',
+      text: 'Hành động này sẽ không thể hoàn tác!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._as.Delete(item, true).subscribe({
+          next: ({ data }) => {
+            this.loadInit();
+          },
+          error: (response) => {
+            console.log(response);
+          },
+        });
+      }
+    });
   }
 
   onChangePage(pageNumber: number) {

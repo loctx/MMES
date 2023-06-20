@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { optionsGroup } from 'src/app/@filter/Common/account-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+import { AccountGroupService } from 'src/app/services/AD/account-group.service';
 import { AccountService } from 'src/app/services/AD/account.service';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitService } from 'src/app/services/MD/unit.service';
@@ -10,13 +13,16 @@ import { utils } from 'src/app/utils/utils';
   templateUrl: './account-create.component.html',
   styleUrls: ['./account-create.component.scss'],
 })
-export class AccountCreateComponent {
+export class AccountCreateComponent implements OnInit {
   accountForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _as: AccountService,
     private _fb: FormBuilder,
+    private _ags: AccountGroupService,
     private utils: utils,
     private drawerService: DrawerService
   ) {
@@ -27,9 +33,24 @@ export class AccountCreateComponent {
       groupId: ['', [Validators.required]],
     });
   }
+  ngOnInit(): void {
+    this.getAllGroup();
+  }
 
   get f() {
     return this.accountForm.controls;
+  }
+
+  getAllGroup() {
+    this.filterGroup.pageSize = 100;
+    this._ags.search(this.filterGroup).subscribe({
+      next: ({ data }) => {
+        this.optionsGroup = data.data;
+      },
+      error: (response) => {
+        console.log(response);
+      },
+    });
   }
 
   close() {

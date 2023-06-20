@@ -18,15 +18,11 @@ export class AccountService {
     return this._commonService.postRequest(`Account/Insert`, parameters);
   }
 
-  Update(parameters?: AdAccount, isLoading?: boolean) {
+  Update(parameters?: AdAccountCreate, isLoading?: boolean) {
     return this._commonService.putRequest(`Account/Update`, parameters);
   }
 
   Delete(parameters?: AdAccount, isLoading?: boolean) {
     return this._commonService.deleteRequest(`Account/Delete`, parameters);
-  }
-
-  searchAccountGroup(pagination?: BaseFilter, isLoading?: boolean) {
-    return this._commonService.getRequest(`AccountGroup/Search`, pagination);
   }
 }
