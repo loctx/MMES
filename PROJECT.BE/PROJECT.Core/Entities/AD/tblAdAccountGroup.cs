@@ -17,13 +17,13 @@ namespace PROJECT.CORE.Entities.AD
         public string Name { get; set; }
         public bool State { get; set; } = true;
         public string Notes { get; set; }
-        public virtual ICollection<tblAdAccount> ListAccount { get; set; }
-        public virtual ICollection<tblAdRight> ListRight { get; set; }
+        public virtual List<tblAdAccount> ListAccount { get; set; }
+        public virtual List<tblAdAccountGroupRight> ListAccountGroupRight { get; set; }
 
         public tblAdAccountGroup()
         {
-            ListAccount = new HashSet<tblAdAccount>();
-            ListRight = new HashSet<tblAdRight>();
+            ListAccount = new List<tblAdAccount>();
+            ListAccountGroupRight = new List<tblAdAccountGroupRight>();
         }
     }
 }

@@ -21,11 +21,11 @@ namespace PROJECT.CORE.Entities.AD
 
         public int? OrderNumber { get; set; }
 
-        public virtual ICollection<tblAdAccountGroup> ListAccountGroup { get; set; }
+        public virtual List<tblAdAccountGroupRight> ListAccountGroupRight { get; set; }
 
         public tblAdRight()
         {
-            ListAccountGroup = new HashSet<tblAdAccountGroup>();
+            ListAccountGroupRight = new List<tblAdAccountGroupRight>();
         }
     }
 }

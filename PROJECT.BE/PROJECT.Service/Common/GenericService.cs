@@ -188,6 +188,7 @@ namespace PROJECT.BUSINESS.Common
                 pagedResponseDto.PageSize = filter.PageSize;
                 pagedResponseDto.TotalPage = Convert.ToInt32(Math.Ceiling((double)pagedResponseDto.TotalRecord / (double)pagedResponseDto.PageSize));
                 var result = query.Skip((filter.CurrentPage - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+                //this._dbContext.ChangeTracker.Clear();
                 //this._dbContext.Dispose();
                 pagedResponseDto.Data = _mapper.Map<List<TDto>>(result);
                 return pagedResponseDto;

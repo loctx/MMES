@@ -91,6 +91,8 @@ namespace PROJECT.CORE
         public DbSet<tblAdAccountGroup> tblAdAccountGroup { get; set; }
         public DbSet<tblAdMenu> tblAdMenu { get; set; }
         public DbSet<tblAdRight> tblAdRight { get; set; }
+        //public DbSet<tblAdAccountGroupRight> tblAdAccountGroupRight { get; set; }
+
         #endregion
 
         #region Master Data

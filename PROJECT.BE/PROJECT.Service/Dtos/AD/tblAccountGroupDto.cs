@@ -11,21 +11,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PROJECT.BUSINESS.Dtos.AD
 {
-    public class tblAccountGroupDto : BaseDto, IMapFrom
+    public class tblAccountGroupDto : IMapFrom
     {
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
         public bool State { get; set; } = true;
-        public ICollection<tblAccountDto> ListAccount { get; set; }
-        public ICollection<tblRightDto> ListRight{ get; set; }
+        public List<tblAccountDto> ListAccount { get; set; }
+        public List<tblAccountGroupRightDto> ListAccountGroupRight { get; set; }
         public tblRightDto TreeRight{ get; set; }
 
         public tblAccountGroupDto()
         {
-            ListAccount = new HashSet<tblAccountDto>();
-            ListRight = new HashSet<tblRightDto>();
+            ListAccount = new List<tblAccountDto>();
+            ListAccountGroupRight = new List<tblAccountGroupRightDto>();
         }
 
         public void Mapping(Profile profile)

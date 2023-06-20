@@ -25,6 +25,7 @@ namespace PROJECT.BUSINESS.Services.AD
             try
             {
                 var query = this._dbContext.tblAdAccountGroup.AsQueryable();
+                //query = query.AsNoTracking();
                 if (!string.IsNullOrWhiteSpace(filter.KeyWord))
                 {
                     query = query.Where(x =>
@@ -63,6 +64,29 @@ namespace PROJECT.BUSINESS.Services.AD
             }
         }
 
+        public override async Task Update(tblAccountGroupDto dto)
+        {
+            try
+            {
+                var entityInDB = await this._dbContext.tblAdAccountGroup.Where(x => x.Id == dto.Id).Include(x => x.ListAccountGroupRight).FirstOrDefaultAsync();
+                if (entityInDB == null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2003";
+                    return;
+                }
+                entityInDB.ListAccountGroupRight.Clear();
+                this._mapper.Map(dto, entityInDB);
+                await this._dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                this._dbContext.Database.RollbackTransaction();
+                this.Status = false;
+                this.Exception = ex;
+            }
+        }
+
         public override async Task<tblAccountGroupDto> GetById(object id)
         {
             try
@@ -70,7 +94,7 @@ namespace PROJECT.BUSINESS.Services.AD
                 var entity = await this._dbContext.tblAdAccountGroup
                     .Where(x => x.Id == (Guid)id)
                     .Include(x => x.ListAccount)
-                    .Include(x => x.ListRight)
+                    .Include(x => x.ListAccountGroupRight)
                     .FirstOrDefaultAsync();
 
                 var result = _mapper.Map<tblAccountGroupDto>(entity);
@@ -81,14 +105,14 @@ namespace PROJECT.BUSINESS.Services.AD
                 lstNode.Add(rootNode);
 
                 var lstAllRight = await this._dbContext.tblAdRight.OrderBy(x => x.OrderNumber).ToListAsync();
-                if (result.ListRight.Count > 0)
+                if (result.ListAccountGroupRight.Count > 0)
                 {
                     rootNode.IsChecked = true;
                 }
                 foreach (var right in lstAllRight)
                 {
                     var node = new tblRightDto() { Id = right.Id, Name = right.Name, PId = right.PId };
-                    if (result.ListRight.Count(x => x.Id == right.Id) > 0)
+                    if (result.ListAccountGroupRight.Count(x => x.RightId == right.Id) > 0)
                     {
                         node.IsChecked = true;
                     }

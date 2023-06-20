@@ -16,5 +16,7 @@ namespace PROJECT.CORE.Entities.AD
         public Guid Id { get; set; }
         public Guid GroupId { get; set; }
         public string RightId { get; set; }
+        public virtual tblAdAccountGroup AccountGroup { get; set; }
+        public virtual tblAdRight Right { get; set; }
     }
 }
