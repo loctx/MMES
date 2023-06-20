@@ -62,7 +62,6 @@ export class SidebarComponent implements OnInit {
         this.userService
           .getMenuOfUser(this.username)
           .subscribe(({ data }: any) => {
-            console.log(data, 'data');
             this.ROUTE_DATA = data?.children;
             const flatten = (
               children: any,

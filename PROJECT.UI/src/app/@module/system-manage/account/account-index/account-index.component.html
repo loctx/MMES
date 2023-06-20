@@ -1,1 +1,117 @@
-<p>account-index works!</p>
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex flex-wrap">
+      <div class="">
+        <h5 class="card-title">
+          <i class="bi bi-journal-text"></i>
+          Danh sách tài khoản
+        </h5>
+      </div>
+      <!--
+      <div class="d-flex flex-row-reverse card-function flex-grow-1">
+        <div>
+          <button type="button" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Xác nhận
+          </button>
+
+          <button type="button" class="btn btn-warning">
+            <i class="bi bi-dash-circle"></i> Từ chối
+          </button>
+
+          <button type="button" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Hủy đơn
+          </button>
+
+          <button type="button" class="btn btn-info">
+            <i class="bi bi-file-earmark-excel"></i> Xuất excel
+          </button>
+        </div>
+      </div> -->
+    </div>
+    <div class="d-flex flex-row p-1 flex-wrap">
+      <!-- <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <input type="date" class="form-control" placeholder="Từ ngày"> &nbsp;
+        <input type="date" class="form-control" placeholder="Đến ngày">
+      </div> -->
+
+      <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <select class="form-select" aria-label="Nhóm" [(ngModel)]="filter.state"
+          (ngModelChange)="onChangeState($event)">
+          <option selected value="">Trạng thái</option>
+          <option *ngFor="let item of optionsSate" [ngValue]="item.value">
+            {{item.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <select class="form-select" aria-label="Nhóm" [(ngModel)]="filter.groupId"
+          (ngModelChange)="onChangeGroup($event)">
+          <option selected value="">Nhóm</option>
+          <option *ngFor="let item of optionsGroup" [ngValue]="item.id">
+            {{item.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row flex-grow-3 p-l-2">
+        <div class="input-group search-box">
+          <input type="text" class="form-control" [(ngModel)]="filter.keyWord" (keyup.enter)="search();"
+            placeholder="Nhập từ khóa tìm kiếm" />
+          <span (click)="search()" class="input-group-text"><i class="bi bi-search"></i></span>
+          <span (click)="refresh()" class="input-group-text"><i class="bi bi-arrow-clockwise"></i></span>
+          &nbsp;
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-success" (click)="openCreate()">
+          <i class="bi bi-plus-lg"></i> Thêm mới
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2">
+      <div class="list-container border-top border-bottom mb-3">
+        <table mat-table [dataSource]="paginationResult.data" *ngIf="paginationResult"
+          class="table table-hover table-click-row">
+          <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef width="60px" class="align-center"> STT </th>
+            <td mat-cell *matCellDef="let element; let i = index;" class="align-center">
+              {{(paginationResult.currentPage - 1) * paginationResult.pageSize + i + 1}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="accountGroup">
+            <th mat-header-cell *matHeaderCellDef width="250px"> Nhóm </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.accountGroup.name}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef width="250px"> Tên tài khoản </th>
+            <td mat-cell *matCellDef="let element">
+              <span href="#" (click)="openEdit(element)" class="cursor-pointer text-primary">{{element.userName}}</span>
+            </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef> Tên đầy đủ </th>
+            <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef width="60px"></th>
+            <td mat-cell *matCellDef="let element">
+              <i class="bi bi-trash3 text-danger cursor-pointer" (click)="deleteUnit(element)"></i>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="border-bottom"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="float-end" *ngIf="paginationResult">
+          <app-pagination [pageSize]="paginationResult.pageSize" [totalRecord]="paginationResult.totalRecord"
+            [totalPage]="paginationResult.totalPage" [(page)]="paginationResult.currentPage"
+            (pageChange)="onChangePage($event)" (pageSizeChange)="pageSizeChange($event)"></app-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
