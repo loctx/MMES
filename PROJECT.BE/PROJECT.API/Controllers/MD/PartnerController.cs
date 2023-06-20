@@ -47,7 +47,7 @@ namespace PROJECT.API.Controllers.MD
         public async Task<IActionResult> Insert([FromBody] tblPartnerDto unit)
         {
             var transferObject = new TransferObject();
-            unit.Id = Guid.NewGuid();
+            // unit.Id = Guid.NewGuid();
             var result = await _service.Add(unit);
             if (_service.Status)
             {
