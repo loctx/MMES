@@ -6,6 +6,7 @@ import { AccountIndexComponent } from './account/account-index/account-index.com
 const routes: Routes = [
   { path: 'phan-quyen', component: AccountGroupIndexComponent },
   { path: 'account', component: AccountIndexComponent },
+  { path: 'account-group', component: AccountGroupIndexComponent },
 ];
 
 @NgModule({
