@@ -97,6 +97,7 @@ namespace PROJECT.CORE
         public DbSet<tblMdUnit> tblMdUnit { get; set; }
         public DbSet<tblMdItemType> tblMdItemType { get; set; }
         public DbSet<tblMdStock> tblMdStock { get; set; }
+        public DbSet<tblMdPartner> tblMdPartner { get; set; }
 
         #endregion
 
