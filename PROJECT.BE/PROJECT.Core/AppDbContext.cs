@@ -88,6 +88,7 @@ namespace PROJECT.CORE
 
         #region System Manage
         public DbSet<tblAdAccount> tblAdAccount { get; set; }
+        public DbSet<tblAdAccountGroup> tblAdAccountGroup { get; set; }
         public DbSet<tblAdMenu> tblAdMenu { get; set; }
         #endregion
 
