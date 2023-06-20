@@ -24,7 +24,6 @@ namespace PROJECT.CORE.Entities.AD
         {
             ListAccount = new HashSet<tblAdAccount>();
             ListRight = new HashSet<tblAdRight>();
-
         }
     }
 }

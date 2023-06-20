@@ -19,6 +19,13 @@ namespace PROJECT.CORE.Entities.AD
 
         public string PId { get; set; }
 
-        public int OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
+
+        public virtual ICollection<tblAdAccountGroup> ListAccountGroup { get; set; }
+
+        public tblAdRight()
+        {
+            ListAccountGroup = new HashSet<tblAdAccountGroup>();
+        }
     }
 }

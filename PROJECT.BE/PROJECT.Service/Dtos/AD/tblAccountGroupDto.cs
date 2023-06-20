@@ -19,10 +19,13 @@ namespace PROJECT.BUSINESS.Dtos.AD
         public string Notes { get; set; }
         public bool State { get; set; } = true;
         public ICollection<tblAccountDto> ListAccount { get; set; }
+        public ICollection<tblRightDto> ListRight{ get; set; }
+        public tblRightDto TreeRight{ get; set; }
 
         public tblAccountGroupDto()
         {
             ListAccount = new HashSet<tblAccountDto>();
+            ListRight = new HashSet<tblRightDto>();
         }
 
         public void Mapping(Profile profile)

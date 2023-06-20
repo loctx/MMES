@@ -69,9 +69,51 @@ namespace PROJECT.BUSINESS.Services.AD
             {
                 var entity = await this._dbContext.tblAdAccountGroup
                     .Where(x => x.Id == (Guid)id)
-                    .Include(x => x.ListAccount).FirstOrDefaultAsync();
+                    .Include(x => x.ListAccount)
+                    .Include(x => x.ListRight)
+                    .FirstOrDefaultAsync();
 
-                return _mapper.Map<tblAccountGroupDto>(entity);
+                var result = _mapper.Map<tblAccountGroupDto>(entity);
+
+                // Lấy danh sách tất cả các quyền
+                var lstNode = new List<tblRightDto>();
+                var rootNode = new tblRightDto() { Id = "R", PId = "-R", Name = "Danh sách quyền trong hệ thống" };
+                lstNode.Add(rootNode);
+
+                var lstAllRight = await this._dbContext.tblAdRight.OrderBy(x => x.OrderNumber).ToListAsync();
+                if (result.ListRight.Count > 0)
+                {
+                    rootNode.IsChecked = true;
+                }
+                foreach (var right in lstAllRight)
+                {
+                    var node = new tblRightDto() { Id = right.Id, Name = right.Name, PId = right.PId };
+                    if (result.ListRight.Count(x => x.Id == right.Id) > 0)
+                    {
+                        node.IsChecked = true;
+                    }
+                    lstNode.Add(node);
+                }
+
+                var nodeDict = lstNode.ToDictionary(n => n.Id);
+                foreach (var item in lstNode)
+                {
+                    tblRightDto parentNode = null;
+                    if (item.PId == "-R" || !nodeDict.TryGetValue(item.PId, out parentNode))
+                    {
+                        continue;
+                    }
+
+                    if (parentNode.Children == null)
+                    {
+                        parentNode.Children = new List<tblRightDto>();
+                    }
+                    parentNode.Children.Add(item);
+                }
+
+                result.TreeRight = rootNode;
+
+                return result;
             }
             catch (Exception ex)
             {
