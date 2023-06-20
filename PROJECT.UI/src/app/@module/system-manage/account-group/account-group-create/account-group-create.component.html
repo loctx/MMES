@@ -1,9 +1,9 @@
 <div class="card" style="height: calc(100vh - 50px)">
     <div class="card-body">
-        <div class="d-flex-wrap d-gap d-space-bw border-bottom pt-3">
+        <div class="d-flex-wrap d-gap-10 d-space-bw border-bottom pt-3">
             <div class="card-title mb-2 p-0">
                 <i class="bi bi-plus-lg"></i>
-                Tạo mới đơn vị tính
+                Tạo mới nhóm tài khoản
             </div>
             <div class="d-flex-wrap d-gap">
                 <div class="mb-3">
@@ -20,26 +20,38 @@
             </div>
         </div>
         <div class="mt-3">
-            <form [formGroup]="unitForm" (ngSubmit)="onCreate()">
+            <form [formGroup]="accountGroupForm" (ngSubmit)="onCreate()">
                 <div>
-                    <label for="inputText" class="col-form-label">Mã đơn vị tính<span
+                    <label for="inputText" class="col-form-label">Tên nhóm<span
                             class="text-danger ms-1">*</span></label>
                     <div>
-                        <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
-                            class="form-control" formControlName="code">
-                        <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
-                            <div *ngIf="f['code']['errors']['required']">Không được để trống</div>
+                        <input [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text"
+                            class="form-control" formControlName="name">
+                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <label for="inputEmail" class="col-form-label">Tên đơn vị tính<span
-                            class="text-danger ms-1">*</span></label>
+                    <label for="inputText" class="col-form-label">Ghi chú</label>
                     <div>
-                        <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
-                            class="form-control" formControlName="name">
-                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                            <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
+                        <textarea class="form-control" formControlName="notes"></textarea>
+                    </div>
+                </div>
+                <div class="mt-1">
+                    <label for="inputText" class="col-form-label nowrap">Trạng thái</label>
+                    <div class="d-flex d-gap-20 w-100 mt-0">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="state" formControlName="state" value="true">
+                            <label class="form-check-label" for="state">
+                                Kích hoạt
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="state" formControlName="state" value="false">
+                            <label class="form-check-label" for="state">
+                                Khoá
+                            </label>
                         </div>
                     </div>
                 </div>

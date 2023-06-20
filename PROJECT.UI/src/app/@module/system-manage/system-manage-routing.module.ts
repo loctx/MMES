@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountGroupIndexComponent } from '../system-manage/account-group/account-group-index/account-group-index.component';
 
 const routes: Routes = [
-  { path: 'phan-quyen', component: AccountGroupIndexComponent },
+  { path: 'account-group', component: AccountGroupIndexComponent },
 ];
 
 @NgModule({

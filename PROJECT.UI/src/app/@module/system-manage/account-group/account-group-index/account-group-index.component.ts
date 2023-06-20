@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UnitService } from 'src/app/services/MD/unit.service';
+import { AccountGroupService } from 'src/app/services/AD/account-group.service';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { AccountGroupCreateComponent } from '../account-group-create/account-group-create.component';
 import { AccountGroupEditComponent } from '../account-group-edit/account-group-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+import { AccountGroupModel } from 'src/app/models/AD/account-group.model';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-account-group-index',
   templateUrl: './account-group-index.component.html',
@@ -12,7 +14,7 @@ import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 })
 export class AccountGroupIndexComponent implements OnInit {
   constructor(
-    private _service: UnitService,
+    private _service: AccountGroupService,
     private drawerService: DrawerService
   ) {}
 
@@ -27,7 +29,7 @@ export class AccountGroupIndexComponent implements OnInit {
       path: '/master-data/unit',
     },
   ];
-  displayedColumns: string[] = ['index', 'code', 'name'];
+  displayedColumns: string[] = ['index', 'name', 'state', 'actions'];
   paginationResult!: PaginationResult;
   filter = new BaseFilter();
 
@@ -46,10 +48,7 @@ export class AccountGroupIndexComponent implements OnInit {
 
   openEdit(item: any) {
     this.drawerService
-      .open(AccountGroupEditComponent, {
-        code: item.code,
-        name: item.name,
-      })
+      .open(AccountGroupEditComponent, item)
       .subscribe((result) => {
         if (result?.status) {
           this.loadInit();
@@ -57,7 +56,11 @@ export class AccountGroupIndexComponent implements OnInit {
       });
   }
 
-  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+  search(
+    currentPage: number = 1,
+    pageSize: number | undefined = undefined,
+    refresh: boolean = false
+  ) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
@@ -85,5 +88,27 @@ export class AccountGroupIndexComponent implements OnInit {
   pageSizeChange(pageSize: number) {
     this.filter.pageSize = pageSize;
     this.search(1, pageSize);
+  }
+
+  deleteUnit(item: AccountGroupModel) {
+    Swal.fire({
+      title: 'Bạn muốn xóa dữ liệu này?',
+      text: 'Hành động này sẽ không thể hoàn tác!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._service.Delete(item, true).subscribe({
+          next: ({ data }) => {
+            this.loadInit();
+          },
+          error: (response) => {
+            console.log(response);
+          },
+        });
+      }
+    });
   }
 }

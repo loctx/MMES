@@ -36,7 +36,7 @@
                     <label for="inputEmail" class="col-form-label">Tên đơn vị tính<span
                             class="text-danger ms-1">*</span></label>
                     <div>
-                        <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
+                        <input [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text"
                             class="form-control" formControlName="name">
                         <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
                             <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
