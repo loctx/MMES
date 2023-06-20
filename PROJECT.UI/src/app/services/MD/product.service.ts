@@ -25,7 +25,4 @@ export class ProductService {
   Delete(parameters?: ProductModel, isLoading?: boolean) {
     return this._commonService.deleteRequest(`Item/Delete`, parameters);
   }
-  GetAll(parameters?: ProductModel, isLoading?: boolean) {
-    return this._commonService.getRequest(`ItemType/GetAll`, parameters);
-  }
 }

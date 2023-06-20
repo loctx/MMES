@@ -43,15 +43,28 @@
                   </div>
               </div>
               <div>
-                <label for="inputText" class="col-form-label">Chọn Loại sản phẩm<span
+                <label for="inputText" class="col-form-label">unitCode<span
                   class="text-danger ms-1">*</span></label>
                   <div>
-                    <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
-                    class="form-control" formControlName="name">
-                <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
-                </div>
+                    <ng-select [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
+                    class="form-control" formControlName="name">     </ng-select>
+                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                      <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
+                  </div>
 
+
+                  </div>
+
+              </div>
+              <div>
+                <label for="inputText" class="col-form-label">TypeCode<span
+                  class="text-danger ms-1">*</span></label>
+                  <div>
+                    <ng-select [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
+                    class="form-control" formControlName="name">     </ng-select>
+                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                      <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
+                  </div>
                   </div>
 
               </div>

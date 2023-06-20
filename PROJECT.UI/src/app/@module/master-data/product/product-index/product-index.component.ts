@@ -7,6 +7,7 @@ import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 import {ProductModel} from 'src/app/models/MD/product.model';
 import Swal from 'sweetalert2';
+import { DropdownService } from 'src/app/services/Common/dropdown.service';
 @Component({
   selector: 'app-product-index',
   templateUrl: './product-index.component.html',
@@ -16,9 +17,11 @@ export class ProductIndexComponent {
   constructor(
 
     private _service: ProductService,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private _test: DropdownService
   ) {}
 
+  dataSource!: any
   //Khai báo biến
   breadcrumbList: any[] = [
     {
@@ -37,6 +40,12 @@ export class ProductIndexComponent {
   //Khai báo hàm
   ngOnInit(): void {
     this.loadInit();
+    const a = this._test.GetAll()
+    a.subscribe((result) => {
+      console.log('tét',result);
+this.dataSource = result.data
+    })
+
   }
 
   openCreate() {
