@@ -26,7 +26,7 @@ namespace PROJECT.BUSINESS.Services.MD
         {
         }
 
-        public async Task<PagedResponseDto> Search(BaseFilter filter)
+        public override async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             try
             {

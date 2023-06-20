@@ -18,7 +18,7 @@ namespace PROJECT.BUSINESS.Common
             
         }
 
-        public async Task<PagedResponseDto> Search(BaseFilter filter)
+        public virtual async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             return null;
         }

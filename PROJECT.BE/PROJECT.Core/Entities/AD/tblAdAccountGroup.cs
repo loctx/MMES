@@ -16,5 +16,6 @@ namespace PROJECT.CORE.Entities.AD
         public Guid Id { get; set; }
         public string Name { get; set; }
         public bool State { get; set; } = true;
+        public string Notes { get; set; }
     }
 }
