@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [
-    PaginationComponent
+    PaginationComponent,
   ],
   exports: [
-    PaginationComponent
+    PaginationComponent,
   ]
 })
 export class SharedModule { }

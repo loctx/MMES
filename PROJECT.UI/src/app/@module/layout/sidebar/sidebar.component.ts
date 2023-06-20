@@ -56,7 +56,6 @@ export class SidebarComponent implements OnInit {
     try {
       if (this.username) {
         this.userService.getMenuOfUser(this.username).subscribe(({data}:any) => {
-          console.log('Data: ', data);
           this.ROUTE_DATA = data?.children;
           const flatten = (children:any, getChildren:any, level?:any, parent?:any) => Array.prototype.concat.apply(
             children.map((x:any) => ({ ...x, level: level || 1, parent: parent || null })), 
@@ -117,7 +116,6 @@ export class SidebarComponent implements OnInit {
       }
     }
     this.dataSource = menu;
-    console.log('this.dataSource: ', this.dataSource);
   }
 
   // kiem tra xem list role cua user va list role cua menu/submenu co chung role khong

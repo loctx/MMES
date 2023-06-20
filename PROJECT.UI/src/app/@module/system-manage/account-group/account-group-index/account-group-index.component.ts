@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { UnitService } from 'src/app/services/MD/unit.service';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
-import { UnitCreateComponent } from '../unit-create/unit-create.component';
-import { UnitEditComponent } from '../unit-edit/unit-edit.component';
+import { AccountGroupCreateComponent } from '../account-group-create/account-group-create.component';
+import { AccountGroupEditComponent } from '../account-group-edit/account-group-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
-import {UnitModel} from 'src/app/models/MD/unit.model';
-import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-unit-index',
-  templateUrl: './unit-index.component.html',
-  styleUrls: ['./unit-index.component.scss'],
+  selector: 'app-account-group-index',
+  templateUrl: './account-group-index.component.html',
+  styleUrls: ['./account-group-index.component.scss'],
 })
-export class UnitIndexComponent implements OnInit {
+export class AccountGroupIndexComponent implements OnInit {
   constructor(
     private _service: UnitService,
     private drawerService: DrawerService
@@ -29,7 +27,7 @@ export class UnitIndexComponent implements OnInit {
       path: '/master-data/unit',
     },
   ];
-  displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name'];
   paginationResult!: PaginationResult;
   filter = new BaseFilter();
 
@@ -39,7 +37,7 @@ export class UnitIndexComponent implements OnInit {
   }
 
   openCreate() {
-    this.drawerService.open(UnitCreateComponent).subscribe((result) => {
+    this.drawerService.open(AccountGroupCreateComponent).subscribe((result) => {
       if (result?.status) {
         this.loadInit();
       }
@@ -48,7 +46,7 @@ export class UnitIndexComponent implements OnInit {
 
   openEdit(item: any) {
     this.drawerService
-      .open(UnitEditComponent, {
+      .open(AccountGroupEditComponent, {
         code: item.code,
         name: item.name,
       })
@@ -87,27 +85,5 @@ export class UnitIndexComponent implements OnInit {
   pageSizeChange(pageSize: number) {
     this.filter.pageSize = pageSize;
     this.search(1, pageSize);
-  }
-
-  deleteUnit(item:UnitModel) {
-    Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
-      text: 'Hành động này sẽ không thể hoàn tác!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._service.Delete(item, true).subscribe({
-          next: ({ data }) => {
-            this.loadInit();
-          },
-          error: (response) => {
-            console.log(response);
-          },
-        });
-      }
-    });
   }
 }

@@ -27,7 +27,7 @@
       "node_modules/@angular",
       "node_modules/@angular/common/http"
     ],
-    "types": ["jquery","bootstrap"]
+    "types": ["jquery","bootstrap", "jest"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

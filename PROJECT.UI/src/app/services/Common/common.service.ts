@@ -6,6 +6,8 @@ import { TranferObject } from 'src/app/models/Common/tranfer-object.model';
 import { share } from 'rxjs';
 import { METHOD } from 'src/app/utils/constant/index';
 import { HandleResponse } from 'src/app/utils/utils';
+import { HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 declare function ShowLoading(): any;
 declare function HideLoading(): any;
 
@@ -57,9 +59,9 @@ export class CommonService {
     return tranferObject;
   }
 
-  deleteRequest(url: string): Observable<TranferObject> {
+  deleteRequest(url: string, request: any): Observable<TranferObject> {
     var tranferObject = this.http
-      .delete<TranferObject>(this.apiUrl + url)
+      .delete<TranferObject>(this.apiUrl + url, { body: request })
       .pipe(share());
     tranferObject.subscribe({
       next: (response) => {
