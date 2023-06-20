@@ -89,7 +89,7 @@
                                             <div class="fw-bold">{{item.userName}}</div>
                                             {{item.fullName}}
                                         </div>
-                                        <i *ngIf="!item.state" class="bi bi-check-circle-fill text-success"></i>
+                                        <i *ngIf="item.state" class="bi bi-check-circle-fill text-success"></i>
                                         <i *ngIf="!item.state" class="bi bi-x-circle-fill"></i>
                                     </li>
                                 </ol>
