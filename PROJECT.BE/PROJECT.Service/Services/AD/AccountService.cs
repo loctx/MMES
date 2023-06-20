@@ -4,6 +4,7 @@ using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Common.Util;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Common;
+using PROJECT.BUSINESS.Filter.AD;
 using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.CORE;
 using PROJECT.CORE.Entities.AD;
@@ -12,6 +13,7 @@ namespace PROJECT.BUSINESS.Services.AD
 {
     public interface IAccountService : IGenericService<tblAdAccount, tblAccountDto>
     {
+        Task<PagedResponseDto> Search(AccountFilter filter);
     }
 
     public class AccountService : GenericService<tblAdAccount, tblAccountDto>, IAccountService
@@ -20,7 +22,7 @@ namespace PROJECT.BUSINESS.Services.AD
         {
         }
 
-        public override async Task<PagedResponseDto> Search(BaseFilter filter)
+        public async Task<PagedResponseDto> Search(AccountFilter filter)
         {
             try
             {
@@ -31,6 +33,14 @@ namespace PROJECT.BUSINESS.Services.AD
                         x.UserName.Contains(filter.KeyWord) ||
                         x.FullName.Contains(filter.KeyWord)
                     );
+                }
+                if (filter.State.HasValue)
+                {
+                    query = query.Where(x => x.State == filter.State);
+                }
+                if (filter.GroupId.HasValue)
+                {
+                    query = query.Where(x => x.GroupId == filter.GroupId);
                 }
                 query = query.Include(x => x.AccountGroup).OrderBy(x => x.UserName);
                 return await this.Paging(query, filter);
