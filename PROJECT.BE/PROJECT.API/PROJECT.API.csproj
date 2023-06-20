@@ -24,7 +24,6 @@
   <ItemGroup>
     <Compile Remove="AppCode\Extensions\ExceptionMiddleware.cs" />
     <Compile Remove="AppCode\Extensions\ExceptionMiddlewareExtension.cs" />
-    <Compile Remove="Controllers\AD\AccountController.cs" />
     <Compile Remove="Controllers\AD\ConfigTextElementController.cs" />
     <Compile Remove="Controllers\AD\HistoryController.cs" />
     <Compile Remove="Controllers\AD\RoleController.cs" />

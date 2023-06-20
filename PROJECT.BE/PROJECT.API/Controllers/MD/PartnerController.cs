@@ -1,19 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
+using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
-using PROJECT.BUSINESS.Dtos.AD;
+using PROJECT.BUSINESS.Dtos.Auth;
+using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Filter.Common;
+using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
+using PROJECT.BUSINESS.Services.MD;
+using PROJECT.CORE.Entities.MD;
 
 namespace PROJECT.API.Controllers.MD
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    [ApiController]
+    public class PartnerController : ControllerBase
     {
-        public readonly IAccountService _service;
-        public AccountController(IAccountService service)
+        public readonly IPartnerService _service;
+        public PartnerController(IPartnerService service)
         {
             _service = service;
         }
@@ -36,29 +43,12 @@ namespace PROJECT.API.Controllers.MD
             return Ok(transferObject);
         }
 
-        [HttpGet("GetDetail")]
-        public async Task<IActionResult> GetDetail(Guid code)
-        {
-            var transferObject = new TransferObject();
-            var result = await _service.GetById(code);
-            if (_service.Status)
-            {
-                transferObject.Data = result;
-            }
-            else
-            {
-                transferObject.Status = false;
-                transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("2000", _service);
-            }
-            return Ok(transferObject);
-        }
-
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert([FromBody] tblAccountDto account)
+        public async Task<IActionResult> Insert([FromBody] tblPartnerDto unit)
         {
             var transferObject = new TransferObject();
-            var result = await _service.Add(account);
+            unit.Id = Guid.NewGuid();
+            var result = await _service.Add(unit);
             if (_service.Status)
             {
                 transferObject.Data = result;
@@ -76,10 +66,10 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] tblAccountDto account)
+        public async Task<IActionResult> Update([FromBody] tblPartnerDto unit)
         {
             var transferObject = new TransferObject();
-            await _service.Update(account);
+            await _service.Update(unit);
             if (_service.Status)
             {
                 transferObject.Status = true;
@@ -96,10 +86,10 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] tblAccountDto account)
+        public async Task<IActionResult> Delete([FromBody] tblPartnerDto unit)
         {
             var transferObject = new TransferObject();
-            await _service.Delete(account);
+            await _service.Delete(unit);
             if (_service.Status)
             {
                 transferObject.Status = true;
@@ -114,7 +104,5 @@ namespace PROJECT.API.Controllers.MD
             }
             return Ok(transferObject);
         }
-
-
     }
 }

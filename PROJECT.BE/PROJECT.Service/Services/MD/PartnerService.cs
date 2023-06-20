@@ -17,20 +17,20 @@ using System.Threading.Tasks;
 
 namespace PROJECT.BUSINESS.Services.MD
 {
-    public interface IUnitService : IGenericService<tblMdUnit, tblUnitDto>
+    public interface IPartnerService : IGenericService<tblMdPartner, tblPartnerDto>
     {
     }
-    public class UnitService : GenericService<tblMdUnit, tblUnitDto>, IUnitService
+    public class PartnerService : GenericService<tblMdPartner, tblPartnerDto>, IPartnerService
     {
-        public UnitService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public PartnerService(AppDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 
-        public override async Task<PagedResponseDto> Search(BaseFilter filter)
+        public async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             try
             {
-                var query = this._dbContext.tblMdUnit.AsQueryable();
+                var query = this._dbContext.tblMdPartner.AsQueryable();
                 if (!string.IsNullOrWhiteSpace(filter.KeyWord))
                 {
                     query = query.Where(x =>
@@ -40,6 +40,27 @@ namespace PROJECT.BUSINESS.Services.MD
                 }
                 query = query.OrderBy(x => x.Code);
                 return await this.Paging(query, filter);
+            }
+            catch (Exception ex)
+            {
+                this.Status = false;
+                this.Exception = ex;
+                return null;
+            }
+        }
+
+        public override async Task<tblPartnerDto> Add(tblPartnerDto dto)
+        {
+            try
+            {
+                var find = await this.GetById(dto.Code);
+                if (find != null)
+                {
+                    this.Status = false;
+                    this.MessageObject.Code = "2001"; // Mã key đã tồn tại
+                    return null;
+                }
+                return await base.Add(dto);
             }
             catch (Exception ex)
             {
