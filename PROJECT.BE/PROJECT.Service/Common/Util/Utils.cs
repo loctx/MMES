@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace PROJECT.BUSINESS.Common.Util
 {
@@ -10,7 +6,7 @@ namespace PROJECT.BUSINESS.Common.Util
     {
         public static string CryptographyMD5(string source)
         {
-            System.Security.Cryptography.MD5CryptoServiceProvider objMD5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            using var objMD5 = MD5.Create();
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(source);
             byte[] bytHash = objMD5.ComputeHash(buffer);
             string result = "";

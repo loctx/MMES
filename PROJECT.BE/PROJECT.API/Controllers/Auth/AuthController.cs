@@ -3,12 +3,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using UAParser;
-using PROJECT.BUSINESS.Common.Authentication;
-using PROJECT.BUSINESS.Services.AD;
 using PROJECT.BUSINESS.Dtos.Auth;
 using PROJECT.BUSINESS.Common.Class;
-using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Services.Auth;
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
@@ -31,10 +27,10 @@ namespace PROJECT.API.Controllers.Auth
         public async Task<IActionResult> Login([FromBody] LoginDto loginInfo)
         {
             var transferObject = new TransferObject();
-            var account = _service.CheckLogin(loginInfo);
+            var account = await _service.CheckLogin(loginInfo);
             if (_service.Status)
             {
-                var token = await this.GenJwtToken(loginInfo.UserName);
+                var token = this.GenJwtToken(loginInfo.UserName);
                 var jwtTokenDto = new JWTTokenDto()
                 {
                     accessToken = token,
@@ -51,14 +47,49 @@ namespace PROJECT.API.Controllers.Auth
             return Ok(transferObject);
         }
 
+        [HttpPost("validate-token")]
+        public async Task<IActionResult> ValidateToken([FromBody] string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+
+            try
+            {
+                var claimsPrincipal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateIssuer = true,
+                    ValidIssuer = _configuration["Jwt:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = _configuration["Jwt:Audience"],
+                    ClockSkew = TimeSpan.Zero,
+                }, out _);
+
+                JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
+
+                DateTimeOffset expiresAt = jwtToken.ValidTo;
+
+                var username = claimsPrincipal.Identity.Name;
+
+                var user = await _service.GetAccount(username);
+
+                return Ok(new { user, expiresAt });
+            }
+            catch (Exception)
+            {
+                return Unauthorized();
+            }
+        }
+
         /// <summary>
         /// Tạo token JWT
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        private async Task<string> GenJwtToken(string userName)
+        private string GenJwtToken(string userName)
         {
-            var claims = new[] { 
+            var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
