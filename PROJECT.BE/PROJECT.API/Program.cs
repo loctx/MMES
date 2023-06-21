@@ -5,17 +5,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http.Features;
 using PROJECT.API.Hubs;
-using PROJECT.CORE;
 using PROJECT.BUSINESS;
 using System.Text.Json.Serialization;
-using System.Text.Json;
 using PROJECT.API.AppCode.Extensions;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using System.Net.Mime;
-using static System.Net.Mime.MediaTypeNames;
-using PROJECT.BUSINESS.Common.Class;
 using PROJECT.API.AppCode.Util;
-using PROJECT.API.AppCode.Enum;
 using NLog;
 using NLog.Extensions.Logging;
 

@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using PROJECT.BUSINESS.Common;
-using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.CORE;
 using PROJECT.CORE.Dtos.SO;
-using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.SO;
 
 namespace PROJECT.BUSINESS.Services.AD

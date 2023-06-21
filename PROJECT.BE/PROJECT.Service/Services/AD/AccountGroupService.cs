@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Common;
-using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.CORE;
 using PROJECT.CORE.Entities.AD;

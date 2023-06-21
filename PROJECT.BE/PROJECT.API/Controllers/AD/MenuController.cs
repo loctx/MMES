@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
-using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
-using PROJECT.BUSINESS.Filter.SO;
 using PROJECT.BUSINESS.Services.AD;
 
 namespace PROJECT.API.Controllers.AD
