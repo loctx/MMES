@@ -120,6 +120,22 @@ builder.Services.AddDIServices(builder.Configuration);
 
 var app = builder.Build();
 
+//Khởi tạo message
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var lstMessage = dbContext.tblAdMessage.ToList();
+    foreach (var message in lstMessage)
+    {
+        MessageUtil.AddToCache(new MessageObject()
+        {
+            Code = message.Code,
+            Language = message.Lang,
+            Message = message.Value
+        });
+    }
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
