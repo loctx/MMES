@@ -19,6 +19,13 @@ namespace PROJECT.CORE.Entities.AD
 
         public string PId { get; set; }
 
-        public int OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
+
+        public virtual List<tblAdAccountGroupRight> ListAccountGroupRight { get; set; }
+
+        public tblAdRight()
+        {
+            ListAccountGroupRight = new List<tblAdAccountGroupRight>();
+        }
     }
 }

@@ -90,6 +90,9 @@ namespace PROJECT.CORE
         public DbSet<tblAdAccount> tblAdAccount { get; set; }
         public DbSet<tblAdAccountGroup> tblAdAccountGroup { get; set; }
         public DbSet<tblAdMenu> tblAdMenu { get; set; }
+        public DbSet<tblAdRight> tblAdRight { get; set; }
+        //public DbSet<tblAdAccountGroupRight> tblAdAccountGroupRight { get; set; }
+
         #endregion
 
         #region Master Data
@@ -98,6 +101,10 @@ namespace PROJECT.CORE
         public DbSet<tblMdItemType> tblMdItemType { get; set; }
         public DbSet<tblMdStock> tblMdStock { get; set; }
         public DbSet<tblMdPartner> tblMdPartner { get; set; }
+        public DbSet<tblMdPourType> tblMdPourType { get; set; }
+        public DbSet<tblMdOrderType> tblMdOrderType { get; set; }
+        public DbSet<tblMdStone> tblMdStone { get; set; }
+        public DbSet<tblMdSand> tblMdSand { get; set; }
 
         #endregion
 
