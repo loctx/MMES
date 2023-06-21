@@ -57,7 +57,7 @@ export class LoginComponent {
               // localStorage.setItem("lstRight", JSON.stringify(response.Data.ListRight, null, 2));
               this.globalService.setUserInfo(response.data?.accountInfo)
               this.invalidLogin = false;
-              this.router.navigate(['master-data/unit'])
+              this.router.navigate(['master-data/dashboard'])
           } else {
             this.toastr.showError(response?.messageObject?.message);
           }

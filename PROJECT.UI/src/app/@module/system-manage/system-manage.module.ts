@@ -13,14 +13,26 @@ import { AccountGroupIndexComponent } from './account-group/account-group-index/
 import { AccountGroupEditComponent } from './account-group/account-group-edit/account-group-edit.component';
 import { AccountGroupCreateComponent } from './account-group/account-group-create/account-group-create.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AccountGroupIndexComponent,
     AccountGroupEditComponent,
-    AccountGroupCreateComponent
+    AccountGroupCreateComponent,
   ],
   imports: [
+    MatButtonModule,
+    MatListModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatTreeModule,
     MatTableModule,
     SharedModule,
     ToastrModule,
@@ -32,6 +44,6 @@ import { MatTableModule } from '@angular/material/table';
     NgSelectModule,
     TranslateModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
-export class SystemManageModule { }
+export class SystemManageModule {}
