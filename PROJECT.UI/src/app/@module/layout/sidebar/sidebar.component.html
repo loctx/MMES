@@ -1,20 +1,87 @@
 <aside [ngClass]="{'sidebar-hidden': !show, 'sidebar-visible': show}" id="sidebar" class="sidebar">
+	<div class="user-info">
+		<div class="image">
+			<img src="../assets/img/UserLogo.jpg" width="48" height="48" alt="User">
+		</div>
+		<div class="info-container">
+			<div class="name" aria-haspopup="true" aria-expanded="false">{{username}}</div>
+			<div class="email">{{username}}@example.com</div>
+			<i class="material-icons icon-open" data-bs-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="true">keyboard_arrow_down</i>
+			<div class="btn-group user-helper-dropdown">
+				<ul class="dropdown-menu dropdown-menu-end profile">
+					<li class="dropdown-header">
+					  <span>Web Designer</span>
+					</li>
+					<li>
+					  <hr class="dropdown-divider">
+					</li>
+		  
+					<li>
+					  <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+						<i class="bi bi-person"></i>
+						<span>My Profile</span>
+					  </a>
+					</li>
+					<li>
+					  <hr class="dropdown-divider">
+					</li>
+		  
+					<li>
+					  <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+						<i class="bi bi-gear"></i>
+						<span>Account Settings</span>
+					  </a>
+					</li>
+					<li>
+					  <hr class="dropdown-divider">
+					</li>
+		  
+					<li>
+					  <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+						<i class="bi bi-question-circle"></i>
+						<span>Need Help?</span>
+					  </a>
+					</li>
+					<li>
+					  <hr class="dropdown-divider">
+					</li>
+		  
+					<li (click)="logOut()">
+					  <a class="dropdown-item d-flex align-items-center" href="#">
+						<i class="bi bi-box-arrow-right"></i>
+						<span>Đăng xuất</span>
+					  </a>
+					</li>
+				  </ul>
+			</div>
+		</div>
+	</div>
 	<ul class="sidebar-nav" id="sidebar-nav">
 		<li *ngFor="let item of dataSource; index as i" class="nav-item">
-			<a *ngIf="!item?.children || item?.children?.length == 0" class="nav-link collapsed" routerLink="{{ item.url || '#' }}">
+			<a *ngIf="!item?.children || item?.children?.length == 0" class="nav-link collapsed"
+				routerLink="{{ item.url || '#' }}">
 				<i class="bi" [ngClass]="item.icon || ''"></i>
 				<span>{{ item.name }}</span>
 			</a>
-			<a *ngIf="item?.children?.length > 0" class="nav-link collapsed" [attr.data-bs-target]="'#po-dcch' + i" data-bs-toggle="collapse">
+			<a *ngIf="item?.children?.length > 0" class="nav-link collapsed" [attr.data-bs-target]="'#po-dcch' + i"
+				data-bs-toggle="collapse">
 				<i class="bi" [ngClass]="item.icon || ''"></i>
 				<span>{{ item.name }}</span>
 				<i class="bi bi-chevron-down ms-auto"></i>
 			</a>
-			<ul *ngIf="item?.children?.length > 0" [id]="'po-dcch' + i" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+			<ul *ngIf="item?.children?.length > 0" [id]="'po-dcch' + i" class="nav-content collapse "
+				data-bs-parent="#sidebar-nav">
 				<li *ngFor="let child of item.children; index as i">
-					<a *ngIf="!child.children || child?.children?.length == 0" routerLink="{{ child.url }}"><i class="bi bi-circle"></i><span>{{ child.name }}</span></a>
+					<a *ngIf="!child.children || child?.children?.length == 0" routerLink="{{ child.url }}"><i
+							class="bi bi-circle"></i><span>{{ child.name }}</span></a>
 				</li>
 			</ul>
 		</li>
 	</ul>
+	<div class="legal">
+		<div class="copyright">
+			© <a href="javascript:void(0);">copyright - Mobifone</a>
+		</div>
+	</div>
 </aside>
