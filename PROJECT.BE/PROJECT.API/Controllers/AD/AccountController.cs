@@ -4,7 +4,6 @@ using PROJECT.API.AppCode.Extensions;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Filter.AD;
-using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.BUSINESS.Services.AD;
 
 namespace PROJECT.API.Controllers.MD

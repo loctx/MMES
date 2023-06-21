@@ -1,0 +1,112 @@
+import { Component, OnInit } from '@angular/core';
+import { ItemTypeService } from 'src/app/services/MD/item-type.service';
+import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { ItemTypeCreateComponent } from '../item-type-create/item-type-create.component';
+import { ItemTypeEditComponent } from '../item-type-edit/item-type-edit.component';
+import { PaginationResult } from 'src/app/models/Common/pagination.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+import Swal from 'sweetalert2';
+@Component({
+  selector: 'app-item-type-index',
+  templateUrl: './item-type-index.component.html',
+  styleUrls: ['./item-type-index.component.scss']
+})
+export class ItemTypeIndexComponent {
+  constructor(
+    private _service: ItemTypeService,
+    private drawerService: DrawerService
+  ) {}
+
+  //Khai báo biến
+  breadcrumbList: any[] = [
+    {
+      name: 'Trang chủ',
+      path: '',
+    },
+    {
+      name: 'Đơn vị tính',
+      path: '/master-data/unit',
+    },
+  ];
+  displayedColumns: string[] = ['index', 'code', 'name' , 'actions'];
+  paginationResult!: PaginationResult;
+  filter = new BaseFilter();
+
+  //Khai báo hàm
+  ngOnInit(): void {
+    this.loadInit();
+  }
+
+  openCreate() {
+    this.drawerService.open(ItemTypeCreateComponent).subscribe((result) => {
+      if (result?.status) {
+        this.loadInit();
+      }
+    });
+  }
+
+  openEdit(item: any) {
+    this.drawerService
+      .open(ItemTypeEditComponent, {
+        code: item.code,
+        name: item.name,
+      })
+      .subscribe((result) => {
+        if (result?.status) {
+          this.loadInit();
+        }
+      });
+  }
+
+  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+    this.filter = {
+      ...this.filter,
+      keyWord: refresh ? '' : this.filter.keyWord,
+      pageSize: pageSize || this.filter.pageSize,
+      currentPage: currentPage,
+    };
+    this._service.search(this.filter, true).subscribe({
+      next: ({ data }) => {
+        this.paginationResult = data;
+      },
+      error: (response) => {
+        console.log(response);
+      },
+    });
+  }
+
+  loadInit() {
+    this.search();
+  }
+
+  onChangePage(pageNumber: number) {
+    this.search(pageNumber);
+  }
+
+  pageSizeChange(pageSize: number) {
+    this.filter.pageSize = pageSize;
+    this.search(1, pageSize);
+  }
+
+  deleteItemType(item:any) {
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
+      text: 'Hành động này sẽ không thể hoàn tác!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Xóa',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._service.Delete(item, true).subscribe({
+          next: ({ data }) => {
+            this.loadInit();
+          },
+          error: (response) => {
+            console.log(response);
+          },
+        });
+      }
+    });
+  }
+}

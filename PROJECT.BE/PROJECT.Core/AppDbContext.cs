@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.MD;
@@ -90,6 +89,10 @@ namespace PROJECT.CORE
         public DbSet<tblAdAccount> tblAdAccount { get; set; }
         public DbSet<tblAdAccountGroup> tblAdAccountGroup { get; set; }
         public DbSet<tblAdMenu> tblAdMenu { get; set; }
+        public DbSet<tblAdRight> tblAdRight { get; set; }
+        public DbSet<tblAdMessage> tblAdMessage { get; set; }
+        //public DbSet<tblAdAccountGroupRight> tblAdAccountGroupRight { get; set; }
+
         #endregion
 
         #region Master Data
@@ -103,6 +106,8 @@ namespace PROJECT.CORE
         public DbSet<tblMdStone> tblMdStone { get; set; }
         public DbSet<tblMdSand> tblMdSand { get; set; }
         public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
+        public DbSet<tblMdMixer> tblMdMixer { get; set; }
+        public DbSet<tblMdArea> tblMdArea { get; set; }
 
         #endregion
 

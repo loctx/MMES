@@ -1,9 +1,9 @@
-<div class="card" style="height: calc(100vh - 50px)">
+<div class="card account-group-style" style="height: calc(100vh - 50px)">
     <div class="card-body">
-        <div class="d-flex-wrap d-gap d-space-bw border-bottom pt-3">
+        <div class="d-flex-wrap d-gap-10 d-space-bw pt-3">
             <div class="card-title mb-2 p-0">
                 <i class="bi bi-plus-lg"></i>
-                Chỉnh sửa đơn vị tính
+                Chỉnh sửa nhóm tài khoản
             </div>
             <div class="d-flex-wrap d-gap">
                 <div class="mb-3">
@@ -19,27 +19,110 @@
                 </div>
             </div>
         </div>
-        <div class="mt-3">
-            <form [formGroup]="unitForm" (ngSubmit)="onEdit()">
+        <div>
+            <form [formGroup]="accountGroupForm" (ngSubmit)="onEdit()">
                 <div>
-                    <label for="inputText" class="col-form-label">Mã đơn vị tính<span
-                            class="text-danger ms-1">*</span></label>
-                    <div>
-                        <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
-                            class="form-control" formControlName="code">
-                        <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
-                            <div *ngIf="f['code']['errors']['required']">Không được để trống</div>
+                    <ul class="nav nav-tabs d-flex" role="tablist">
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button (click)="changeTab(1)" class="nav-link w-100" [class.active]="currentTab === 1"
+                                type="button" role="tab" aria-selected="false" tabindex="-1">Thông tin</button>
+                        </li>
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button (click)="changeTab(2)" class="nav-link w-100" [class.active]="currentTab === 2" type="button"
+                                role="tab" aria-selected="false" tabindex="-1">Phân quyền</button>
+                        </li>
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button (click)="changeTab(3)" class="nav-link w-100" [class.active]="currentTab === 3" type="button"
+                                role="tab" aria-selected="true">Thành viên</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content pt-2">
+                        <div *ngIf="currentTab === 1" class="fade show active" role="tabpanel"
+                            aria-labelledby="info-tab">
+                            <div>
+                                <label for="inputText" class="col-form-label">Tên nhóm<span
+                                        class="text-danger ms-1">*</span></label>
+                                <div>
+                                    <input [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text"
+                                        class="form-control" formControlName="name">
+                                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="inputText" class="col-form-label">Ghi chú</label>
+                                <div>
+                                    <textarea class="form-control" formControlName="notes"></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-1">
+                                <label for="inputText" class="col-form-label nowrap">Trạng thái</label>
+                                <div class="d-flex d-gap-20 w-100 mt-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="state"
+                                            formControlName="state" value="true">
+                                        <label class="form-check-label" for="state">
+                                            Kích hoạt
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="state"
+                                            formControlName="state" value="false">
+                                        <label class="form-check-label" for="state">
+                                            Khoá
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                    <label for="inputEmail" class="col-form-label">Tên đơn vị tính<span
-                            class="text-danger ms-1">*</span></label>
-                    <div>
-                        <input [ngClass]="{ 'is-invalid': submitted && f['code'].errors }" type="text"
-                            class="form-control" formControlName="name">
-                        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                            <div *ngIf="f['name']['errors']['required']">Không được để trống</div>
+                        <div *ngIf="currentTab === 2" class="fade show active" role="tabpanel"
+                            aria-labelledby="rights-tab">
+                            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                    <div style="width: 38px;"></div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            [checked]="checklistSelection.isSelected(node)"
+                                            (change)="todoLeafItemSelectionToggle(node)">
+                                        <label class="form-check-label">
+                                            {{node.label}}
+                                        </label>
+                                    </div>
+                                </mat-tree-node>
+                                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                    <div class="icon-tree" mat-icon-button matTreeNodeToggle
+                                        [attr.aria-label]="'toggle ' + node.filename">
+                                        <i *ngIf="treeControl.isExpanded(node)" class="bi bi-chevron-down"></i>
+                                        <i *ngIf="!treeControl.isExpanded(node)" class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            [checked]="descendantsAllSelected(node)"
+                                            [indeterminate]="descendantsPartiallySelected(node)"
+                                            (change)="todoItemSelectionToggle(node)">
+                                        <label class="form-check-label">
+                                            {{node.label}}
+                                        </label>
+                                    </div>
+                                </mat-tree-node>
+                            </mat-tree>
+                        </div>
+                        <div *ngIf="currentTab === 3" class="fade show active" role="tabpanel"
+                            aria-labelledby="list-tab">
+                            <div class="card-body">
+                                <ol class="list-group list-group-numbered">
+                                    <li *ngFor="let item of detailData?.listAccount"
+                                        class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <div class="fw-bold">{{item.userName}}</div>
+                                            {{item.fullName}}
+                                        </div>
+                                        <i *ngIf="item.state" class="bi bi-check-circle-fill text-success"></i>
+                                        <i *ngIf="!item.state" class="bi bi-x-circle-fill"></i>
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>

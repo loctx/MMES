@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Common.Util;
 using PROJECT.BUSINESS.Dtos.AD;
@@ -10,7 +11,9 @@ namespace PROJECT.BUSINESS.Services.Auth
 {
     public interface IAuthService : IGenericService<tblAdAccount, tblAccountDto>
     {
-        tblAccountDto CheckLogin(LoginDto loginInfo);
+        Task<tblAccountDto> CheckLogin(LoginDto loginInfo);
+        Task<tblAccountDto> GetAccount(string userName);
+
     }
 
     public class AuthService : GenericService<tblAdAccount, tblAccountDto>, IAuthService
@@ -19,7 +22,7 @@ namespace PROJECT.BUSINESS.Services.Auth
         {
         }
 
-        public tblAccountDto CheckLogin(LoginDto loginInfo)
+        public async Task<tblAccountDto> CheckLogin(LoginDto loginInfo)
         {
             if (string.IsNullOrWhiteSpace(loginInfo.UserName) || string.IsNullOrWhiteSpace(loginInfo.Password))
             {
@@ -29,7 +32,7 @@ namespace PROJECT.BUSINESS.Services.Auth
             }
             try
             {
-                var account = this._dbContext.tblAdAccount.FirstOrDefault(
+                var account = await _dbContext.tblAdAccount.FirstOrDefaultAsync(
                     x => x.UserName == loginInfo.UserName &&
                     x.Password == Utils.CryptographyMD5(loginInfo.Password));
                 if (account == null)
@@ -54,6 +57,14 @@ namespace PROJECT.BUSINESS.Services.Auth
                 this.Exception = ex;
                 return null;
             }
+        }
+
+        public async Task<tblAccountDto> GetAccount(string userName)
+        {
+            var account = await _dbContext.tblAdAccount.FirstOrDefaultAsync(
+                    x => x.UserName == userName);
+
+            return _mapper.Map<tblAccountDto>(account);
         }
     }
 }
