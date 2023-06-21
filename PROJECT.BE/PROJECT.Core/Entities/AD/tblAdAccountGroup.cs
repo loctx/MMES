@@ -12,6 +12,7 @@ namespace PROJECT.CORE.Entities.AD
         public string Name { get; set; }
         public bool State { get; set; } = true;
         public string Notes { get; set; }
+        public string Code { get; set; }
         public virtual List<tblAdAccount> ListAccount { get; set; }
         public virtual List<tblAdAccountGroupRight> ListAccountGroupRight { get; set; }
 
