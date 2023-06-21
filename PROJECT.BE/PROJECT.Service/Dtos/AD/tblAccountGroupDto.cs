@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PROJECT.CORE.Entities.AD;
 using PROJECT.BUSINESS.Common.Mapping;
-using PROJECT.BUSINESS.Dtos.Common;
 using System.ComponentModel.DataAnnotations;
 
 namespace PROJECT.BUSINESS.Dtos.AD
