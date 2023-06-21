@@ -40,6 +40,7 @@ import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.compon
 import { HandleResponse } from 'src/app/utils/utils';
 import { ResultComponent } from 'src/app/@module/components/result/result.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

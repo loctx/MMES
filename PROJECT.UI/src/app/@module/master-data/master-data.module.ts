@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MasterDataRoutingModule } from './master-data-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,6 +37,9 @@ import { StoneEditComponent } from './stone/stone-edit/stone-edit.component';
 import { AreaIndexComponent } from './area/area-index/area-index.component';
 import { AreaCreateComponent } from './area/area-create/area-create.component';
 import { AreaEditComponent } from './area/area-edit/area-edit.component';
+import {ProductIndexComponent} from './product/product-index/product-index.component'
+import {ProductCreateComponent} from './product/product-create/product-create.component'
+import {ProductEditComponent} from './product/product-edit/product-edit.component'
 import {
   MixerIndexComponent,
   MixerCreateComponent,
@@ -53,7 +55,6 @@ import {
     UnitEditComponent,
     UnitCreateComponent,
     UnitIndexComponent,
-    DashboardComponent,
     CustomerIndexComponent,
     CustomerCreateComponent,
     CustomerEditComponent,
@@ -72,15 +73,18 @@ import {
     StoneIndexComponent,
     StoneCreateComponent,
     StoneEditComponent,
-    AreaIndexComponent, 
-    AreaCreateComponent, 
-    AreaEditComponent, 
+    AreaIndexComponent,
+    AreaCreateComponent,
+    AreaEditComponent,
     MixerIndexComponent,
-    MixerCreateComponent, 
-    MixerEditComponent, 
-    PourTypeIndexComponent, 
-    PourTypeCreateComponent, 
+    MixerCreateComponent,
+    MixerEditComponent,
+    PourTypeIndexComponent,
+    PourTypeCreateComponent,
     PourTypeEditComponent,
+    ProductIndexComponent,
+    ProductCreateComponent,
+    ProductEditComponent,
   ],
   imports: [
     MatTableModule,
