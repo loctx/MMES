@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace PROJECT.CORE.Common
+﻿namespace PROJECT.CORE.Common
 {
     public class BaseEntity : IBaseEntity
     {

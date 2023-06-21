@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using PROJECT.CORE;
-using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Filter.Common;
-using DocumentFormat.OpenXml.VariantTypes;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 
@@ -56,9 +52,9 @@ namespace PROJECT.BUSINESS.Common
             return value;
         }
 
-        public virtual async Task<PagedResponseDto> Search(BaseFilter filter)
+        public virtual Task<PagedResponseDto> Search(BaseFilter filter)
         {
-            return null;
+            return Task.FromResult<PagedResponseDto>(new());
         }
 
         public virtual async Task<IList<TDto>> GetAll()

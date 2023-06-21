@@ -17,14 +17,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { AccountIndexComponent } from './account/account-index/account-index.component';
+import { AccountEditComponent } from './account/account-edit/account-edit.component';
+import { AccountCreateComponent } from './account/account-create/account-create.component';
 
 @NgModule({
   declarations: [
     AccountGroupIndexComponent,
     AccountGroupEditComponent,
     AccountGroupCreateComponent,
+    AccountIndexComponent,
+    AccountEditComponent,
+    AccountCreateComponent,
   ],
   imports: [
     MatButtonModule,
