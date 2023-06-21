@@ -36,8 +36,11 @@ import { SandEditComponent } from './sand/sand-edit/sand-edit.component';
 import { StoneIndexComponent } from './stone/stone-index/stone-index.component';
 import { StoneCreateComponent } from './stone/stone-create/stone-create.component';
 import { StoneEditComponent } from './stone/stone-edit/stone-edit.component';
+import { AreaIndexComponent } from './area/area-index/area-index.component';
+import { AreaCreateComponent } from './area/area-create/area-create.component';
+import { AreaEditComponent } from './area/area-edit/area-edit.component';
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent , DashboardComponent, ResultComponent, CustomerIndexComponent, CustomerCreateComponent, CustomerEditComponent, ProviderIndexComponent, ProviderCreateComponent, ProviderEditComponent, WarehouseIndexComponent, WarehouseCreateComponent, WarehouseEditComponent, ItemTypeIndexComponent, ItemTypeCreateComponent, ItemTypeEditComponent, SandIndexComponent, SandCreateComponent, SandEditComponent, StoneIndexComponent, StoneCreateComponent, StoneEditComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent , DashboardComponent, ResultComponent, CustomerIndexComponent, CustomerCreateComponent, CustomerEditComponent, ProviderIndexComponent, ProviderCreateComponent, ProviderEditComponent, WarehouseIndexComponent, WarehouseCreateComponent, WarehouseEditComponent, ItemTypeIndexComponent, ItemTypeCreateComponent, ItemTypeEditComponent, SandIndexComponent, SandCreateComponent, SandEditComponent, StoneIndexComponent, StoneCreateComponent, StoneEditComponent, AreaIndexComponent, AreaCreateComponent, AreaEditComponent],
   imports: [
     MatTableModule,
     SharedModule,
