@@ -10,11 +10,7 @@ namespace PROJECT.BUSINESS.Dtos.MD
         [Key]
         public string Code { get; set; }
 
-        public double Tonnage { get; set; }
-
-        public string Driver { get; set; }
-
-        public string TypeCode { get; set; }
+        public string Name { get; set; }
 
         public void Mapping(Profile profile)
         {

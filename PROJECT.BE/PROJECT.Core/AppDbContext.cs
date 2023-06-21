@@ -109,7 +109,6 @@ namespace PROJECT.CORE
         public DbSet<tblMdArea> tblMdArea { get; set; }
         public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
         public DbSet<tblMdVehicle> tblMdVehicle { get; set; }
-        public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
         #endregion
 
         #region Sale Order
