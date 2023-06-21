@@ -1,6 +1,4 @@
-﻿using PROJECT.CORE;
-using PROJECT.BUSINESS.Common.Class;
-using PROJECT.BUSINESS.Dtos.Common;
+﻿using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Filter.Common;
 
 namespace PROJECT.BUSINESS.Common

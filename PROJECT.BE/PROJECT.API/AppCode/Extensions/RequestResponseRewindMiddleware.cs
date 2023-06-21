@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace PROJECT.API.AppCode.Extensions
+﻿namespace PROJECT.API.AppCode.Extensions
 {
     public class RequestBodyRewindMiddleware
     {

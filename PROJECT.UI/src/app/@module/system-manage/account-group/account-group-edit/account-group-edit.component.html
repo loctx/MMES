@@ -1,4 +1,4 @@
-<div class="card" style="height: calc(100vh - 50px)">
+<div class="card account-group-style" style="height: calc(100vh - 50px)">
     <div class="card-body">
         <div class="d-flex-wrap d-gap-10 d-space-bw pt-3">
             <div class="card-title mb-2 p-0">
@@ -24,20 +24,21 @@
                 <div>
                     <ul class="nav nav-tabs d-flex" role="tablist">
                         <li class="nav-item flex-fill" role="presentation">
-                            <button class="nav-link w-100 active" data-bs-toggle="tab" data-bs-target="#tab-info"
+                            <button (click)="changeTab(1)" class="nav-link w-100" [class.active]="currentTab === 1"
                                 type="button" role="tab" aria-selected="false" tabindex="-1">Thông tin</button>
                         </li>
                         <li class="nav-item flex-fill" role="presentation">
-                            <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#tab-rights"
-                                type="button" role="tab" aria-selected="false" tabindex="-1">Phân quyền</button>
+                            <button (click)="changeTab(2)" class="nav-link w-100" [class.active]="currentTab === 2" type="button"
+                                role="tab" aria-selected="false" tabindex="-1">Phân quyền</button>
                         </li>
                         <li class="nav-item flex-fill" role="presentation">
-                            <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#tab-list" type="button"
+                            <button (click)="changeTab(3)" class="nav-link w-100" [class.active]="currentTab === 3" type="button"
                                 role="tab" aria-selected="true">Thành viên</button>
                         </li>
                     </ul>
                     <div class="tab-content pt-2">
-                        <div class="tab-pane fade active show" id="tab-info" role="tabpanel" aria-labelledby="home-tab">
+                        <div *ngIf="currentTab === 1" class="fade show active" role="tabpanel"
+                            aria-labelledby="info-tab">
                             <div>
                                 <label for="inputText" class="col-form-label">Tên nhóm<span
                                         class="text-danger ms-1">*</span></label>
@@ -75,15 +76,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tab-rights" role="tabpanel" aria-labelledby="profile-tab">
-                            Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium
-                            distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio
-                            similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                        <div *ngIf="currentTab === 2" class="fade show active" role="tabpanel"
+                            aria-labelledby="rights-tab">
+                            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                    <div style="width: 38px;"></div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            [checked]="checklistSelection.isSelected(node)"
+                                            (change)="todoLeafItemSelectionToggle(node)">
+                                        <label class="form-check-label">
+                                            {{node.label}}
+                                        </label>
+                                    </div>
+                                </mat-tree-node>
+                                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                    <div class="icon-tree" mat-icon-button matTreeNodeToggle
+                                        [attr.aria-label]="'toggle ' + node.filename">
+                                        <i *ngIf="treeControl.isExpanded(node)" class="bi bi-chevron-down"></i>
+                                        <i *ngIf="!treeControl.isExpanded(node)" class="bi bi-chevron-right"></i>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            [checked]="descendantsAllSelected(node)"
+                                            [indeterminate]="descendantsPartiallySelected(node)"
+                                            (change)="todoItemSelectionToggle(node)">
+                                        <label class="form-check-label">
+                                            {{node.label}}
+                                        </label>
+                                    </div>
+                                </mat-tree-node>
+                            </mat-tree>
                         </div>
-                        <div class="tab-pane fade" id="tab-list" role="tabpanel" aria-labelledby="contact-tab">
+                        <div *ngIf="currentTab === 3" class="fade show active" role="tabpanel"
+                            aria-labelledby="list-tab">
                             <div class="card-body">
                                 <ol class="list-group list-group-numbered">
-                                    <li *ngFor="let item of listMember"
+                                    <li *ngFor="let item of detailData?.listAccount"
                                         class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
                                             <div class="fw-bold">{{item.userName}}</div>

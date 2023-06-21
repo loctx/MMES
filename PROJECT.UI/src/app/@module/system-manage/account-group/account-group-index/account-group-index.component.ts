@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./account-group-index.component.scss'],
 })
 export class AccountGroupIndexComponent implements OnInit {
+  currentTab:number = 1;
   constructor(
     private _service: AccountGroupService,
     private drawerService: DrawerService
@@ -48,10 +49,17 @@ export class AccountGroupIndexComponent implements OnInit {
 
   openEdit(item: any) {
     this.drawerService
-      .open(AccountGroupEditComponent, item)
+      .open(AccountGroupEditComponent, {
+        ...item,
+        currentTab: this.currentTab
+      })
       .subscribe((result) => {
         if (result?.status) {
           this.loadInit();
+        }
+
+        if(result.type == 'tab') {
+          this.currentTab = result.tab;
         }
       });
   }
