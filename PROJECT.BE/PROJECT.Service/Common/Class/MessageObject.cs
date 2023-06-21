@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PROJECT.BUSINESS.Common.Class
+﻿namespace PROJECT.BUSINESS.Common.Class
 {
     public class MessageObject
     {
