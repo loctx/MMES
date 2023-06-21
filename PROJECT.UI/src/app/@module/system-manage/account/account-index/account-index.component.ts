@@ -25,7 +25,6 @@ export class AccountIndexComponent implements OnInit {
     'userName',
     'fullName',
     'state',
-    'actions',
   ];
   filter = new AccountFilter();
   filterGroup = new BaseFilter();
