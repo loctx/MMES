@@ -19,9 +19,10 @@ import { ResultComponent } from './result/result.component';
 import { DanhSachDonHangComponent } from './mockup/danh-sach-don-hang/danh-sach-don-hang.component';
 import { QuanLiTramTronComponent } from './mockup/quan-li-tram-tron/quan-li-tram-tron.component';
 import { CreateLanTronComponent } from './mockup/create-lan-tron/create-lan-tron.component';
+import { ChamSocKhachHangComponent } from './mockup/cham-soc-khach-hang/cham-soc-khach-hang.component';
 
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent, DanhSachDonHangComponent, QuanLiTramTronComponent, CreateLanTronComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent, DanhSachDonHangComponent, QuanLiTramTronComponent, CreateLanTronComponent, ChamSocKhachHangComponent],
   imports: [
     MatTableModule,
     SharedModule,
