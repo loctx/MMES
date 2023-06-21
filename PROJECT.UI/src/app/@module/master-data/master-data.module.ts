@@ -42,7 +42,12 @@ import {
   MixerIndexComponent,
   MixerCreateComponent,
   MixerEditComponent
-} from './mixer'
+} from './mixer';
+import {
+  PourTypeIndexComponent,
+  PourTypeCreateComponent,
+  PourTypeEditComponent
+} from './pour-type'
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -72,7 +77,10 @@ import {
     AreaEditComponent, 
     MixerIndexComponent,
     MixerCreateComponent, 
-    MixerEditComponent,
+    MixerEditComponent, 
+    PourTypeIndexComponent, 
+    PourTypeCreateComponent, 
+    PourTypeEditComponent,
   ],
   imports: [
     MatTableModule,
