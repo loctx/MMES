@@ -49,7 +49,12 @@ import {
   PourTypeIndexComponent,
   PourTypeCreateComponent,
   PourTypeEditComponent
-} from './pour-type'
+} from './pour-type';
+import {
+  DepartmentCreateComponent,
+  DepartmentEditComponent,
+  DepartmentIndexComponent
+} from './department'
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -85,6 +90,9 @@ import {
     ProductIndexComponent,
     ProductCreateComponent,
     ProductEditComponent,
+    DepartmentIndexComponent,
+    DepartmentCreateComponent,
+    DepartmentEditComponent,
   ],
   imports: [
     MatTableModule,
