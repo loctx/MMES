@@ -50,7 +50,7 @@ export class HandleResponse {
             footer: `LogID: ${res.logId}`,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 3000,
+            timer: 5000,
           });
           break;
         default:
