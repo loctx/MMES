@@ -1,0 +1,125 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PROJECT.API.AppCode.Enum;
+using PROJECT.API.AppCode.Extensions;
+using PROJECT.API.AppCode.Util;
+using PROJECT.BUSINESS.Common.Class;
+using PROJECT.BUSINESS.Dtos.Auth;
+using PROJECT.BUSINESS.Dtos.MD;
+using PROJECT.BUSINESS.Filter.Common;
+using PROJECT.BUSINESS.Filter.SO;
+using PROJECT.BUSINESS.Services.AD;
+using PROJECT.BUSINESS.Services.MD;
+using PROJECT.CORE.Entities.MD;
+
+namespace PROJECT.API.Controllers.MD
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MixerController : ControllerBase
+    {
+        public readonly IMixerService _service;
+        public MixerController(IMixerService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search([FromQuery] BaseFilter filter)
+        {
+            var transferObject = new TransferObject();
+            var result = await _service.Search(filter);
+            if (_service.Status)
+            {
+                transferObject.Data = result;
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0001", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var transferObject = new TransferObject();
+            var result = await _service.GetAll();
+            if (_service.Status)
+            {
+                transferObject.Data = result;
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0001", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpPost("Insert")]
+        public async Task<IActionResult> Insert([FromBody] tblMixerDto mixer)
+        {
+            var transferObject = new TransferObject();
+            var result = await _service.Add(mixer);
+            if (_service.Status)
+            {
+                transferObject.Data = result;
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0100", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0101", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] tblMixerDto mixer)
+        {
+            var transferObject = new TransferObject();
+            await _service.Update(mixer);
+            if (_service.Status)
+            {
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0103", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0104", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete([FromBody] tblMixerDto mixer)
+        {
+            var transferObject = new TransferObject();
+            await _service.Delete(mixer);
+            if (_service.Status)
+            {
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0105", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0106", _service);
+            }
+            return Ok(transferObject);
+        }
+    }
+}
