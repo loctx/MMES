@@ -7,6 +7,8 @@ import {WarehouseIndexComponent} from './warehouse/warehouse-index/warehouse-ind
 import {ItemTypeIndexComponent} from './item-type/item-type-index/item-type-index.component'
 import {SandIndexComponent} from './sand/sand-index/sand-index.component'
 import {StoneIndexComponent} from './stone/stone-index/stone-index.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 const routes: Routes = [
   { path: 'unit', component: UnitIndexComponent },
   { path: 'khach-hang', component: CustomerIndexComponent },
@@ -15,7 +17,8 @@ const routes: Routes = [
   { path: 'loai-hang', component: ItemTypeIndexComponent },
   { path: 'loai-cat', component: SandIndexComponent },
   { path: 'loai-da', component: StoneIndexComponent },
-];
+  { path: 'dashboard', component: DashboardComponent },
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
