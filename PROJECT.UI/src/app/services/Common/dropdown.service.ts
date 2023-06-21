@@ -9,7 +9,11 @@ export class DropdownService {
   constructor(private _commonService: CommonService) {}
 
 
-  GetAll(parameters?: ProductModel, isLoading?: boolean) {
+  GetAllUnit(parameters?: '', isLoading?: boolean) {
+    return this._commonService.getRequest(`Unit/GetAll`, parameters);
+  }
+  GetAllItemType(parameters?: '', isLoading?: boolean) {
     return this._commonService.getRequest(`ItemType/GetAll`, parameters);
   }
+
 }

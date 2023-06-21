@@ -3,28 +3,33 @@ import { ProductService } from 'src/app/services/MD/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { DropdownService } from 'src/app/services/Common/dropdown.service';
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.scss']
+  styleUrls: ['./product-edit.component.scss'],
 })
 export class ProductEditComponent {
-  unitForm: FormGroup;
+  productForm: FormGroup;
   submitted: boolean = false;
   code: string = '';
   name: string = '';
   unitCode: string = '';
-  typeCode: string ='';
+  typeCode: string = '';
+  unitCodes: any[] = [];
+  itemTypes: any[] = [];
+  selectedItem: string = '';
 
   constructor(
     private _service: ProductService,
     private _fb: FormBuilder,
     private utils: utils,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private _service1: DropdownService
   ) {
-    this.unitForm = this._fb.group({
-      code: ['', [Validators.required, this.utils.trimSpace]],
+    this.productForm = this._fb.group({
+      code: [{ value: "", disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
       unitCode: ['', [Validators.required, this.utils.trimSpace]],
       typeCode: ['', [Validators.required, this.utils.trimSpace]],
@@ -32,38 +37,43 @@ export class ProductEditComponent {
   }
 
   get f() {
-    return this.unitForm.controls;
+    return this.productForm.controls;
   }
 
   ngOnInit() {
-    this.unitForm?.get('code')?.setValue(this.code);
-    this.unitForm?.get('name')?.setValue(this.name);
-    this.unitForm?.get('unitCode')?.setValue(this.unitCode);
-    this.unitForm?.get('typeCode')?.setValue(this.typeCode);
+    this._service1.GetAllUnit().subscribe((result: any) => {
+      this.unitCodes = result.data;
+    });
+    this._service1.GetAllItemType().subscribe((result: any) => {
+      this.itemTypes = result.data;
+    });
+
+    this.productForm?.get('code')?.setValue(this.code);
+    this.productForm?.get('name')?.setValue(this.name);
+    this.productForm?.get('unitCode')?.setValue(this.unitCode);
+    this.productForm?.get('typeCode')?.setValue(this.typeCode);
   }
 
   close() {
     this.drawerService.close();
-    this.unitForm?.get('code')?.setValue('');
-    this.unitForm?.get('name')?.setValue('');
-    this.unitForm?.get('unitCode')?.setValue('');
-    this.unitForm?.get('typeCode')?.setValue('');
+    this.productForm?.get('code')?.setValue('');
+    this.productForm?.get('name')?.setValue('');
+    this.productForm?.get('unitCode')?.setValue('');
+    this.productForm?.get('typeCode')?.setValue('');
   }
 
   onEdit() {
     this.submitted = true;
-    if (this.unitForm.invalid) {
+    if (this.productForm.invalid) {
       return;
     }
     this._service
       .Update(
         {
-
-          code: this.unitForm.value.code.trim(),
-          name: this.unitForm.value.name.trim(),
-          unitCode: this.unitForm.value.unitCode.trim(),
-          typeCode: this.unitForm.value.typeCode.trim(),
-
+          code: this.code.trim(),
+          name: this.productForm.value.name.trim(),
+          unitCode: this.productForm.value.unitCode,
+          typeCode: this.productForm.value.typeCode,
         },
         false
       )

@@ -5,23 +5,22 @@ import { ProductCreateComponent } from '../product-create/product-create.compone
 import { ProductEditComponent } from '../product-edit/product-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
-import {ProductModel} from 'src/app/models/MD/product.model';
+import { ProductModel } from 'src/app/models/MD/product.model';
 import Swal from 'sweetalert2';
 import { DropdownService } from 'src/app/services/Common/dropdown.service';
 @Component({
   selector: 'app-product-index',
   templateUrl: './product-index.component.html',
-  styleUrls: ['./product-index.component.scss']
+  styleUrls: ['./product-index.component.scss'],
 })
 export class ProductIndexComponent {
   constructor(
-
     private _service: ProductService,
     private drawerService: DrawerService,
     private _test: DropdownService
   ) {}
 
-  dataSource!: any
+  dataSource!: any;
   //Khai báo biến
   breadcrumbList: any[] = [
     {
@@ -33,19 +32,20 @@ export class ProductIndexComponent {
       path: '/master-data/san-pham',
     },
   ];
-  displayedColumns: string[] = ['index', 'code', 'name', 'unitCode', 'typeCode', 'actions'];
+  displayedColumns: string[] = [
+    'index',
+    'code',
+    'name',
+    'unitCode',
+    'typeCode',
+    'actions',
+  ];
   paginationResult!: PaginationResult;
   filter = new BaseFilter();
 
   //Khai báo hàm
   ngOnInit(): void {
     this.loadInit();
-    const a = this._test.GetAll()
-    a.subscribe((result) => {
-      console.log('tét',result);
-this.dataSource = result.data
-    })
-
   }
 
   openCreate() {
@@ -62,7 +62,7 @@ this.dataSource = result.data
         code: item.code,
         name: item.name,
         unitCode: item.unitCode,
-        typeCode: item.typeCode
+        typeCode: item.typeCode,
       })
       .subscribe((result) => {
         if (result?.status) {
@@ -71,7 +71,11 @@ this.dataSource = result.data
       });
   }
 
-  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+  search(
+    currentPage: number = 1,
+    pageSize: number | undefined = undefined,
+    refresh: boolean = false
+  ) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
@@ -101,14 +105,14 @@ this.dataSource = result.data
     this.search(1, pageSize);
   }
 
-  deleteProduct(item:ProductModel) {
+  deleteProduct(item: ProductModel) {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
       text: 'Hành động này sẽ không thể hoàn tác!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
         this._service.Delete(item, true).subscribe({
