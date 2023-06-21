@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  dataUser = JSON.parse(localStorage.getItem('user') || '{}');
   ROUTE_DATA: any = [];
   opened: boolean;
   show: boolean;
@@ -20,6 +21,7 @@ export class SidebarComponent implements OnInit {
   loading: boolean = false;
   dataSource: any = [];
   username: string = '';
+  fullName: string = '';
   dataRouter: string[] = [];
   constructor(
     private router: Router,
@@ -31,6 +33,7 @@ export class SidebarComponent implements OnInit {
     this.show = true;
     const UserInfo = this.globalService.getUserInfo();
     this.username = UserInfo?.userName;
+    this.fullName = UserInfo?.fullName;
     this.globalService.rightSubject.subscribe((item) => {
       this.loadInit();
     });
@@ -112,6 +115,11 @@ export class SidebarComponent implements OnInit {
     this.globalService.getLoading().subscribe((value) => {
       this.loading = value;
     });
+  }
+
+  logOut(){
+    localStorage.clear();
+    window.location.reload();
   }
 
   reload() {

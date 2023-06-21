@@ -13,7 +13,7 @@ namespace PROJECT.CORE.Entities.MD
         public string Code { get; set; }
 
         [Required]
-        [MaxLength(225)]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         public bool IsCustomer { get; set; }

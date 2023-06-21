@@ -7,33 +7,8 @@
           Danh sách tài khoản
         </h5>
       </div>
-      <!--
-      <div class="d-flex flex-row-reverse card-function flex-grow-1">
-        <div>
-          <button type="button" class="btn btn-success">
-            <i class="bi bi-check-circle"></i> Xác nhận
-          </button>
-
-          <button type="button" class="btn btn-warning">
-            <i class="bi bi-dash-circle"></i> Từ chối
-          </button>
-
-          <button type="button" class="btn btn-danger">
-            <i class="bi bi-trash"></i> Hủy đơn
-          </button>
-
-          <button type="button" class="btn btn-info">
-            <i class="bi bi-file-earmark-excel"></i> Xuất excel
-          </button>
-        </div>
-      </div> -->
     </div>
     <div class="d-flex flex-row p-1 flex-wrap">
-      <!-- <div class="d-flex flex-row p-l-2 flex-grow-1">
-        <input type="date" class="form-control" placeholder="Từ ngày"> &nbsp;
-        <input type="date" class="form-control" placeholder="Đến ngày">
-      </div> -->
-
       <div class="d-flex flex-row p-l-2 flex-grow-1">
         <select class="form-select" aria-label="Nhóm" [(ngModel)]="filter.state"
           (ngModelChange)="onChangeState($event)">
@@ -81,7 +56,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="accountGroup">
-            <th mat-header-cell *matHeaderCellDef width="250px"> Nhóm </th>
+            <th mat-header-cell *matHeaderCellDef width="250px"> Nhóm tài khoản </th>
             <td mat-cell *matCellDef="let element">
               {{element.accountGroup.name}}
             </td>
