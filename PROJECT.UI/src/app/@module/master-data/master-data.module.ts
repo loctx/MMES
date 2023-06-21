@@ -14,9 +14,11 @@ import { UnitEditComponent } from './unit/unit-edit/unit-edit.component';
 import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
 import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
 import { MatTableModule } from '@angular/material/table';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent],
   imports: [
     MatTableModule,
     SharedModule,

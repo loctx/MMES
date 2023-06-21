@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.MD;
