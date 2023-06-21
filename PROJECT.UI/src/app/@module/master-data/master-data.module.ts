@@ -82,6 +82,9 @@ import {
     PourTypeIndexComponent,
     PourTypeCreateComponent,
     PourTypeEditComponent,
+    ProductIndexComponent,
+    ProductCreateComponent,
+    ProductEditComponent,
   ],
   imports: [
     MatTableModule,
