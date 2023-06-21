@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using PROJECT.BUSINESS.Common.Mapping;
-using PROJECT.BUSINESS.Dtos.AD;
-using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.SO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Dtos.SO
 {
