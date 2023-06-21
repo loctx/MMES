@@ -241,7 +241,7 @@ td {
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -250,7 +250,7 @@ td {
 
 *::-webkit-scrollbar-thumb {
   background-color: #D7D7D7;
-  border-radius: 10px;
+  border-radius: 7px;
   cursor: pointer;
   /* border: 3px solid orange; */
 }
