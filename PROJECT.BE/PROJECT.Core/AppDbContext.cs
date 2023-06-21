@@ -107,6 +107,7 @@ namespace PROJECT.CORE
         public DbSet<tblMdSand> tblMdSand { get; set; }
         public DbSet<tblMdMixer> tblMdMixer { get; set; }
         public DbSet<tblMdArea> tblMdArea { get; set; }
+        public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
 
         #endregion
 
