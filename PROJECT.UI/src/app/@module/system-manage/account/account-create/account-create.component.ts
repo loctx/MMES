@@ -61,6 +61,15 @@ export class AccountCreateComponent implements OnInit {
     this.accountForm?.get('groupId')?.setValue('');
   }
 
+  onChange(e: any) {
+    this.filterGroup.keyWord = e;
+    this.getAllGroup();
+  }
+
+  onSelectItem(item: any) {
+    this.accountForm?.get('groupId')?.setValue(item.id);
+  }
+
   onCreate() {
     this.submitted = true;
     if (this.accountForm.invalid) {

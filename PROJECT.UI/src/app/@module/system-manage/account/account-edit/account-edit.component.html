@@ -42,7 +42,17 @@
           </div>
         </div>
         <div>
-          <label for="inputEmail" class="col-form-label">Nhóm tài khoản<span class="text-danger ms-1">*</span></label>
+          <label for="inputText" class="col-form-label">Nhóm tài khoản<span class="text-danger ms-1">*</span></label>
+          <div>
+            <app-input-custom [className]="{ 'is-invalid': submitted && f['groupId'].errors }"
+              [defaultValue]="groupName" [options]="optionsGroup" [prop]="'name'" (valueChange)="onChange($event)"
+              (selectItem)="onSelectItem($event)">
+            </app-input-custom>
+            <div *ngIf="submitted && f['groupId'].errors" class="text-error">
+              <div *ngIf="f['groupId']['errors']['required']">Không được để trống</div>
+            </div>
+          </div>
+          <!-- <label for="inputEmail" class="col-form-label">Nhóm tài khoản<span class="text-danger ms-1">*</span></label>
           <select class="form-select" aria-label="Nhóm" formControlName="groupId">
             <option *ngFor="let item of optionsGroup" [ngValue]="item.id">
               {{item.name}}
@@ -52,7 +62,7 @@
             <div *ngIf="submitted && f['groupId'].errors" class="invalid-feedback">
               <div *ngIf="f['groupId']['errors']['required']">Không được để trống</div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div>
           <label for="inputText" class="col-form-label nowrap">Trạng thái</label>

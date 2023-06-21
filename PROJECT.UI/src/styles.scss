@@ -6,7 +6,9 @@ body {
   height: 100%;
 }
 body {
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background: white;
   color: #444444;
 }
@@ -60,7 +62,6 @@ form {
   }
 }
 
-
 /**
 * Template Name: NiceAdmin
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -74,7 +75,6 @@ form {
 :root {
   scroll-behavior: smooth;
 }
-
 
 a {
   color: #4154f1;
@@ -92,19 +92,26 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /*--------------------------------------------------------------
 # Table
 --------------------------------------------------------------*/
 
-table{
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+table {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
-table th,td{
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+table th,
+td {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
   line-height: 30px !important;
   font-size: 13px !important;
 }
@@ -346,7 +353,9 @@ table th,td{
   font-size: 15px;
   font-weight: 500;
   color: #012970;
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .card-title span {
@@ -572,7 +581,7 @@ table th,td{
   list-style: none;
 }
 
-.header-nav>ul {
+.header-nav > ul {
   margin: 0;
   padding: 0;
 }
@@ -742,7 +751,6 @@ table th,td{
 }
 
 @media (min-width: 1200px) {
-
   #main,
   #footer {
     margin-left: 300px;
@@ -756,7 +764,6 @@ table th,td{
 }
 
 @media (min-width: 1200px) {
-
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -801,7 +808,9 @@ table th,td{
   background: #f6f9ff;
   padding: 10px 15px;
   border-radius: 2px;
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   cursor: pointer;
 }
 
@@ -854,7 +863,9 @@ table th,td{
   padding: 10px 0 10px 40px;
   transition: 0.3s;
   text-decoration: none;
-  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   cursor: pointer;
 }
 
@@ -1000,7 +1011,7 @@ table th,td{
 }
 
 /* News & Updates */
-.dashboard .news .post-item+.post-item {
+.dashboard .news .post-item + .post-item {
   margin-top: 15px;
 }
 
@@ -1266,7 +1277,7 @@ table th,td{
   padding: 12px 15px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
   background: #4154f1;
   border: 0;
   padding: 10px 30px;
@@ -1275,7 +1286,7 @@ table th,td{
   border-radius: 4px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form button[type="submit"]:hover {
   background: #5969f3;
 }
 
@@ -1396,11 +1407,16 @@ table th,td{
 
 @keyframes indeterminate-progress-bar {
   from {
-      left: -50%;
+    left: -50%;
   }
   to {
-      left: 100%;
+    left: 100%;
   }
 }
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.text-error {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--bs-form-invalid-color);
+}

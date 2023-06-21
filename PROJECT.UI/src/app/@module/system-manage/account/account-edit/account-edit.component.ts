@@ -20,6 +20,7 @@ export class AccountEditComponent {
   fullName: string = '';
   state: boolean | null = null;
   groupId: string = '';
+  groupName: string = '';
   filterGroup = new BaseFilter();
   optionsGroup: optionsGroup[] = [];
 
@@ -68,6 +69,15 @@ export class AccountEditComponent {
     this.accountForm?.get('fullName')?.setValue('');
     this.accountForm?.get('state')?.setValue(true);
     this.accountForm?.get('groupId')?.setValue('');
+  }
+
+  onChange(e: any) {
+    this.filterGroup.keyWord = e;
+    this.getAllGroup();
+  }
+
+  onSelectItem(item: any) {
+    this.accountForm?.get('groupId')?.setValue(item.id);
   }
 
   onEdit() {
