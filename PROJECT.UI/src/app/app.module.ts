@@ -38,6 +38,7 @@ import { AuthGuard } from 'src/app/guards/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrawerComponent } from 'src/app/@module/components/drawer/drawer.component';
 import { HandleResponse } from 'src/app/utils/utils';
+import { ResultComponent } from 'src/app/@module/components/result/result.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { HandleResponse } from 'src/app/utils/utils';
     LoginComponent,
     LayoutComponent,
     DrawerComponent,
+    ResultComponent,
   ],
   imports: [
     FooterModule,

@@ -15,10 +15,51 @@ import { UnitCreateComponent } from './unit/unit-create/unit-create.component';
 import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResultComponent } from './result/result.component';
 
+import { CustomerIndexComponent } from './customer/customer-index/customer-index.component';
+import { CustomerCreateComponent } from './customer/customer-create/customer-create.component';
+import { CustomerEditComponent } from './customer/customer-edit/customer-edit.component';
+import { ProviderIndexComponent } from './provider/provider-index/provider-index.component';
+import { ProviderCreateComponent } from './provider/provider-create/provider-create.component';
+import { ProviderEditComponent } from './provider/provider-edit/provider-edit.component';
+import { WarehouseIndexComponent } from './warehouse/warehouse-index/warehouse-index.component';
+import { WarehouseCreateComponent } from './warehouse/warehouse-create/warehouse-create.component';
+import { WarehouseEditComponent } from './warehouse/warehouse-edit/warehouse-edit.component';
+import { ItemTypeIndexComponent } from './item-type/item-type-index/item-type-index.component';
+import { ItemTypeCreateComponent } from './item-type/item-type-create/item-type-create.component';
+import { ItemTypeEditComponent } from './item-type/item-type-edit/item-type-edit.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SandIndexComponent } from './sand/sand-index/sand-index.component';
+import { SandCreateComponent } from './sand/sand-create/sand-create.component';
+import { SandEditComponent } from './sand/sand-edit/sand-edit.component';
+import { StoneIndexComponent } from './stone/stone-index/stone-index.component';
+import { StoneCreateComponent } from './stone/stone-create/stone-create.component';
+import { StoneEditComponent } from './stone/stone-edit/stone-edit.component';
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent],
+  declarations: [
+    UnitEditComponent,
+    UnitCreateComponent,
+    UnitIndexComponent,
+    DashboardComponent,
+    CustomerIndexComponent,
+    CustomerCreateComponent,
+    CustomerEditComponent,
+    ProviderIndexComponent,
+    ProviderCreateComponent,
+    ProviderEditComponent,
+    WarehouseIndexComponent,
+    WarehouseCreateComponent,
+    WarehouseEditComponent,
+    ItemTypeIndexComponent,
+    ItemTypeCreateComponent,
+    ItemTypeEditComponent,
+    SandIndexComponent,
+    SandCreateComponent,
+    SandEditComponent,
+    StoneIndexComponent,
+    StoneCreateComponent,
+    StoneEditComponent,
+  ],
   imports: [
     MatTableModule,
     SharedModule,
@@ -31,6 +72,7 @@ import { ResultComponent } from './result/result.component';
     NgSelectModule,
     TranslateModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
   ],
 })
 export class MasterDataModule {}
