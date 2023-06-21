@@ -4,7 +4,6 @@ using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Logger;
 using PROJECT.API.AppCode.Util;
 using PROJECT.BUSINESS.Common.Class;
-using System.Text.Json;
 
 namespace PROJECT.API.AppCode.Extensions
 {
@@ -18,7 +17,7 @@ namespace PROJECT.API.AppCode.Extensions
                 Status = false,
                 MessageObject = new MessageObject()
                 {
-                    Code = "1000",
+                    Code = "0001",
                     MessageType = MessageType.Error,
                     Message = MessageUtil.GetMessage("1000"),
                     MessageDetail = exception.Message,
@@ -64,7 +63,7 @@ namespace PROJECT.API.AppCode.Extensions
                 Status = false,
                 MessageObject = new MessageObject()
                 {
-                    Code = "1000",
+                    Code = "0000",
                     MessageType = MessageType.Error,
                     Message = MessageUtil.GetMessage("1000"),
                     MessageDetail = string.Join("; ", context.ModelState.Values

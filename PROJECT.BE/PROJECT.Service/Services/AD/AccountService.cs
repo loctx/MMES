@@ -5,7 +5,6 @@ using PROJECT.BUSINESS.Common.Util;
 using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Filter.AD;
-using PROJECT.BUSINESS.Filter.Common;
 using PROJECT.CORE;
 using PROJECT.CORE.Entities.AD;
 

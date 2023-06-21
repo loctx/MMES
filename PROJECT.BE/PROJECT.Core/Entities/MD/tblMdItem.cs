@@ -1,10 +1,5 @@
 ﻿using PROJECT.CORE.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROJECT.CORE.Entities.MD
 {
@@ -18,13 +13,15 @@ namespace PROJECT.CORE.Entities.MD
         public string Code { get; set; }
 
         [Required]
-        [MaxLength(225)]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string UnitCode { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string TypeCode { get; set; }
     }
 }

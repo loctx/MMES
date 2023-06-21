@@ -1,6 +1,4 @@
 ﻿using PROJECT.API.AppCode.Cache;
-using PROJECT.API.AppCode.Logger;
-using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Common.Class;
 
 namespace PROJECT.API.AppCode.Util
@@ -18,7 +16,7 @@ namespace PROJECT.API.AppCode.Util
         public static string GetMessage(string code, string lang = "")
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            if (!string.IsNullOrEmpty(lang))
+            if (string.IsNullOrEmpty(lang))
             {
                 lang = configuration.GetValue<string>("LanguageDefault");
             }

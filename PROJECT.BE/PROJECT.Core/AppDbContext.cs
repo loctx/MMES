@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
 using PROJECT.CORE.Entities.MD;
@@ -91,6 +90,7 @@ namespace PROJECT.CORE
         public DbSet<tblAdAccountGroup> tblAdAccountGroup { get; set; }
         public DbSet<tblAdMenu> tblAdMenu { get; set; }
         public DbSet<tblAdRight> tblAdRight { get; set; }
+        public DbSet<tblAdMessage> tblAdMessage { get; set; }
         //public DbSet<tblAdAccountGroupRight> tblAdAccountGroupRight { get; set; }
 
         #endregion
@@ -105,7 +105,11 @@ namespace PROJECT.CORE
         public DbSet<tblMdOrderType> tblMdOrderType { get; set; }
         public DbSet<tblMdStone> tblMdStone { get; set; }
         public DbSet<tblMdSand> tblMdSand { get; set; }
-
+        public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
+        public DbSet<tblMdMixer> tblMdMixer { get; set; }
+        public DbSet<tblMdArea> tblMdArea { get; set; }
+        public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
+        public DbSet<tblMdVehicle> tblMdVehicle { get; set; }
         #endregion
 
         #region Sale Order
