@@ -19,7 +19,6 @@ namespace PROJECT.BUSINESS.Services.MD
 {
     public interface IOrderTypeService : IGenericService<tblMdOrderType, tblOrderTypeDto>
     {
-        Task<PagedResponseDto> Search(BaseFilter filter);
     }
     public class OrderTypeService : GenericService<tblMdOrderType, tblOrderTypeDto>, IOrderTypeService
     {
@@ -27,7 +26,7 @@ namespace PROJECT.BUSINESS.Services.MD
         {
         }
 
-        public async Task<PagedResponseDto> Search(BaseFilter filter)
+        public override async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             try
             {

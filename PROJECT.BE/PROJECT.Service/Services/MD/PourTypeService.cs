@@ -19,7 +19,6 @@ namespace PROJECT.BUSINESS.Services.MD
 {
     public interface IPourTypeService : IGenericService<tblMdPourType, tblPourTypeDto>
     {
-        Task<PagedResponseDto> Search(BaseFilter filter);
     }
     public class PourTypeService : GenericService<tblMdPourType, tblPourTypeDto>, IPourTypeService
     {
@@ -27,7 +26,7 @@ namespace PROJECT.BUSINESS.Services.MD
         {
         }
 
-        public async Task<PagedResponseDto> Search(BaseFilter filter)
+        public override async Task<PagedResponseDto> Search(BaseFilter filter)
         {
             try
             {
