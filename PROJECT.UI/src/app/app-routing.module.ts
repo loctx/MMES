@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authentication/login/login.component';
 import { LayoutComponent } from 'src/app/@module/layout/layout.component';
 import { AuthGuard } from 'src/app/guards/auth-guard.service';
+import { ResultComponent } from 'src/app/@module/components/result/result.component';
 
 const routes: Routes = [
   { path: 'Login', component: LoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: '**', component: ResultComponent },
 ];
 
 @NgModule({
