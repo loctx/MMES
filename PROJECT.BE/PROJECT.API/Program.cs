@@ -46,7 +46,8 @@ builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => {
+builder.Services.AddSwaggerGen(options =>
+{
     options.SwaggerDoc("V1", new OpenApiInfo
     {
         Version = "V1",
@@ -81,10 +82,12 @@ builder.Services.Configure<JsonOptions>(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.AddAuthentication(opt => {
+builder.Services.AddAuthentication(opt =>
+{
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
+}).AddJwtBearer(options =>
+{
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -120,13 +123,14 @@ builder.Services.AddDIServices(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options => {
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "PROJECT WebAPI");
-    });
-}
+    options.SwaggerEndpoint("/swagger/V1/swagger.json", "PROJECT WebAPI");
+});
+// }
 
 //Truyền httpcontext vào trong TransferObject để lấy thông tin http request
 TransferObjectExtension.SetHttpContextAccessor(app.Services.GetRequiredService<IHttpContextAccessor>());
@@ -147,7 +151,7 @@ app.UseStaticFiles();
 app.UseCors("CorsPolicy");
 app.UseEndpoints(endpoints =>
 {
-   endpoints.MapHub<OnlineCountHub>("/UserOnline");
+    endpoints.MapHub<OnlineCountHub>("/UserOnline");
 });
 
 app.MapControllers();
