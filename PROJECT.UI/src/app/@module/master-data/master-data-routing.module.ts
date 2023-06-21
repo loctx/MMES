@@ -8,7 +8,11 @@ import {ItemTypeIndexComponent} from './item-type/item-type-index/item-type-inde
 import {SandIndexComponent} from './sand/sand-index/sand-index.component'
 import {StoneIndexComponent} from './stone/stone-index/stone-index.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {AreaIndexComponent} from './area/area-index/area-index.component'
+import {MixerIndexComponent} from './mixer'
+import {ProductIndexComponent} from './product/product-index/product-index.component'
 
+import {PourTypeIndexComponent} from './pour-type'
 const routes: Routes = [
   { path: 'unit', component: UnitIndexComponent },
   { path: 'khach-hang', component: CustomerIndexComponent },
@@ -18,6 +22,10 @@ const routes: Routes = [
   { path: 'loai-cat', component: SandIndexComponent },
   { path: 'loai-da', component: StoneIndexComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'khu-vuc', component: AreaIndexComponent },
+  { path: 'may-tron', component: MixerIndexComponent },
+  { path: 'san-pham', component: ProductIndexComponent },
+  { path: 'loai-do', component: PourTypeIndexComponent },
 ]
 
 @NgModule({

@@ -11,12 +11,12 @@ namespace PROJECT.CORE.Entities.MD
     public class tblMdSand : BaseEntity
     {
         [Required]
-        [MaxLength(20)]
+        [MaxLength(50)]
         [Key]
         public string Code { get; set; }
 
         [Required]
-        [MaxLength(250)]
+        [MaxLength(100)]
         public string Name { get; set; }
     }
 }
