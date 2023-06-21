@@ -10,7 +10,8 @@ namespace PROJECT.CORE.Configuration.AD
         {
             builder.HasOne<tblAdAccountGroup>(x => x.AccountGroup)
                 .WithMany(g => g.ListAccount)
-                .HasForeignKey(x => x.GroupId);
+                .HasForeignKey(x => x.GroupId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
