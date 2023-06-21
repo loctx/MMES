@@ -38,7 +38,7 @@ namespace PROJECT.API.Controllers.MD
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0001", _service);
             }
             return Ok(transferObject);
         }
@@ -56,7 +56,7 @@ namespace PROJECT.API.Controllers.MD
             {
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("2000", _service);
+                transferObject.GetMessage("0001", _service);
             }
             return Ok(transferObject);
         }

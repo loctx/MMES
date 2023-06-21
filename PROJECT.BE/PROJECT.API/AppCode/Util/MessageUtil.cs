@@ -18,7 +18,7 @@ namespace PROJECT.API.AppCode.Util
         public static string GetMessage(string code, string lang = "")
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            if (!string.IsNullOrEmpty(lang))
+            if (string.IsNullOrEmpty(lang))
             {
                 lang = configuration.GetValue<string>("LanguageDefault");
             }
