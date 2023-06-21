@@ -38,6 +38,11 @@ import { StoneEditComponent } from './stone/stone-edit/stone-edit.component';
 import { AreaIndexComponent } from './area/area-index/area-index.component';
 import { AreaCreateComponent } from './area/area-create/area-create.component';
 import { AreaEditComponent } from './area/area-edit/area-edit.component';
+import {
+  MixerIndexComponent,
+  MixerCreateComponent,
+  MixerEditComponent
+} from './mixer'
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -64,7 +69,10 @@ import { AreaEditComponent } from './area/area-edit/area-edit.component';
     StoneEditComponent,
     AreaIndexComponent, 
     AreaCreateComponent, 
-    AreaEditComponent,
+    AreaEditComponent, 
+    MixerIndexComponent,
+    MixerCreateComponent, 
+    MixerEditComponent,
   ],
   imports: [
     MatTableModule,
