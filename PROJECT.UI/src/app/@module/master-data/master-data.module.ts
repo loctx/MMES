@@ -16,9 +16,12 @@ import { UnitIndexComponent } from './unit/unit-index/unit-index.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResultComponent } from './result/result.component';
+import { DanhSachDonHangComponent } from './mockup/danh-sach-don-hang/danh-sach-don-hang.component';
+import { QuanLiTramTronComponent } from './mockup/quan-li-tram-tron/quan-li-tram-tron.component';
+import { CreateLanTronComponent } from './mockup/create-lan-tron/create-lan-tron.component';
 
 @NgModule({
-  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent],
+  declarations: [UnitEditComponent, UnitCreateComponent, UnitIndexComponent, DashboardComponent, ResultComponent, DanhSachDonHangComponent, QuanLiTramTronComponent, CreateLanTronComponent],
   imports: [
     MatTableModule,
     SharedModule,

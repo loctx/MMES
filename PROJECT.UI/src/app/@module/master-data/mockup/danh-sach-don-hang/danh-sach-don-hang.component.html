@@ -1,0 +1,295 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex flex-wrap">
+      <div class="">
+        <h5 class="card-title">
+          <i class="bi bi-journal-text"></i>
+          Danh sách đơn hàng
+        </h5>
+      </div>
+
+      <div class="d-flex flex-row-reverse card-function flex-grow-1">
+        <div>
+          <button type="button" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Xác nhận
+          </button>
+          &nbsp;
+          <button type="button" class="btn btn-warning">
+            <i class="bi bi-dash-circle"></i> Từ chối
+          </button>
+          &nbsp;
+          <button type="button" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Hủy đơn
+          </button>
+          &nbsp;
+          <button type="button" class="btn btn-info">
+            <i class="bi bi-file-earmark-excel"></i> Xuất excel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap">
+      <div class="d-flex flex-row flex-grow-1">
+        <input type="date" class="form-control" placeholder="Từ ngày" /> &nbsp;
+        <input type="date" class="form-control" placeholder="Đến ngày" />
+      </div>
+
+      <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <select class="form-select" aria-label="Trạng thái">
+          <option selected="">Trạng thái</option>
+          <option value="1">Đã xác nhận</option>
+          <option value="2">Đã vào cổng</option>
+          <option value="3">Đã cân lần 1</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <select class="form-select" aria-label="Khách hàng">
+          <option selected="">Khách hàng</option>
+          <option value="1">Khách hàng 1</option>
+          <option value="2">Khách hàng 2</option>
+          <option value="3">Khách hàng 3</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row p-l-2 flex-grow-1">
+        <select class="form-select" aria-label="Mặt hàng">
+          <option selected="">Hàng hóa</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row flex-grow-3 p-l-2">
+        <div class="input-group search-box">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nhập từ khóa tìm kiếm"
+          />
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <span class="input-group-text"><i class="bi bi-filter"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-top: 10px">
+      <table class="table table-hover table-bordered" id="table-user">
+        <thead>
+          <tr>
+            <th scope="col" class="align-center">STT</th>
+            <th scope="col" class="align-center">Mã đơn hàng</th>
+            <th scope="col" class="align-center" width="150px">
+              Ngày đặt hàng
+            </th>
+            <th scope="col" class="align-center" width="150px">Ngày giờ đổ</th>
+            <th scope="col">Hàng hóa</th>
+            <th scope="col" class="align-right">Lượng đặt</th>
+            <th scope="col" class="align-right">Lượng xuất</th>
+            <th scope="col">Địa điểm đổ</th>
+            <th scope="col">Khách hàng</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Người tạo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="align-center">1</td>
+            <td class="align-center text-primary">2023060101</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông C20</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Xóm 7 Thị Trấn Đô Lương</td>
+            <td>Chú Thắng</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">2</td>
+            <td class="align-center text-primary">2023060102</td>
+            <td class="align-center">19/06/2023 13:36</td>
+            <td class="align-center">19/06/2023 23:35</td>
+            <td>Bê tông M330</td>
+            <td class="align-right text-primary">27.25 M3</td>
+            <td class="align-right text-danger">28.25 M3</td>
+            <td>Khu đô thị Vườn Xanh</td>
+            <td>Công ty 318</td>
+            <td>0951417081</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 2</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">3</td>
+            <td class="align-center text-primary">2023060103</td>
+            <td class="align-center">19/06/2023 14:33</td>
+            <td class="align-center">19/06/2023 21:32</td>
+            <td>Bê tông M250R28</td>
+            <td class="align-right text-primary">16.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Khu đô thị Seo Vàng</td>
+            <td>Công ty vườn xanh</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">4</td>
+            <td class="align-center text-primary">2023060104</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông M250C3</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Xóm 7 Thị Trấn Đô Lương</td>
+            <td>Thắng Hòa</td>
+            <td>093141150</td>
+            <td>
+              <span class="badge bg-warning font-12 p-b-6">Chưa xác nhận</span>
+            </td>
+            <td>Kinh doanh 4</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">5</td>
+            <td class="align-center text-primary">2023060105</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông M150</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Khối 10 Thị Trấn Anh Sơn</td>
+            <td>Chính Xinh</td>
+            <td>0941417082</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">6</td>
+            <td class="align-center text-primary">2023060106</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông M250R28</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Khối 2 Yên Sơn Đô Lương</td>
+            <td>Công ty Thắng Hằng</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-secondary font-12 p-b-6">Đã từ chối</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">7</td>
+            <td class="align-center text-primary">2023060107</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông M350R28</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Đắc Lý Đắc Tiến</td>
+            <td>Chú ngọc</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-danger font-12 p-b-6">Đã hủy đơn</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">8</td>
+            <td class="align-center text-primary">2023060108</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông G2</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Anh Sơn Con Cuông</td>
+            <td>Chú ngọc</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">9</td>
+            <td class="align-center text-primary">2023060109</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông T325</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Xóm 9 Đà Sơn</td>
+            <td>Chú ngọc</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+
+          <tr>
+            <td class="align-center">10</td>
+            <td class="align-center text-primary">2023060110</td>
+            <td class="align-center">19/06/2023 13:31</td>
+            <td class="align-center">19/06/2023 23:31</td>
+            <td>Bê tông M250R28</td>
+            <td class="align-right text-primary">17.25 M3</td>
+            <td class="align-right text-danger">18.25 M3</td>
+            <td>Xóm 10 Văn Sơn</td>
+            <td>Chú Thắng</td>
+            <td>0961417080</td>
+            <td>
+              <span class="badge bg-primary font-12 p-b-6">Đã xác nhận</span>
+            </td>
+            <td>Kinh doanh 1</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="align-center">
+              <b>Tổng cộng : 36 đơn hàng</b>
+            </td>
+            <td>
+              <div>Bê tông C20</div>
+              <div>Bê tông M330</div>
+              <div>Bê tông M250R28</div>
+            </td>
+            <td class="align-right text-primary">
+              <div>1500 M3</div>
+              <div>2500 M3</div>
+              <div>3340 M3</div>
+            </td>
+            <td class="align-right text-danger">
+              <div>1502 M3</div>
+              <div>2556 M3</div>
+              <div>3355 M3</div>
+            </td>
+            <td colspan="5">
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
