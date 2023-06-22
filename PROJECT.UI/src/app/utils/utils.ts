@@ -22,11 +22,11 @@ export class HandleResponse {
         case 'S':
           if (method != METHOD.GET) {
             Swal.fire({
-              // icon: 'success',
-              color: '#198754',
+              icon: 'success',
+              color: '#1ab394',
               title: response?.messageObject?.message,
               position: 'top-end',
-              width: 600,
+              width: 400,
               showConfirmButton: false,
               timer: 5000,
               toast: true,
@@ -36,7 +36,7 @@ export class HandleResponse {
         case 'W':
           Swal.fire({
             // icon: 'warning',
-            color: '#ffc720',
+            color: '#f8bb86',
             title: `MSG${res.code} ${res.message}`,
             text: res.messageDetail,
             width: 600,
@@ -49,7 +49,7 @@ export class HandleResponse {
         case 'E':
           Swal.fire({
             // icon: 'error',
-            color: '#dc3545',
+            color: '#e74c3c',
             title: `MSG${res.code} ${res.message}`,
             width: 600,
             text: res.messageDetail,
