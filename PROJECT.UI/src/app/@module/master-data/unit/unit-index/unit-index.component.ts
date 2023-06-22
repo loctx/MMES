@@ -87,6 +87,7 @@ export class UnitIndexComponent implements OnInit {
     };
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
+        console.log('data: ', data);
         this.paginationResult = data;
         this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
         if(this.filter.code !== '') {
