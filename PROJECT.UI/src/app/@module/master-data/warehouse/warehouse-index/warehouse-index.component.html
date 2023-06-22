@@ -56,8 +56,9 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="border-bottom"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openEdit(row)" [ngClass]="{'selected-row': row.code === filter.code}"></tr>
             </table>
+            <app-empty *ngIf="!paginationResult || paginationResult.data?.length == 0"></app-empty>
         </div>
         <div class="float-end" *ngIf="paginationResult">
             <app-pagination [pageSize]="paginationResult.pageSize" [totalRecord]="paginationResult.totalRecord"
