@@ -9,6 +9,7 @@ namespace PROJECT.BUSINESS.Services.AD
     public interface IMenuService : IGenericService<tblAdMenu, tblMenuDto>
     {
         Task<tblMenuDto> BuildDataForTree();
+        Task UpdateOrderTree(tblMenuDto moduleDto);
     }
 
     public class MenuService : GenericService<tblAdMenu, tblMenuDto>, IMenuService
@@ -51,7 +52,7 @@ namespace PROJECT.BUSINESS.Services.AD
             return rootNode;
         }
 
-        public void UpdateOrderTree(tblMenuDto moduleDto)
+        public async Task UpdateOrderTree(tblMenuDto moduleDto)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace PROJECT.BUSINESS.Services.AD
                     lstModuleUpdate.Add(module);
                 }
                 this._dbContext.UpdateRange(lstModuleUpdate);
-                this._dbContext.SaveChanges();
+                await this._dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
