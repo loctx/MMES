@@ -16,6 +16,8 @@ namespace PROJECT.CORE.Entities.MD
         [MaxLength(100)]
         public string Name { get; set; }
 
+        public bool? State { get; set; }
+
         public bool IsCustomer { get; set; }
 
         public bool IsProvider { get; set; }

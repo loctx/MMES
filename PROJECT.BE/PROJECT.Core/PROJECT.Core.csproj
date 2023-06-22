@@ -23,8 +23,8 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Configuration\MD\" />
-	</ItemGroup>
+  <ItemGroup>
+	<Folder Include="Configuration\MD\" />
+  </ItemGroup>
 
 </Project>

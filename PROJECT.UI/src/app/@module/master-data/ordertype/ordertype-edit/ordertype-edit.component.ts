@@ -3,6 +3,8 @@ import { OrderTypeService } from 'src/app/services/MD/ordertype.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderTypeFilter } from 'src/app/@filter/MD/ordertype-filter.model';
 
 @Component({
   selector: 'app-ordertype-edit',
@@ -15,12 +17,15 @@ export class OrdertypeEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  filter = new OrderTypeFilter();
 
   constructor(
     private _service: OrderTypeService,
     private _fb: FormBuilder,
     private utils: utils,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.orderTypeForm = this._fb.group({
       code: [{ value: "", disabled: true }],
@@ -38,6 +43,12 @@ export class OrdertypeEditComponent {
   }
 
   close() {
+    this.filter = {
+      ...this.filter,
+      code: '',
+      name: ''
+    }
+    this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.orderTypeForm?.get('code')?.setValue('');
     this.orderTypeForm?.get('name')?.setValue('');

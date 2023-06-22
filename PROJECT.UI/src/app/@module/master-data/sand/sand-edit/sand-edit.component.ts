@@ -3,6 +3,9 @@ import { SandService } from 'src/app/services/MD/sand.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SandFilter } from 'src/app/@filter/MD/sand-filter.model';
+
 @Component({
   selector: 'app-sand-edit',
   templateUrl: './sand-edit.component.html',
@@ -13,16 +16,25 @@ export class SandEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  filter = new SandFilter();
 
   constructor(
     private _service: SandService,
     private _fb: FormBuilder,
     private utils: utils,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.sandForm = this._fb.group({
-      code: [{ value: "", disabled: true }],
+      code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+    });
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
     });
   }
 
@@ -36,6 +48,12 @@ export class SandEditComponent {
   }
 
   close() {
+    this.filter = {
+      ...this.filter,
+      code: '',
+      name: ''
+    }
+    this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.sandForm?.get('code')?.setValue('');
     this.sandForm?.get('name')?.setValue('');

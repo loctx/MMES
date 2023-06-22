@@ -4,8 +4,10 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { SandCreateComponent } from '../sand-create/sand-create.component';
 import { SandEditComponent } from '../sand-edit/sand-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+import { SandFilter } from 'src/app/@filter/MD/sand-filter.model';
+import { SandModel } from 'src/app/models/MD/sand.model';
 import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sand-index',
   templateUrl: './sand-index.component.html',
@@ -14,23 +16,22 @@ import Swal from 'sweetalert2';
 export class SandIndexComponent {
   constructor(
     private _service: SandService,
-    private drawerService: DrawerService
-  ) {}
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+  }
 
   //Khai báo biến
-  breadcrumbList: any[] = [
-    {
-      name: 'Trang chủ',
-      path: '',
-    },
-    {
-      name: 'Đơn vị tính',
-      path: '/master-data/unit',
-    },
-  ];
-  displayedColumns: string[] = ['index', 'code', 'name' , 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
   paginationResult!: PaginationResult;
-  filter = new BaseFilter();
+  filter = new SandFilter();
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -46,6 +47,11 @@ export class SandIndexComponent {
   }
 
   openEdit(item: any) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: {
+      ...this.filter,
+      code: item.code,
+      name: item.name,
+    } });
     this.drawerService
       .open(SandEditComponent, {
         code: item.code,
@@ -58,7 +64,11 @@ export class SandIndexComponent {
       });
   }
 
-  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+  search(
+    currentPage: number = 1,
+    pageSize: number | undefined = undefined,
+    refresh: boolean = false
+  ) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
@@ -68,6 +78,13 @@ export class SandIndexComponent {
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
+        this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
+        if(this.filter.code !== '') {
+          const detail = data?.data?.find((item:SandFilter) => item.code == this.filter.code);
+          if(detail) {
+            this.openEdit(detail);
+          }
+        }
       },
       error: (response) => {
         console.log(response);
@@ -76,7 +93,7 @@ export class SandIndexComponent {
   }
 
   loadInit() {
-    this.search();
+    this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {
@@ -88,14 +105,14 @@ export class SandIndexComponent {
     this.search(1, pageSize);
   }
 
-  deleteSand(item:any) {
+  deleteSand(item: SandModel) {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
+      title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
         this._service.Delete(item, true).subscribe({

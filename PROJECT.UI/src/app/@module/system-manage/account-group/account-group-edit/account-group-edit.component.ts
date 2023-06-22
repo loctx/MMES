@@ -70,7 +70,7 @@ export class AccountGroupEditComponent implements OnInit {
   id: string = '';
   name: string = '';
   notes: string = '';
-  state: string = '';
+  state: boolean | null = null;
   detailData:AccountGroupModel = {};
   currentTab:number = 1;
 
@@ -127,14 +127,14 @@ export class AccountGroupEditComponent implements OnInit {
     this.getDetail();
     this.accountGroupForm?.get('name')?.setValue(this.name);
     this.accountGroupForm?.get('notes')?.setValue(this.notes);
-    this.accountGroupForm?.get('state')?.setValue(this.state.toString());
+    this.accountGroupForm?.get('state')?.setValue(this.state || false);
   }
 
   close() {
     this.drawerService.close();
     this.accountGroupForm?.get('name')?.setValue('');
     this.accountGroupForm?.get('notes')?.setValue('');
-    this.accountGroupForm?.get('state')?.setValue('true');
+    this.accountGroupForm?.get('state')?.setValue(true);
     this.drawerService.returnData({
       type: 'tab',
       tab: 1
@@ -173,7 +173,7 @@ export class AccountGroupEditComponent implements OnInit {
           id: this.id,
           name: this.accountGroupForm.value.name.trim(),
           notes: this.accountGroupForm.value.notes.trim(),
-          state: this.accountGroupForm.value.state === 'true',
+          state: this.accountGroupForm.value.state,
           listAccountGroupRight: data
         },
         false

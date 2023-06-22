@@ -4,9 +4,10 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { UnitCreateComponent } from '../unit-create/unit-create.component';
 import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
-import {UnitModel} from 'src/app/models/MD/unit.model';
+import { UnitFilter } from 'src/app/@filter/MD/unit-filter.model';
+import { UnitModel } from 'src/app/models/MD/unit.model';
 import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-unit-index',
   templateUrl: './unit-index.component.html',
@@ -15,8 +16,17 @@ import Swal from 'sweetalert2';
 export class UnitIndexComponent implements OnInit {
   constructor(
     private _service: UnitService,
-    private drawerService: DrawerService
-  ) {}
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+  }
 
   //Khai báo biến
   breadcrumbList: any[] = [
@@ -31,7 +41,7 @@ export class UnitIndexComponent implements OnInit {
   ];
   displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
   paginationResult!: PaginationResult;
-  filter = new BaseFilter();
+  filter = new UnitFilter();
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -47,6 +57,11 @@ export class UnitIndexComponent implements OnInit {
   }
 
   openEdit(item: any) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: {
+      ...this.filter,
+      code: item.code,
+      name: item.name,
+    } });
     this.drawerService
       .open(UnitEditComponent, {
         code: item.code,
@@ -59,7 +74,11 @@ export class UnitIndexComponent implements OnInit {
       });
   }
 
-  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+  search(
+    currentPage: number = 1,
+    pageSize: number | undefined = undefined,
+    refresh: boolean = false
+  ) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
@@ -68,7 +87,15 @@ export class UnitIndexComponent implements OnInit {
     };
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
+        console.log('data: ', data);
         this.paginationResult = data;
+        this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
+        if(this.filter.code !== '') {
+          const detail = data?.data?.find((item:UnitFilter) => item.code == this.filter.code);
+          if(detail) {
+            this.openEdit(detail);
+          }
+        }
       },
       error: (response) => {
         console.log(response);
@@ -77,7 +104,7 @@ export class UnitIndexComponent implements OnInit {
   }
 
   loadInit() {
-    this.search();
+    this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {
@@ -89,14 +116,14 @@ export class UnitIndexComponent implements OnInit {
     this.search(1, pageSize);
   }
 
-  deleteUnit(item:UnitModel) {
+  deleteUnit(item: UnitModel) {
     Swal.fire({
       title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
         this._service.Delete(item, true).subscribe({

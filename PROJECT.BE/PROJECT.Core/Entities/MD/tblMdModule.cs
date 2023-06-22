@@ -12,5 +12,6 @@ namespace PROJECT.CORE.Entities.MD
         public string Notes { get; set; }
         public string LicenseKey { get; set; }
         public int? NumberOrder { get; set; }
+        public bool? State { get; set; }
     }
 }
