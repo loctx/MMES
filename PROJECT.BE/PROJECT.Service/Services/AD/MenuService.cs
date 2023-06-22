@@ -83,7 +83,7 @@ namespace PROJECT.BUSINESS.Services.AD
 
         private void ConvertNestedToList(tblMenuDto node, ref List<tblMenuDto> lstNodeFlat)
         {
-            if (node.Id != "M")
+            if (node.Id != "MNU")
             {
                 lstNodeFlat.Add(node);
             }
