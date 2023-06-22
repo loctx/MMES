@@ -5,6 +5,7 @@ import { LayoutRoutes } from './layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MasterDataModule } from '../master-data/master-data.module';
 import { SystemManageModule } from '../system-manage/system-manage.module';
+import { SaleOrdersModule } from '../sale-orders/sale-orders.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -12,6 +13,7 @@ import { SystemManageModule } from '../system-manage/system-manage.module';
     NgbModule,
     MasterDataModule,
     SystemManageModule,
+    SaleOrdersModule
   ],
   declarations: [],
 })

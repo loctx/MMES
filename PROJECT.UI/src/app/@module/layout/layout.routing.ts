@@ -15,4 +15,11 @@ export const LayoutRoutes: Routes = [
         (m) => m.MasterDataModule
       ),
   },
+  {
+    path: 'sale-orders',
+    loadChildren: () =>
+      import('../sale-orders/sale-orders.module').then(
+        (m) => m.SaleOrdersModule
+      ),
+  },
 ];
