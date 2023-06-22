@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CommonService } from '../Common/common.service';
-import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
-import { AdAccount, AdAccountCreate } from 'src/app/models/AD/account.model';
-import { AccountFilter } from 'src/app/@filter/Common/account-filter.model';
+import { map } from 'rxjs';
+import { TreeNode } from 'src/app/models/MD/treeNode.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +9,19 @@ import { AccountFilter } from 'src/app/@filter/Common/account-filter.model';
 export class ModuleService {
   constructor(private _commonService: CommonService) {}
 
-  getMenuOfUser(userName: string) {
-    return this._commonService.getRequest(
-      `Menu/getMenuOfUser?userName=${userName}`
+  getDataForTree() {
+    return this._commonService.getRequest(`Module/getDataTree`).pipe(
+      map((data: any) => {
+        return data;
+      })
+    );
+  }
+
+  UpdateOrderTree(dataTree: TreeNode[]) {
+    console.log(dataTree[0]);
+    return this._commonService.putRequest(
+      'Module/updateOrderTree',
+      dataTree[0]
     );
   }
 }

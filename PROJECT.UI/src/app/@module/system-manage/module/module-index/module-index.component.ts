@@ -8,6 +8,7 @@ import { TreeFlatNode, TreeNode } from 'src/app/models/MD/treeNode.model';
 import { ModuleService } from 'src/app/services/AD/module.service';
 import { UserService } from 'src/app/services/AD/user.service';
 import { ChecklistDatabaseService } from 'src/app/services/Common/checkListDatabase.service';
+import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { GlobalService } from 'src/app/services/Common/global.service';
 
 @Component({
@@ -19,7 +20,6 @@ import { GlobalService } from 'src/app/services/Common/global.service';
 export class ModuleIndexComponent implements OnInit {
   isCreate: boolean = false;
   isEdit: boolean = false;
-  username: string;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TreeFlatNode, TreeNode>();
 
@@ -46,11 +46,9 @@ export class ModuleIndexComponent implements OnInit {
   @ViewChild('emptyItem') emptyItem!: ElementRef;
   constructor(
     private _ms: ModuleService,
-    private _gs: GlobalService,
+    private _ds: DrawerService,
     private database: ChecklistDatabaseService
   ) {
-    const UserInfo = this._gs.getUserInfo();
-    this.username = UserInfo?.userName;
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
@@ -90,7 +88,7 @@ export class ModuleIndexComponent implements OnInit {
   }
 
   loadInit() {
-    this._ms.getMenuOfUser(this.username).subscribe(({ data }) => {
+    this._ms.getDataForTree().subscribe(({ data }) => {
       this.database.dataChange.next([data]);
     });
   }
@@ -195,8 +193,8 @@ export class ModuleIndexComponent implements OnInit {
     }
     this.nodeForm = data!;
     this.selectId = data!.id;
-    this.nodeForm.orderNumber = data!.orderNumber;
-    this.nodeForm.pId = data!.pId;
+    this.nodeForm.numberOrder = data!.numberOrder;
+    this.nodeForm.notes = data!.notes;
     this.isEdit = true;
     this.isCreate = false;
   }
@@ -215,19 +213,14 @@ export class ModuleIndexComponent implements OnInit {
   submitModule() {}
 
   submitOrderTree() {
-    // this.moduleService
-    //   .UpdateOrderTree(this.database.data)
-    //   .subscribe((response) => {
-    //     try {
-    //       if (response.succeeded === true) {
-    //         this.toastr.showSuccess(response.message);
-    //       } else {
-    //         this.toastr.showError(response.message);
-    //       }
-    //     } catch (e) {
-    //       console.log('e: ', e);
-    //     }
-    //     this.cancel();
-    //   });
+    this._ms.UpdateOrderTree(this.database.data).subscribe(
+      (data: any): void => {
+        this._ds.returnData(data);
+        this.cancel();
+      },
+      (error: any) => {
+        console.log('error: ', error);
+      }
+    );
   }
 }
