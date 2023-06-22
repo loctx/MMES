@@ -108,7 +108,6 @@ namespace PROJECT.CORE
         public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
         public DbSet<tblMdMixer> tblMdMixer { get; set; }
         public DbSet<tblMdArea> tblMdArea { get; set; }
-        public DbSet<tblMdModule> tblMdModule { get; set; }
         public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
         public DbSet<tblMdVehicle> tblMdVehicle { get; set; }
         #endregion

@@ -50,5 +50,49 @@ namespace PROJECT.BUSINESS.Services.AD
             }
             return rootNode;
         }
+
+        public void UpdateOrderTree(tblMenuDto moduleDto)
+        {
+            try
+            {
+                var lstModuleDto = new List<tblMenuDto>();
+                var lstModuleUpdate = new List<tblAdMenu>();
+
+                this.ConvertNestedToList(moduleDto, ref lstModuleDto);
+                if (moduleDto.Children == null || moduleDto.Children.Count == 0)
+                {
+                    return;
+                }
+                var numberOrder = 1;
+                foreach (var item in lstModuleDto)
+                {
+                    var module = _mapper.Map<tblAdMenu>(item);
+                    module.OrderNumber = numberOrder++;
+                    lstModuleUpdate.Add(module);
+                }
+                this._dbContext.UpdateRange(lstModuleUpdate);
+                this._dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                this.Status = false;
+                this.Exception = ex;
+            }
+        }
+
+        private void ConvertNestedToList(tblMenuDto node, ref List<tblMenuDto> lstNodeFlat)
+        {
+            if (node.Id != "M")
+            {
+                lstNodeFlat.Add(node);
+            }
+            if (node.Children != null && node.Children.Count > 0)
+            {
+                foreach (var item in node.Children)
+                {
+                    ConvertNestedToList(item, ref lstNodeFlat);
+                }
+            }
+        }
     }
 }
