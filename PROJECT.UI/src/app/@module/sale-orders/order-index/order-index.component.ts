@@ -124,7 +124,7 @@ export class OrderIndexComponent {
     this.search(1, pageSize);
   }
 
-  deleteUnit(item: UnitModel) {
+  deleteOrders(item: UnitModel) {
     Swal.fire({
       title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',
