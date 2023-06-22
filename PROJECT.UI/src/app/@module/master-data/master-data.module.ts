@@ -53,6 +53,11 @@ import {
 import { OrdertypeIndexComponent } from './ordertype/ordertype-index/ordertype-index.component';
 import { OrdertypeCreateComponent } from './ordertype/ordertype-create/ordertype-create.component';
 import { OrdertypeEditComponent } from './ordertype/ordertype-edit/ordertype-edit.component'
+import {
+  DepartmentCreateComponent,
+  DepartmentEditComponent,
+  DepartmentIndexComponent
+} from './department'
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -91,6 +96,9 @@ import { OrdertypeEditComponent } from './ordertype/ordertype-edit/ordertype-edi
     OrdertypeIndexComponent,
     OrdertypeCreateComponent,
     OrdertypeEditComponent,
+    DepartmentIndexComponent,
+    DepartmentCreateComponent,
+    DepartmentEditComponent,
   ],
   imports: [
     MatTableModule,
