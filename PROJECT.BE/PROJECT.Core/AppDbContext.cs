@@ -109,13 +109,13 @@ namespace PROJECT.CORE
         public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
         public DbSet<tblMdMixer> tblMdMixer { get; set; }
         public DbSet<tblMdArea> tblMdArea { get; set; }
-        public DbSet<tblMdModule> tblMdModule { get; set; }
         public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
         public DbSet<tblMdVehicle> tblMdVehicle { get; set; }
         #endregion
 
         #region Sale Order
-        public DbSet<tblStoreOrderOperating> tblStoreOrderOperating { get; set; }
+        public DbSet<tblSoOrder> tblSoOrder { get; set; }
+        public DbSet<tblSoOrderDetail> tblSoOrderDetail { get; set; }
         #endregion
 
         #region Bussiness Unit

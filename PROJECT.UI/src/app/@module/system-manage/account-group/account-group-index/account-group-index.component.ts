@@ -98,7 +98,7 @@ export class AccountGroupIndexComponent implements OnInit {
     this.search(1, pageSize);
   }
 
-  deleteUnit(item: AccountGroupModel) {
+  deleteAccountGroup(item: AccountGroupModel) {
     Swal.fire({
       title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',

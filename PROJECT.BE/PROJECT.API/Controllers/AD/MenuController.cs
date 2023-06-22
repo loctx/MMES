@@ -2,6 +2,7 @@
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
 using PROJECT.BUSINESS.Common.Class;
+using PROJECT.BUSINESS.Dtos.AD;
 using PROJECT.BUSINESS.Services.AD;
 
 namespace PROJECT.API.Controllers.AD
@@ -30,6 +31,26 @@ namespace PROJECT.API.Controllers.AD
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
                 transferObject.GetMessage("2000", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateMenu([FromBody] tblMenuDto moduleDto)
+        {
+            var transferObject = new TransferObject();
+            await _service.UpdateOrderTree(moduleDto);
+            if (_service.Status)
+            {
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0103", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0104", _service);
             }
             return Ok(transferObject);
         }

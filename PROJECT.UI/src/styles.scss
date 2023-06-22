@@ -300,6 +300,10 @@ table th,td{
   flex-wrap: wrap;
 }
 
+.d-gap-2 {
+  gap: 2px;
+}
+
 .d-gap {
   gap: 5px;
 }
@@ -1242,4 +1246,12 @@ table th,td{
   td {
       background: rgba(0, 0, 0, 0.075);
   }
+}
+
+.search-box {
+  min-width: 250px !important;
+}
+
+.table {
+  min-width: 820px !important;
 }
