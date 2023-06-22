@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { DropdownService } from 'src/app/services/Common/dropdown.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductFilter } from 'src/app/@filter/MD/product-filter.model';
 
 @Component({
   selector: 'app-product-edit',
@@ -20,13 +22,17 @@ export class ProductEditComponent {
   unitCodes: any[] = [];
   itemTypes: any[] = [];
   selectedItem: string = '';
+  filter = new ProductFilter();
+
 
   constructor(
     private _service: ProductService,
     private _fb: FormBuilder,
     private utils: utils,
     private drawerService: DrawerService,
-    private _service1: DropdownService
+    private _service1: DropdownService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.productForm = this._fb.group({
       code: [{ value: "", disabled: true }],
@@ -34,6 +40,13 @@ export class ProductEditComponent {
       unitCode: ['', [Validators.required, this.utils.trimSpace]],
       typeCode: ['', [Validators.required, this.utils.trimSpace]],
     });
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+
   }
 
   get f() {
@@ -55,6 +68,7 @@ export class ProductEditComponent {
   }
 
   close() {
+    this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.productForm?.get('code')?.setValue('');
     this.productForm?.get('name')?.setValue('');
