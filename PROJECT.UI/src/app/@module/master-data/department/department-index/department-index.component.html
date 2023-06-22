@@ -35,7 +35,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="code">
-                    <th mat-header-cell *matHeaderCellDef width="150px"> Mã phòng ban </th>
+                    <th mat-header-cell *matHeaderCellDef width="150px"> Mã phòng</th>
                     <td mat-cell *matCellDef="let element">
                         <span href="#" (click)="openEdit(element)"
                             class="cursor-pointer text-primary">{{element.code}}</span>
@@ -44,12 +44,12 @@
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Tên phòng ban</th>
+                    <th mat-header-cell *matHeaderCellDef> Tên phòng</th>
                     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef width="90px">Hành Động</th>
+                    <th mat-header-cell *matHeaderCellDef width="90px">Hành động</th>
                     <td mat-cell *matCellDef="let element" class="text-center">
                         <i class="bi bi-trash3 text-danger cursor-pointer" (click)="deleteDepartment(element)"></i>
                     </td>
