@@ -62,7 +62,12 @@ import {
   VehicleTypeCreateComponent,
   VehicleTypeIndexComponent,
   VehicleTypeEditComponent
-} from './vehicle-type'
+} from './vehicle-type';
+import {
+    VehicleIndexComponent,
+    VehicleEditComponent,
+    VehicleCreateComponent
+}from './vehicle'
 
 
 @NgModule({
@@ -109,6 +114,9 @@ import {
     VehicleTypeIndexComponent,
     VehicleTypeCreateComponent,
     VehicleTypeEditComponent,
+    VehicleIndexComponent,
+    VehicleCreateComponent,
+    VehicleEditComponent,
   ],
   imports: [
     MatTableModule,

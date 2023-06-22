@@ -13,26 +13,29 @@ import {MixerIndexComponent} from './mixer';
 import {ProductIndexComponent} from './product/product-index/product-index.component';
 import {OrdertypeIndexComponent} from './ordertype/ordertype-index/ordertype-index.component';
 
-import {PourTypeIndexComponent} from './pour-type';
-import {DepartmentIndexComponent} from './department';
-import {VehicleTypeIndexComponent} from './vehicle-type';
+import {PourTypeIndexComponent} from './pour-type'
+import {DepartmentIndexComponent} from './department'
+import {VehicleTypeIndexComponent} from './vehicle-type'
+import {VehicleIndexComponent} from './vehicle'
+
 const routes: Routes = [
-  {path: 'unit', component: UnitIndexComponent},
-  {path: 'khach-hang', component: CustomerIndexComponent},
-  {path: 'nha-cung-cap', component: ProviderIndexComponent},
-  {path: 'kho-hang', component: WarehouseIndexComponent},
-  {path: 'loai-hang', component: ItemTypeIndexComponent},
-  {path: 'loai-cat', component: SandIndexComponent},
-  {path: 'loai-da', component: StoneIndexComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'khu-vuc', component: AreaIndexComponent},
-  {path: 'may-tron', component: MixerIndexComponent},
-  {path: 'san-pham', component: ProductIndexComponent},
-  {path: 'loai-do', component: PourTypeIndexComponent},
-  {path: 'order-type', component: OrdertypeIndexComponent},
-  {path: 'phong-ban', component: DepartmentIndexComponent},
-  {path: 'loai-phuong-tien', component: VehicleTypeIndexComponent},
-];
+  { path: 'unit', component: UnitIndexComponent },
+  { path: 'khach-hang', component: CustomerIndexComponent },
+  { path: 'nha-cung-cap', component: ProviderIndexComponent },
+  { path: 'kho-hang', component: WarehouseIndexComponent },
+  { path: 'loai-hang', component: ItemTypeIndexComponent },
+  { path: 'loai-cat', component: SandIndexComponent },
+  { path: 'loai-da', component: StoneIndexComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'khu-vuc', component: AreaIndexComponent },
+  { path: 'may-tron', component: MixerIndexComponent },
+  { path: 'san-pham', component: ProductIndexComponent },
+  { path: 'loai-do', component: PourTypeIndexComponent },
+  { path: 'order-type', component: OrdertypeIndexComponent },
+  { path: 'phong-ban', component: DepartmentIndexComponent },
+  { path: 'loai-phuong-tien', component: VehicleTypeIndexComponent },
+  { path: 'phuong-tien', component: VehicleIndexComponent },
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
