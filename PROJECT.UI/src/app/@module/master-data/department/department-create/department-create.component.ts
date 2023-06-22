@@ -3,6 +3,8 @@ import { DepartmentService } from 'src/app/services/MD/department.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { optionsGroup } from 'src/app/@filter/MD/product-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 
 @Component({
   selector: 'app-department-create',
@@ -12,6 +14,8 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 export class DepartmentCreateComponent {
   dpmForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: DepartmentService,
@@ -22,6 +26,7 @@ export class DepartmentCreateComponent {
     this.dpmForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: [true, [Validators.required]],
     });
   }
 
@@ -33,6 +38,7 @@ export class DepartmentCreateComponent {
     this.drawerService.close();
     this.dpmForm?.get('code')?.setValue('');
     this.dpmForm?.get('name')?.setValue('');
+    this.dpmForm?.get('state')?.setValue(true);
   }
 
   onCreate() {
@@ -45,6 +51,7 @@ export class DepartmentCreateComponent {
         {
           code: this.dpmForm.value.code.trim(),
           name: this.dpmForm.value.name.trim(),
+          state: this.dpmForm.value.state,
         },
         false
       )
@@ -54,6 +61,7 @@ export class DepartmentCreateComponent {
           this.submitted = false;
           this.dpmForm?.get('code')?.setValue('');
           this.dpmForm?.get('name')?.setValue('');
+          this.dpmForm?.get('state')?.setValue(true);
         },
         (error) => {
           console.log('error: ', error);

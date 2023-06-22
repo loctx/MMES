@@ -4,18 +4,18 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { ProductCreateComponent } from '../product-create/product-create.component';
 import { ProductEditComponent } from '../product-edit/product-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 import { ProductModel } from 'src/app/models/MD/product.model';
 import Swal from 'sweetalert2';
 import { DropdownService } from 'src/app/services/Common/dropdown.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductFilter } from 'src/app/@filter/MD/product-filter.model';
+import { ProductFilter, optionsGroup } from 'src/app/@filter/MD/product-filter.model';
+import { CloseScrollStrategy } from 'igniteui-angular';
 @Component({
   selector: 'app-product-index',
   templateUrl: './product-index.component.html',
   styleUrls: ['./product-index.component.scss'],
 })
-export class ProductIndexComponent {
+export class ProductIndexComponent  implements OnInit{
   constructor(
     private _service: ProductService,
     private drawerService: DrawerService,
@@ -47,12 +47,18 @@ export class ProductIndexComponent {
     'index',
     'code',
     'name',
+    'state',
     'unitCode',
     'typeCode',
     'actions',
   ];
   paginationResult!: PaginationResult;
   filter = new ProductFilter();
+  optionsGroup: optionsGroup[] = [];
+  optionsSate = [
+    { name: 'Đã kích hoạt', value: true },
+    { name: 'Chưa kích hoạt', value: false },
+  ];
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -68,10 +74,13 @@ export class ProductIndexComponent {
   }
 
   openEdit(item: any) {
+
+
     this.router.navigate([], { relativeTo: this.route, queryParams: {
       ...this.filter,
       code: item.code,
       name: item.name,
+      state: item.state,
       unitCode: item.unitCode,
       typeCode: item.typeCode,
     } });
@@ -79,6 +88,7 @@ export class ProductIndexComponent {
       .open(ProductEditComponent, {
         code: item.code,
         name: item.name,
+        state: item.state,
         unitCode: item.unitCode,
         typeCode: item.typeCode,
       })
@@ -118,7 +128,7 @@ export class ProductIndexComponent {
   }
 
   loadInit() {
-    this.search();
+   this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {

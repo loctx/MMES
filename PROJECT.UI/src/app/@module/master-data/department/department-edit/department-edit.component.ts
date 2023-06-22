@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { optionsGroup } from 'src/app/@filter/MD/product-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 import { DepartmentFilter } from 'src/app/@filter/MD/department-filter.model';
 @Component({
   selector: 'app-department-edit',
@@ -15,7 +17,10 @@ export class DepartmentEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  state: boolean | null = null;
   filter = new DepartmentFilter();
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: DepartmentService,
@@ -28,6 +33,7 @@ export class DepartmentEditComponent {
     this.dpmForm = this._fb.group({
       code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: ['', Validators.required],
     });
     this.route.queryParams.subscribe(params => {
       this.filter = {
@@ -44,18 +50,21 @@ export class DepartmentEditComponent {
   ngOnInit() {
     this.dpmForm?.get('code')?.setValue(this.code);
     this.dpmForm?.get('name')?.setValue(this.name);
+    this.dpmForm?.get('state')?.setValue(this.state || false);
   }
 
   close() {
     this.filter = {
       ...this.filter,
       code: '',
-      name: ''
+      name: '',
+      state:'',
     }
     this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.dpmForm?.get('code')?.setValue('');
     this.dpmForm?.get('name')?.setValue('');
+    this.dpmForm?.get('state')?.setValue(true);
   }
 
   onEdit() {
@@ -68,6 +77,7 @@ export class DepartmentEditComponent {
         {
           code: this.code.trim(),
           name: this.dpmForm.value.name.trim(),
+          state: this.dpmForm.value.state,
         },
         false
       )

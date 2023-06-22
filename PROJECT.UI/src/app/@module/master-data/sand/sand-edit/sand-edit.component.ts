@@ -5,6 +5,8 @@ import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SandFilter } from 'src/app/@filter/MD/sand-filter.model';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 
 @Component({
   selector: 'app-sand-edit',
@@ -16,7 +18,10 @@ export class SandEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  state: boolean | null = null;
   filter = new SandFilter();
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: SandService,
@@ -29,6 +34,7 @@ export class SandEditComponent {
     this.sandForm = this._fb.group({
       code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: ['', Validators.required],
     });
     this.route.queryParams.subscribe(params => {
       this.filter = {
@@ -45,18 +51,21 @@ export class SandEditComponent {
   ngOnInit() {
     this.sandForm?.get('code')?.setValue(this.code);
     this.sandForm?.get('name')?.setValue(this.name);
+    this.sandForm?.get('state')?.setValue(this.state || false);
   }
 
   close() {
     this.filter = {
       ...this.filter,
       code: '',
-      name: ''
+      name: '',
+      state:'',
     }
     this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.sandForm?.get('code')?.setValue('');
     this.sandForm?.get('name')?.setValue('');
+    this.sandForm?.get('state')?.setValue(true);
   }
 
   onEdit() {
@@ -69,6 +78,7 @@ export class SandEditComponent {
         {
           code: this.code.trim(),
           name: this.sandForm.value.name.trim(),
+          state: this.sandForm.value.state,
         },
         false
       )

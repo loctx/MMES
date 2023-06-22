@@ -4,7 +4,7 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { OrdertypeCreateComponent } from '../ordertype-create/ordertype-create.component';
 import { OrdertypeEditComponent } from '../ordertype-edit/ordertype-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { OrderTypeFilter } from 'src/app/@filter/MD/ordertype-filter.model';
+import { OrderTypeFilter,optionsGroup } from 'src/app/@filter/MD/ordertype-filter.model';
 import Swal from 'sweetalert2';
 import {OrderTypeModel} from 'src/app/models/MD/ordertype.model'
 import { Router, ActivatedRoute } from '@angular/router';
@@ -28,11 +28,16 @@ export class OrdertypeIndexComponent {
       }
     });
   }
-
+  dataSource!: any;
   //Khai báo biến
-  displayedColumns: string[] = ['index', 'code', 'name' , 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name' ,'state', 'actions'];
   paginationResult!: PaginationResult;
   filter = new OrderTypeFilter();
+  optionsGroup: optionsGroup[] = [];
+  optionsSate = [
+    { name: 'Đã kích hoạt', value: true },
+    { name: 'Chưa kích hoạt', value: false },
+  ];
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -52,11 +57,13 @@ export class OrdertypeIndexComponent {
       ...this.filter,
       code: item.code,
       name: item.name,
+      state: item.state
     } });
     this.drawerService
       .open(OrdertypeEditComponent, {
         code: item.code,
         name: item.name,
+        state: item.state
       })
       .subscribe((result) => {
         if (result?.status) {
@@ -90,7 +97,7 @@ export class OrdertypeIndexComponent {
   }
 
   loadInit() {
-    this.search();
+    this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {

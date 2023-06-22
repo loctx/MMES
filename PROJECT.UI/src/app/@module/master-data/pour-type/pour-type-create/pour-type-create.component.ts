@@ -3,6 +3,8 @@ import { PourTypeService } from 'src/app/services/MD/pour-type.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 
 @Component({
   selector: 'app-pour-type-create',
@@ -12,6 +14,8 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 export class PourTypeCreateComponent {
   pourTypeForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: PourTypeService,
@@ -22,6 +26,7 @@ export class PourTypeCreateComponent {
     this.pourTypeForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: [true, [Validators.required]],
     });
   }
 
@@ -33,6 +38,7 @@ export class PourTypeCreateComponent {
     this.drawerService.close();
     this.pourTypeForm?.get('code')?.setValue('');
     this.pourTypeForm?.get('name')?.setValue('');
+    this.pourTypeForm?.get('state')?.setValue(true);
   }
 
   onCreate() {
@@ -45,6 +51,7 @@ export class PourTypeCreateComponent {
         {
           code: this.pourTypeForm.value.code.trim(),
           name: this.pourTypeForm.value.name.trim(),
+          state: this.pourTypeForm.value.state,
         },
         false
       )
@@ -54,6 +61,7 @@ export class PourTypeCreateComponent {
           this.submitted = false;
           this.pourTypeForm?.get('code')?.setValue('');
           this.pourTypeForm?.get('name')?.setValue('');
+          this.pourTypeForm?.get('state')?.setValue(true);
         },
         (error) => {
           console.log('error: ', error);
