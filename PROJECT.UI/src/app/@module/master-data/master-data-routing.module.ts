@@ -14,6 +14,7 @@ import {ProductIndexComponent} from './product/product-index/product-index.compo
 
 import {PourTypeIndexComponent} from './pour-type'
 import {DepartmentIndexComponent} from './department'
+import {VehicleTypeIndexComponent} from './vehicle-type'
 const routes: Routes = [
   { path: 'unit', component: UnitIndexComponent },
   { path: 'khach-hang', component: CustomerIndexComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'san-pham', component: ProductIndexComponent },
   { path: 'loai-do', component: PourTypeIndexComponent },
   { path: 'phong-ban', component: DepartmentIndexComponent },
+  { path: 'loai-phuong-tien', component: VehicleTypeIndexComponent },
 ]
 
 @NgModule({

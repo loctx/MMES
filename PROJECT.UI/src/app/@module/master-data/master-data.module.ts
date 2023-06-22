@@ -54,7 +54,14 @@ import {
   DepartmentCreateComponent,
   DepartmentEditComponent,
   DepartmentIndexComponent
-} from './department'
+} from './department';
+import {
+  VehicleTypeCreateComponent,
+  VehicleTypeIndexComponent,
+  VehicleTypeEditComponent
+} from './vehicle-type'
+
+
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -93,6 +100,9 @@ import {
     DepartmentIndexComponent,
     DepartmentCreateComponent,
     DepartmentEditComponent,
+    VehicleTypeIndexComponent,
+    VehicleTypeCreateComponent,
+    VehicleTypeEditComponent,
   ],
   imports: [
     MatTableModule,
