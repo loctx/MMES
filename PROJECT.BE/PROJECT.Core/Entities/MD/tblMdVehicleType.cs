@@ -19,6 +19,11 @@ namespace PROJECT.CORE.Entities.MD
         [MaxLength(250)]
         public string Name { get; set; }
 
-        public bool? State { get; set; }
+        public virtual List<tblMdVehicle> ListVehicle { get; set; }
+
+        public tblMdVehicleType()
+        {
+            ListVehicle = new List<tblMdVehicle>();
+        }
     }
 }

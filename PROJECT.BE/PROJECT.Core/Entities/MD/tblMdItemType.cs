@@ -14,6 +14,13 @@ namespace PROJECT.CORE.Entities.MD
         [MaxLength(100)]
         public string Name { get; set; }
 
+        public virtual List<tblMdItem> ListItem { get; set; }
+
+        public tblMdItemType()
+        {
+            ListItem = new List<tblMdItem>();
+        }
+
         public bool? State { get; set; }
     }
 }

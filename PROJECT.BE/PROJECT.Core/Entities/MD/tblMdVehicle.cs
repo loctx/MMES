@@ -17,6 +17,6 @@ namespace PROJECT.CORE.Entities.MD
 
         public string TypeCode { get; set; }
 
-        public bool? State { get; set; }
+        public virtual tblMdVehicleType VehicleType { get; set; }
     }
 }
