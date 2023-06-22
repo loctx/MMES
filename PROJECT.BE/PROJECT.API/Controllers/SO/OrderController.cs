@@ -2,18 +2,18 @@
 using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
 using PROJECT.BUSINESS.Common.Class;
-using PROJECT.BUSINESS.Dtos.MD;
+using PROJECT.BUSINESS.Dtos.SO;
 using PROJECT.BUSINESS.Filter.Common;
-using PROJECT.BUSINESS.Services.MD;
+using PROJECT.BUSINESS.Services.SO;
 
 namespace PROJECT.API.Controllers.MD
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VehicleTypeController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        public readonly IVehicleTypeService _service;
-        public VehicleTypeController(IVehicleTypeService service)
+        public readonly IOrderService _service;
+        public OrderController(IOrderService service)
         {
             _service = service;
         }
@@ -55,7 +55,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPost("Insert")]
-        public async Task<IActionResult> Insert([FromBody] tblVehicleTypeDto unit)
+        public async Task<IActionResult> Insert([FromBody] tblOrderDto unit)
         {
             var transferObject = new TransferObject();
             var result = await _service.Add(unit);
@@ -76,7 +76,7 @@ namespace PROJECT.API.Controllers.MD
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update([FromBody] tblVehicleTypeDto unit)
+        public async Task<IActionResult> Update([FromBody] tblOrderDto unit)
         {
             var transferObject = new TransferObject();
             await _service.Update(unit);
@@ -91,26 +91,6 @@ namespace PROJECT.API.Controllers.MD
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
                 transferObject.GetMessage("0104", _service);
-            }
-            return Ok(transferObject);
-        }
-
-        [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete([FromBody] tblVehicleTypeDto unit)
-        {
-            var transferObject = new TransferObject();
-            await _service.Delete(unit);
-            if (_service.Status)
-            {
-                transferObject.Status = true;
-                transferObject.MessageObject.MessageType = MessageType.Success;
-                transferObject.GetMessage("0105", _service);
-            }
-            else
-            {
-                transferObject.Status = false;
-                transferObject.MessageObject.MessageType = MessageType.Error;
-                transferObject.GetMessage("0106", _service);
             }
             return Ok(transferObject);
         }
