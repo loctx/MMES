@@ -6,6 +6,9 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { Dropdown } from 'bootstrap';
 import { DropdownService } from 'src/app/services/Common/dropdown.service';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
+import { optionsGroup } from 'src/app/@filter/MD/product-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+
 
 @Component({
   selector: 'app-product-create',
@@ -15,6 +18,8 @@ import { PaginationResult } from 'src/app/models/Common/pagination.model';
 export class ProductCreateComponent {
   productForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   unitCodes: any[] = [];
   itemTypes: any[] = [];
@@ -29,6 +34,7 @@ export class ProductCreateComponent {
     this.productForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: [true, [Validators.required]],
       unitCode: ['', [Validators.required]],
       typeCode: ['', [Validators.required, this.utils.trimSpace]],
     });
@@ -50,6 +56,7 @@ export class ProductCreateComponent {
     this.drawerService.close();
     this.productForm?.get('code')?.setValue('');
     this.productForm?.get('name')?.setValue('');
+    this.productForm?.get('state')?.setValue(true);
     this.productForm?.get('unitCode')?.setValue('');
     this.productForm?.get('typeCode')?.setValue('');
   }
@@ -69,6 +76,7 @@ export class ProductCreateComponent {
         {
           code: this.productForm.value.code.trim(),
           name: this.productForm.value.name.trim(),
+          state: this.productForm.value.state,
           unitCode: this.productForm.value.unitCode,
           typeCode: this.productForm.value.typeCode,
         },
@@ -80,6 +88,7 @@ export class ProductCreateComponent {
           this.submitted = false;
           this.productForm?.get('code')?.setValue('');
           this.productForm?.get('name')?.setValue('');
+          this.productForm?.get('state')?.setValue(true);
           this.productForm?.get('unitCode')?.setValue('');
           this.productForm?.get('typeCode')?.setValue('');
         },

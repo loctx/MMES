@@ -4,7 +4,7 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { AreaCreateComponent } from '../area-create/area-create.component';
 import { AreaEditComponent } from '../area-edit/area-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { AreaFilter } from 'src/app/@filter/MD/area-filter.model';
+import { AreaFilter,optionsGroup } from 'src/app/@filter/MD/area-filter.model';
 import { AreaModel } from 'src/app/models/MD/area.model';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -29,9 +29,14 @@ export class AreaIndexComponent {
   }
 
   //Khai báo biến
-  displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name','state', 'actions'];
   paginationResult!: PaginationResult;
   filter = new AreaFilter();
+  optionsGroup: optionsGroup[] = [];
+  optionsSate = [
+    { name: 'Đã kích hoạt', value: true },
+    { name: 'Chưa kích hoạt', value: false },
+  ];
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -51,11 +56,13 @@ export class AreaIndexComponent {
       ...this.filter,
       code: item.code,
       name: item.name,
+      state: item.state
     } });
     this.drawerService
       .open(AreaEditComponent, {
         code: item.code,
         name: item.name,
+        state: item.state
       })
       .subscribe((result) => {
         if (result?.status) {
