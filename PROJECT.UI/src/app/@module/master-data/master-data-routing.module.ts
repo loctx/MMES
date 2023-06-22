@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {AreaIndexComponent} from './area/area-index/area-index.component'
 import {MixerIndexComponent} from './mixer'
 import {ProductIndexComponent} from './product/product-index/product-index.component'
+import {OrdertypeIndexComponent} from './ordertype/ordertype-index/ordertype-index.component'
 
 import {PourTypeIndexComponent} from './pour-type'
 import {DepartmentIndexComponent} from './department'
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'may-tron', component: MixerIndexComponent },
   { path: 'san-pham', component: ProductIndexComponent },
   { path: 'loai-do', component: PourTypeIndexComponent },
+  { path: 'order-type', component: OrdertypeIndexComponent },
   { path: 'phong-ban', component: DepartmentIndexComponent },
   { path: 'loai-phuong-tien', component: VehicleTypeIndexComponent },
 ]
