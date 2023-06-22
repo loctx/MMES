@@ -8,6 +8,8 @@ import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 import { ProductModel } from 'src/app/models/MD/product.model';
 import Swal from 'sweetalert2';
 import { DropdownService } from 'src/app/services/Common/dropdown.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductFilter } from 'src/app/@filter/MD/product-filter.model';
 @Component({
   selector: 'app-product-index',
   templateUrl: './product-index.component.html',
@@ -17,8 +19,17 @@ export class ProductIndexComponent {
   constructor(
     private _service: ProductService,
     private drawerService: DrawerService,
-    private _test: DropdownService
-  ) {}
+    private _test: DropdownService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+  }
 
   dataSource!: any;
   //Khai báo biến
@@ -41,7 +52,7 @@ export class ProductIndexComponent {
     'actions',
   ];
   paginationResult!: PaginationResult;
-  filter = new BaseFilter();
+  filter = new ProductFilter();
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -57,6 +68,13 @@ export class ProductIndexComponent {
   }
 
   openEdit(item: any) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: {
+      ...this.filter,
+      code: item.code,
+      name: item.name,
+      unitCode: item.unitCode,
+      typeCode: item.typeCode,
+    } });
     this.drawerService
       .open(ProductEditComponent, {
         code: item.code,
@@ -85,6 +103,13 @@ export class ProductIndexComponent {
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
+        this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
+        if(this.filter.code !== '') {
+          const detail = data?.data?.find((item:ProductFilter) => item.code == this.filter.code);
+          if(detail) {
+            this.openEdit(detail);
+          }
+        }
       },
       error: (response) => {
         console.log(response);
