@@ -3,11 +3,6 @@
     max-height: calc(100vh - 190px);
     max-width: 100%;
     overflow: auto;
-    .selected {
-        td {
-            background: rgba(0, 0, 0, 0.075);
-        }
-    }
 }
 
 table {
