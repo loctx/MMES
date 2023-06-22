@@ -49,7 +49,10 @@ import {
   PourTypeIndexComponent,
   PourTypeCreateComponent,
   PourTypeEditComponent
-} from './pour-type'
+} from './pour-type';
+import { OrdertypeIndexComponent } from './ordertype/ordertype-index/ordertype-index.component';
+import { OrdertypeCreateComponent } from './ordertype/ordertype-create/ordertype-create.component';
+import { OrdertypeEditComponent } from './ordertype/ordertype-edit/ordertype-edit.component'
 @NgModule({
   declarations: [
     UnitEditComponent,
@@ -85,6 +88,9 @@ import {
     ProductIndexComponent,
     ProductCreateComponent,
     ProductEditComponent,
+    OrdertypeIndexComponent,
+    OrdertypeCreateComponent,
+    OrdertypeEditComponent,
   ],
   imports: [
     MatTableModule,
