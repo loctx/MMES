@@ -23,5 +23,9 @@ namespace PROJECT.CORE.Entities.MD
         [Required]
         [MaxLength(50)]
         public string TypeCode { get; set; }
+
+        public virtual tblMdUnit Unit { get; set; }
+
+        public virtual tblMdItemType ItemType { get; set; }
     }
 }
