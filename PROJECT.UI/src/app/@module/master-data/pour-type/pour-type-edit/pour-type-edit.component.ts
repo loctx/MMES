@@ -3,7 +3,8 @@ import { PourTypeService } from 'src/app/services/MD/pour-type.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { PourTypeFilter } from 'src/app/@filter/MD/pour-type-filter.model';
 @Component({
   selector: 'app-pour-type-edit',
   templateUrl: './pour-type-edit.component.html',
@@ -14,16 +15,25 @@ export class PourTypeEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  filter = new PourTypeFilter();
 
   constructor(
     private _service: PourTypeService,
     private _fb: FormBuilder,
     private utils: utils,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.pourTypeForm = this._fb.group({
-      code: [{ value: "", disabled: true }],
+      code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+    });
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
     });
   }
 
@@ -37,6 +47,12 @@ export class PourTypeEditComponent {
   }
 
   close() {
+    this.filter = {
+      ...this.filter,
+      code: '',
+      name: ''
+    }
+    this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.pourTypeForm?.get('code')?.setValue('');
     this.pourTypeForm?.get('name')?.setValue('');

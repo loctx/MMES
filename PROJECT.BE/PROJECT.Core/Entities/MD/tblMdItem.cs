@@ -16,6 +16,8 @@ namespace PROJECT.CORE.Entities.MD
         [MaxLength(100)]
         public string Name { get; set; }
 
+        public bool? State { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string UnitCode { get; set; }
@@ -23,5 +25,9 @@ namespace PROJECT.CORE.Entities.MD
         [Required]
         [MaxLength(50)]
         public string TypeCode { get; set; }
+
+        public virtual tblMdUnit Unit { get; set; }
+
+        public virtual tblMdItemType ItemType { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-<nav class="pagination-container" aria-label="Page navigation example">
+<nav *ngIf="totalRecord > 0" class="pagination-container" aria-label="Page navigation example">
     <div class="total-record">Total {{totalRecord}} record</div>
     <ul *ngIf="totalPage > 1" class="pagination">
         <li (click)="decreasePage()" class="page-item" [ngClass]="page === 1 ? 'disabled' : ''">

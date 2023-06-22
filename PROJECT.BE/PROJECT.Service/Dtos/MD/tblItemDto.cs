@@ -14,6 +14,8 @@ namespace PROJECT.BUSINESS.Dtos.MD
 
         public string Name { get; set; }
 
+        public bool? State { get; set; }
+
         public string UnitCode { get; set; }
 
         public string TypeCode { get; set; }

@@ -4,9 +4,10 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { MixerCreateComponent } from '../mixer-create/mixer-create.component';
 import { MixerEditComponent } from '../mixer-edit/mixer-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+import { MixerFilter } from 'src/app/@filter/MD/mixer-filter.model';
+import { MixerModel } from 'src/app/models/MD/mixer.model';
 import Swal from 'sweetalert2';
-import {MixerModel} from 'src/app/models/MD/mixer.model'
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-mixer-index',
   templateUrl: './mixer-index.component.html',
@@ -15,13 +16,22 @@ import {MixerModel} from 'src/app/models/MD/mixer.model'
 export class MixerIndexComponent {
   constructor(
     private _service: MixerService,
-    private drawerService: DrawerService
-  ) {}
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+  }
 
   //Khai báo biến
-  displayedColumns: string[] = ['index', 'code', 'name' , 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
   paginationResult!: PaginationResult;
-  filter = new BaseFilter();
+  filter = new MixerFilter();
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -37,6 +47,11 @@ export class MixerIndexComponent {
   }
 
   openEdit(item: any) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: {
+      ...this.filter,
+      code: item.code,
+      name: item.name,
+    } });
     this.drawerService
       .open(MixerEditComponent, {
         code: item.code,
@@ -49,7 +64,11 @@ export class MixerIndexComponent {
       });
   }
 
-  search(currentPage: number = 1, pageSize:number | undefined = undefined, refresh: boolean = false) {
+  search(
+    currentPage: number = 1,
+    pageSize: number | undefined = undefined,
+    refresh: boolean = false
+  ) {
     this.filter = {
       ...this.filter,
       keyWord: refresh ? '' : this.filter.keyWord,
@@ -59,6 +78,13 @@ export class MixerIndexComponent {
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
+        this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
+        if(this.filter.code !== '') {
+          const detail = data?.data?.find((item:MixerFilter) => item.code == this.filter.code);
+          if(detail) {
+            this.openEdit(detail);
+          }
+        }
       },
       error: (response) => {
         console.log(response);
@@ -67,7 +93,7 @@ export class MixerIndexComponent {
   }
 
   loadInit() {
-    this.search();
+    this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {
@@ -79,14 +105,14 @@ export class MixerIndexComponent {
     this.search(1, pageSize);
   }
 
-  deleteMixer(item:MixerModel) {
+  deleteMixer(item: MixerModel) {
     Swal.fire({
-      title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
+      title: 'Bạn muốn xóa dữ liệu này?',
       text: 'Hành động này sẽ không thể hoàn tác!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Xóa',
-      cancelButtonText: 'Hủy'
+      cancelButtonText: 'Hủy',
     }).then((result) => {
       if (result.isConfirmed) {
         this._service.Delete(item, true).subscribe({
