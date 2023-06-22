@@ -4,7 +4,7 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { StoneCreateComponent } from '../stone-create/stone-create.component';
 import { StoneEditComponent } from '../stone-edit/stone-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
-import { StoneFilter } from 'src/app/@filter/MD/stone-filter.model';
+import { StoneFilter,optionsGroup } from 'src/app/@filter/MD/stone-filter.model';
 import { StoneModel } from 'src/app/models/MD/stone.model';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -29,9 +29,14 @@ export class StoneIndexComponent {
   }
 
   //Khai báo biến
-  displayedColumns: string[] = ['index', 'code', 'name', 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name', 'state', 'actions'];
   paginationResult!: PaginationResult;
   filter = new StoneFilter();
+  optionsGroup: optionsGroup[] = [];
+  optionsSate = [
+    { name: 'Đã kích hoạt', value: true },
+    { name: 'Chưa kích hoạt', value: false },
+  ];
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -51,11 +56,13 @@ export class StoneIndexComponent {
       ...this.filter,
       code: item.code,
       name: item.name,
+      state: item.state
     } });
     this.drawerService
       .open(StoneEditComponent, {
         code: item.code,
         name: item.name,
+        state: item.state
       })
       .subscribe((result) => {
         if (result?.status) {

@@ -5,6 +5,9 @@ import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AreaFilter } from 'src/app/@filter/MD/area-filter.model';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+
 @Component({
   selector: 'app-area-edit',
   templateUrl: './area-edit.component.html',
@@ -15,7 +18,10 @@ export class AreaEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  state: boolean | null = null;
   filter = new AreaFilter();
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: AreaService,
@@ -28,6 +34,7 @@ export class AreaEditComponent {
     this.areaForm = this._fb.group({
       code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: ['', Validators.required],
     });
     this.route.queryParams.subscribe(params => {
       this.filter = {
@@ -44,18 +51,21 @@ export class AreaEditComponent {
   ngOnInit() {
     this.areaForm?.get('code')?.setValue(this.code);
     this.areaForm?.get('name')?.setValue(this.name);
+    this.areaForm?.get('state')?.setValue(this.state || false);
   }
 
   close() {
     this.filter = {
       ...this.filter,
       code: '',
-      name: ''
+      name: '',
+      state:'',
     }
     this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.areaForm?.get('code')?.setValue('');
     this.areaForm?.get('name')?.setValue('');
+    this.areaForm?.get('state')?.setValue(true);
   }
 
   onEdit() {
@@ -68,6 +78,7 @@ export class AreaEditComponent {
         {
           code: this.code.trim(),
           name: this.areaForm.value.name.trim(),
+          state: this.areaForm.value.state,
         },
         false
       )

@@ -16,11 +16,15 @@ namespace PROJECT.BUSINESS.Dtos.MD
 
         public string TypeCode { get; set; }
 
+        public string TypeName { get; set; }
+
         public bool? State { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<tblMdVehicle, tblVehicleDto>().ReverseMap();
+            profile.CreateMap<tblMdVehicle, tblVehicleDto>()
+                .ForMember(dst => dst.TypeName, opt => opt.MapFrom(src => src.VehicleType.Name))
+                .ReverseMap();
         }
     }
 }

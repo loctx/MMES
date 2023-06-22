@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
+using PROJECT.CORE.Entities.BU;
 using PROJECT.CORE.Entities.MD;
 using PROJECT.CORE.Entities.SO;
 using System.IdentityModel.Tokens.Jwt;
@@ -108,14 +109,17 @@ namespace PROJECT.CORE
         public DbSet<tblMdVehicleType> tblMdVehicleType { get; set; }
         public DbSet<tblMdMixer> tblMdMixer { get; set; }
         public DbSet<tblMdArea> tblMdArea { get; set; }
-        public DbSet<tblMdModule> tblMdModule { get; set; }
         public DbSet<tblMdDepartment> tblMdDepartment { get; set; }
         public DbSet<tblMdVehicle> tblMdVehicle { get; set; }
         #endregion
 
         #region Sale Order
-        public DbSet<tblStoreOrderOperating> tblStoreOrderOperating { get; set; }
+        public DbSet<tblSoOrder> tblSoOrder { get; set; }
+        public DbSet<tblSoOrderDetail> tblSoOrderDetail { get; set; }
         #endregion
 
+        #region Bussiness Unit
+        public DbSet<tblBuCustomerCare> tblBuCustomerCare { get; set; }
+        #endregion
     }
 }

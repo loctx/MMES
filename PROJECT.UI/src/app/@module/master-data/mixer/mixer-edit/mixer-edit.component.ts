@@ -5,6 +5,8 @@ import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MixerFilter } from 'src/app/@filter/MD/mixer-filter.model';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 @Component({
   selector: 'app-mixer-edit',
   templateUrl: './mixer-edit.component.html',
@@ -15,7 +17,11 @@ export class MixerEditComponent {
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  state: boolean | null = null;
   filter = new MixerFilter();
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
+
 
   constructor(
     private _service: MixerService,
@@ -28,6 +34,7 @@ export class MixerEditComponent {
     this.mixerForm = this._fb.group({
       code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: ['', Validators.required],
     });
     this.route.queryParams.subscribe(params => {
       this.filter = {
@@ -44,18 +51,21 @@ export class MixerEditComponent {
   ngOnInit() {
     this.mixerForm?.get('code')?.setValue(this.code);
     this.mixerForm?.get('name')?.setValue(this.name);
+    this.mixerForm?.get('state')?.setValue(this.state || false);
   }
 
   close() {
     this.filter = {
       ...this.filter,
       code: '',
-      name: ''
+      name: '',
+      state:'',
     }
     this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
     this.mixerForm?.get('code')?.setValue('');
     this.mixerForm?.get('name')?.setValue('');
+    this.mixerForm?.get('state')?.setValue(true);
   }
 
   onEdit() {
@@ -68,6 +78,7 @@ export class MixerEditComponent {
         {
           code: this.code.trim(),
           name: this.mixerForm.value.name.trim(),
+          state: this.mixerForm.value.state,
         },
         false
       )
