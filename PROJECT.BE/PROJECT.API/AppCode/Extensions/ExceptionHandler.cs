@@ -19,7 +19,7 @@ namespace PROJECT.API.AppCode.Extensions
                 {
                     Code = "0001",
                     MessageType = MessageType.Error,
-                    Message = MessageUtil.GetMessage("1000"),
+                    Message = MessageUtil.GetMessage("0001"),
                     MessageDetail = exception.Message,
                     LogId = logId
                 }
@@ -65,7 +65,7 @@ namespace PROJECT.API.AppCode.Extensions
                 {
                     Code = "0000",
                     MessageType = MessageType.Error,
-                    Message = MessageUtil.GetMessage("1000"),
+                    Message = MessageUtil.GetMessage("0000"),
                     MessageDetail = string.Join("; ", context.ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage)),

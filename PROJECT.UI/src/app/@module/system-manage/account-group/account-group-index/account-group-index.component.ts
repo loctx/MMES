@@ -30,7 +30,7 @@ export class AccountGroupIndexComponent implements OnInit {
       path: '/master-data/unit',
     },
   ];
-  displayedColumns: string[] = ['index', 'name', 'state', 'actions'];
+  displayedColumns: string[] = ['index', 'name', 'notes', 'state', 'actions'];
   paginationResult!: PaginationResult;
   filter = new BaseFilter();
 

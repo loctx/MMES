@@ -11,6 +11,8 @@ using PROJECT.API.AppCode.Extensions;
 using PROJECT.API.AppCode.Util;
 using NLog;
 using NLog.Extensions.Logging;
+using PROJECT.CORE;
+using PROJECT.BUSINESS.Common.Class;
 
 //LogManager.Setup().LoadConfigurationFromFile(Path.Combine(Directory.GetCurrentDirectory(), "nlog.config"));
 var config = new ConfigurationBuilder()
@@ -116,20 +118,20 @@ builder.Services.AddDIServices(builder.Configuration);
 
 var app = builder.Build();
 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     var lstMessage = dbContext.tblAdMessage.ToList();
-//     foreach (var message in lstMessage)
-//     {
-//         MessageUtil.AddToCache(new MessageObject()
-//         {
-//             Code = message.Code,
-//             Language = message.Lang,
-//             Message = message.Value
-//         });
-//     }
-// }
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var lstMessage = dbContext.tblAdMessage.ToList();
+    foreach (var message in lstMessage)
+    {
+        MessageUtil.AddToCache(new MessageObject()
+        {
+            Code = message.Code,
+            Language = message.Lang,
+            Message = message.Value
+        });
+    }
+}
 
 // if (app.Environment.IsDevelopment())
 // {

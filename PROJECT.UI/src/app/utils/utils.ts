@@ -20,23 +20,27 @@ export class HandleResponse {
       const res = response?.messageObject;
       switch (res.messageType) {
         case 'S':
-          if(method != METHOD.GET) {
+          if (method != METHOD.GET) {
             Swal.fire({
-              icon: 'success',
+              // icon: 'success',
+              color: '#198754',
               title: response?.messageObject?.message,
               position: 'top-end',
+              width: 600,
               showConfirmButton: false,
-              timer: 3000,
+              timer: 5000,
               toast: true,
             });
           }
           break;
         case 'W':
           Swal.fire({
-            icon: 'warning',
-            title: res.message,
+            // icon: 'warning',
+            color: '#ffc720',
+            title: `MSG${res.code} ${res.message}`,
             text: res.messageDetail,
-            footer: `LogID: ${res.logId}`,
+            width: 600,
+            footer: `LogID ${res.logId}`,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
@@ -44,13 +48,15 @@ export class HandleResponse {
           break;
         case 'E':
           Swal.fire({
-            icon: 'error',
-            title: res.message,
+            // icon: 'error',
+            color: '#dc3545',
+            title: `MSG${res.code} ${res.message}`,
+            width: 600,
             text: res.messageDetail,
-            footer: `LogID: ${res.logId}`,
+            footer: `LogID ${res.logId}`,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 3000,
+            allowOutsideClick: true,
           });
           break;
         default:

@@ -80,7 +80,6 @@ namespace PROJECT.BUSINESS.Services.AD
             }
             catch (Exception ex)
             {
-                this._dbContext.Database.RollbackTransaction();
                 this.Status = false;
                 this.Exception = ex;
             }
