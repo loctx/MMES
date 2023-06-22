@@ -14,6 +14,8 @@ namespace PROJECT.BUSINESS.Dtos.MD
 
         public string Name { get; set; }
 
+        public bool? State { get; set; }
+
         public bool IsCustomer { get; set; }
 
         public bool IsProvider { get; set; }

@@ -20,5 +20,7 @@ namespace PROJECT.CORE.Entities.MD
         {
             ListItem = new List<tblMdItem>();
         }
+
+        public bool? State { get; set; }
     }
 }

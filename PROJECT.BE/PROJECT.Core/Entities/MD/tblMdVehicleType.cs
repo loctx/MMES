@@ -25,5 +25,7 @@ namespace PROJECT.CORE.Entities.MD
         {
             ListVehicle = new List<tblMdVehicle>();
         }
+
+        public bool? State { get; set; }
     }
 }

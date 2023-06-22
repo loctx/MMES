@@ -16,6 +16,8 @@ namespace PROJECT.BUSINESS.Dtos.MD
 
         public string TypeCode { get; set; }
 
+        public bool? State { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<tblMdVehicle, tblVehicleDto>().ReverseMap();
