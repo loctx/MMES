@@ -32,9 +32,7 @@ export class InputCustomComponent implements OnInit {
   showOptions: boolean = false;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.inputValue = this.defaultValue;
-    }, 300);
+    this.inputValue = this.defaultValue;
   }
 
   onChange(e: any) {
