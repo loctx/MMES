@@ -3,54 +3,72 @@ import { WareHouseService } from 'src/app/services/MD/warehouse.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { WareHouseFilter } from 'src/app/@filter/MD/warehouse-filter.model';
+
 @Component({
   selector: 'app-warehouse-edit',
   templateUrl: './warehouse-edit.component.html',
   styleUrls: ['./warehouse-edit.component.scss']
 })
 export class WarehouseEditComponent {
-  unitForm: FormGroup;
+  whForm: FormGroup;
   submitted: boolean = false;
   code: string = '';
   name: string = '';
+  filter = new WareHouseFilter();
 
   constructor(
     private _service: WareHouseService,
     private _fb: FormBuilder,
     private utils: utils,
-    private drawerService: DrawerService
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.unitForm = this._fb.group({
-      code: [{ value: "", disabled: true }],
+    this.whForm = this._fb.group({
+      code: [{ value: '', disabled: true }],
       name: ['', [Validators.required, this.utils.trimSpace]],
+    });
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
     });
   }
 
   get f() {
-    return this.unitForm.controls;
+    return this.whForm.controls;
   }
 
   ngOnInit() {
-    this.unitForm?.get('code')?.setValue(this.code);
-    this.unitForm?.get('name')?.setValue(this.name);
+    this.whForm?.get('code')?.setValue(this.code);
+    this.whForm?.get('name')?.setValue(this.name);
   }
 
   close() {
+    this.filter = {
+      ...this.filter,
+      code: '',
+      name: ''
+    }
+    this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
     this.drawerService.close();
-    this.unitForm?.get('code')?.setValue('');
-    this.unitForm?.get('name')?.setValue('');
+    this.whForm?.get('code')?.setValue('');
+    this.whForm?.get('name')?.setValue('');
   }
 
   onEdit() {
     this.submitted = true;
-    if (this.unitForm.invalid) {
+    if (this.whForm.invalid) {
       return;
     }
     this._service
       .Update(
         {
           code: this.code.trim(),
-          name: this.unitForm.value.name.trim(),
+          name: this.whForm.value.name.trim(),
         },
         false
       )
