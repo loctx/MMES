@@ -3,17 +3,8 @@ using PROJECT.BUSINESS.Common;
 using PROJECT.BUSINESS.Dtos.Common;
 using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Filter.Common;
-using PROJECT.BUSINESS.Filter.SO;
-using PROJECT.BUSINESS.Services.AD;
 using PROJECT.CORE;
-using PROJECT.CORE.Dtos.SO;
 using PROJECT.CORE.Entities.MD;
-using PROJECT.CORE.Entities.SO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROJECT.BUSINESS.Services.MD
 {
