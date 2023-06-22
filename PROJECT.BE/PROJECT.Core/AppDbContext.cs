@@ -113,7 +113,8 @@ namespace PROJECT.CORE
         #endregion
 
         #region Sale Order
-        public DbSet<tblStoreOrderOperating> tblStoreOrderOperating { get; set; }
+        public DbSet<tblSoOrder> tblSoOrder { get; set; }
+        public DbSet<tblSoOrderDetail> tblSoOrderDetail { get; set; }
         #endregion
 
     }

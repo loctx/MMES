@@ -62,4 +62,8 @@
     <ProjectReference Include="..\PROJECT.Service\PROJECT.BUSINESS.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\SO\" />
+  </ItemGroup>
+
 </Project>
