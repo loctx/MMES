@@ -13,6 +13,7 @@ namespace PROJECT.BUSINESS.Dtos.MD
         public string LicenseKey { get; set; }
         public int? NumberOrder { get; set; }
         public List<tblMdModuleDto> Children { get; set; }
+        public bool? State { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -13,5 +13,7 @@ namespace PROJECT.CORE.Entities.MD
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+
+        public bool? State { get; set; }
     }
 }
