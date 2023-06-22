@@ -24,4 +24,7 @@ export class VehicleTypeService {
   Delete(parameters?: VehicleTypeModel, isLoading?: boolean) {
     return this._commonService.deleteRequest(`VehicleType/Delete`, parameters);
   }
+  getAll(isLoading?: boolean){
+    return this._commonService.getRequest(`VehicleType/GetAll`);
+  }
 }
