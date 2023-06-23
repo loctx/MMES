@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AccountIndexComponent } from './account/account-index/account-index.component';
 import { AccountEditComponent } from './account/account-edit/account-edit.component';
 import { AccountCreateComponent } from './account/account-create/account-create.component';
+import { ModuleIndexComponent } from './module/module-index/module-index.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AccountCreateComponent } from './account/account-create/account-create.
     AccountIndexComponent,
     AccountEditComponent,
     AccountCreateComponent,
+    ModuleIndexComponent,
   ],
   imports: [
     MatButtonModule,

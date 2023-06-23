@@ -106,6 +106,7 @@ export class AccountIndexComponent implements OnInit {
         fullName: item.fullName,
         state: item.state,
         groupId: item.groupId,
+        groupName: item.accountGroup.name,
       })
       .subscribe((result) => {
         if (result?.status) {

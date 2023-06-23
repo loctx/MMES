@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-7" style="border-right: 1px solid #d7d7d7; height: 100vh">
+    <h5>DANH SÁCH MODULE</h5>
+    <div style="padding: 10px; border-bottom: 1px solid #d7d7d7">
+      <button type="button" class="btn btn-primary" (click)="submitOrderTree()">Cập nhật thứ tự</button>
+      &nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="createModule()">
+        Tạo thêm module
+      </button>
+    </div>
+    <div>
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding (click)="clickNode(node, $event)"
+          [ngClass]="node.selected ? 'mat-tree-node-selected':''">
+          <button mat-icon-button disabled></button>
+          <span class="checklist-leaf-node" [ngClass]="{
+              'drop-above':
+                dragNodeExpandOverArea === 'above' &&
+                dragNodeExpandOverNode === node,
+              'drop-below':
+                dragNodeExpandOverArea === 'below' &&
+                dragNodeExpandOverNode === node,
+              'drop-center':
+                dragNodeExpandOverArea === 'center' &&
+                dragNodeExpandOverNode === node
+            }" draggable="true" (dragstart)="handleDragStart($event, node)" (dragover)="handleDragOver($event, node)"
+            (drop)="handleDrop($event, node)" (dragend)="handleDragEnd($event)">{{ node.name }}</span>
+        </mat-tree-node>
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" (click)="clickNode(node, $event)" matTreeNodePadding
+          [ngClass]="node.selected ? 'mat-tree-node-selected':''">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{
+                treeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+              }}
+            </mat-icon>
+          </button>
+          <span [ngClass]="{
+              'drop-above':
+                dragNodeExpandOverArea === 'above' &&
+                dragNodeExpandOverNode === node,
+              'drop-below':
+                dragNodeExpandOverArea === 'below' &&
+                dragNodeExpandOverNode === node,
+              'drop-center':
+                dragNodeExpandOverArea === 'center' &&
+                dragNodeExpandOverNode === node
+            }" draggable="true" (dragstart)="handleDragStart($event, node)" (dragover)="handleDragOver($event, node)"
+            (drop)="handleDrop($event, node)" (dragend)="handleDragEnd($event)">{{ node.name }}</span>
+        </mat-tree-node>
+      </mat-tree>
+      <span #emptyItem></span>
+    </div>
+  </div>
+  <div class="col-md-5" *ngIf="isCreate || isEdit">
+    <h5 *ngIf="isCreate">TẠO MỚI MODULE</h5>
+    <h5 *ngIf="isEdit">CHỈNH SỬA THÔNG TIN MODULE</h5>
+
+    <div style="padding: 10px; border-bottom: 1px solid #d7d7d7">
+      <button type="button" class="btn btn-primary" (click)="cancel()">
+        Hủy
+      </button>
+      &nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="submitModule()">
+        Lưu thông tin
+      </button>
+    </div>
+
+    <div class="row" style="padding-top: 10px;">
+      <div class="col-md-12">
+        <label>Mã module : </label>
+        <input type="text" class="form-control" readonly [(ngModel)]="nodeForm.id" *ngIf="isEdit">
+        <input type="text" class="form-control" [(ngModel)]="nodeForm.id" *ngIf="isCreate">
+      </div>
+      <div class="col-md-12" style="padding-top: 10px;">
+        <label>Tên module : </label>
+        <input type="text" class="form-control" [(ngModel)]="nodeForm.name">
+      </div>
+      <div class="col-md-12" style="padding-top: 10px;">
+        <label>Url : </label>
+        <input type="text" class="form-control" [(ngModel)]="nodeForm.url">
+      </div>
+      <div class="col-md-12" style="padding-top: 10px;">
+        <label>Icon : </label>
+        <input type="text" class="form-control" [(ngModel)]="nodeForm.icon">
+      </div>
+    </div>
+  </div>
+</div>
