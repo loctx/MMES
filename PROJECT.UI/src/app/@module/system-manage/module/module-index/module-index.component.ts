@@ -1,15 +1,12 @@
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import {
-  MatTreeFlatDataSource,
-  MatTreeFlattener,
-} from '@angular/material/tree';
-import { TreeFlatNode, TreeNode } from 'src/app/models/MD/treeNode.model';
-import { ModuleService } from 'src/app/services/AD/module.service';
-import { UserService } from 'src/app/services/AD/user.service';
-import { ChecklistDatabaseService } from 'src/app/services/Common/checkListDatabase.service';
-import { DrawerService } from 'src/app/services/Common/drawer.service';
-import { GlobalService } from 'src/app/services/Common/global.service';
+import {FlatTreeControl} from '@angular/cdk/tree';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {TreeFlatNode, TreeNode} from 'src/app/models/MD/treeNode.model';
+import {ModuleService} from 'src/app/services/AD/module.service';
+import {UserService} from 'src/app/services/AD/user.service';
+import {ChecklistDatabaseService} from 'src/app/services/Common/checkListDatabase.service';
+import {DrawerService} from 'src/app/services/Common/drawer.service';
+import {GlobalService} from 'src/app/services/Common/global.service';
 
 @Component({
   selector: 'app-module-index',
@@ -45,25 +42,10 @@ export class ModuleIndexComponent implements OnInit {
   dragNodeExpandOverTime: number = 0;
   dragNodeExpandOverArea: string = '';
   @ViewChild('emptyItem') emptyItem!: ElementRef;
-  constructor(
-    private _ms: ModuleService,
-    private _ds: DrawerService,
-    private database: ChecklistDatabaseService
-  ) {
-    this.treeFlattener = new MatTreeFlattener(
-      this.transformer,
-      this.getLevel,
-      this.isExpandable,
-      this.getChildren
-    );
-    this.treeControl = new FlatTreeControl<TreeFlatNode>(
-      this.getLevel,
-      this.isExpandable
-    );
-    this.dataSource = new MatTreeFlatDataSource(
-      this.treeControl,
-      this.treeFlattener
-    );
+  constructor(private _ms: ModuleService, private _ds: DrawerService, private database: ChecklistDatabaseService) {
+    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
+    this.treeControl = new FlatTreeControl<TreeFlatNode>(this.getLevel, this.isExpandable);
+    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     database.dataChange.subscribe((data) => {
       this.dataSource.data = [];
       this.dataSource.data = data;
@@ -89,17 +71,14 @@ export class ModuleIndexComponent implements OnInit {
   }
 
   loadInit() {
-    this._ms.getDataForTree().subscribe(({ data }) => {
+    this._ms.getDataForTree().subscribe(({data}) => {
       this.database.dataChange.next([data]);
     });
   }
 
   transformer = (node: TreeNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
-    const flatNode =
-      existingNode && existingNode.name === node.name
-        ? existingNode
-        : new TreeFlatNode();
+    const flatNode = existingNode && existingNode.name === node.name ? existingNode : new TreeFlatNode();
     flatNode.name = node.name;
     flatNode.level = level;
     flatNode.expandable = node.children && node.children.length > 0;
@@ -122,10 +101,7 @@ export class ModuleIndexComponent implements OnInit {
     // Handle node expand
     if (node === this.dragNodeExpandOverNode) {
       if (this.dragNode !== node && !this.treeControl.isExpanded(node)) {
-        if (
-          new Date().getTime() - this.dragNodeExpandOverTime >
-          this.dragNodeExpandOverWaitTimeMs
-        ) {
+        if (new Date().getTime() - this.dragNodeExpandOverTime > this.dragNodeExpandOverWaitTimeMs) {
           this.treeControl.expand(node);
         }
       }
@@ -151,20 +127,11 @@ export class ModuleIndexComponent implements OnInit {
     if (node !== this.dragNode) {
       let newItem: TreeNode;
       if (this.dragNodeExpandOverArea === 'above') {
-        newItem = this.database.copyPasteItemAbove(
-          this.flatNodeMap.get(this.dragNode)!,
-          this.flatNodeMap.get(node)!
-        );
+        newItem = this.database.copyPasteItemAbove(this.flatNodeMap.get(this.dragNode)!, this.flatNodeMap.get(node)!);
       } else if (this.dragNodeExpandOverArea === 'below') {
-        newItem = this.database.copyPasteItemBelow(
-          this.flatNodeMap.get(this.dragNode)!,
-          this.flatNodeMap.get(node)!
-        );
+        newItem = this.database.copyPasteItemBelow(this.flatNodeMap.get(this.dragNode)!, this.flatNodeMap.get(node)!);
       } else {
-        newItem = this.database.copyPasteItem(
-          this.flatNodeMap.get(this.dragNode)!,
-          this.flatNodeMap.get(node)!
-        );
+        newItem = this.database.copyPasteItem(this.flatNodeMap.get(this.dragNode)!, this.flatNodeMap.get(node)!);
       }
       this.database.deleteItem(this.flatNodeMap.get(this.dragNode)!);
       this.treeControl.expandDescendants(this.nestedNodeMap.get(newItem)!);
@@ -190,7 +157,7 @@ export class ModuleIndexComponent implements OnInit {
     var ele = event.target as Element;
     ele.classList.add('mat-tree-node-selected');
     var data = this.flatNodeMap.get(node);
-    if (data!.id === 'M') {
+    if (data!.id === 'MNU') {
       return;
     }
     this.nodeForm = data!;
@@ -232,7 +199,7 @@ export class ModuleIndexComponent implements OnInit {
       },
       (error: any) => {
         console.log('error: ', error);
-      }
+      },
     );
   }
 }
