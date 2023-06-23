@@ -16,5 +16,9 @@ namespace PROJECT.CORE.Entities.MD
         public string Driver { get; set; }
 
         public string TypeCode { get; set; }
+
+        public virtual tblMdVehicleType VehicleType { get; set; }
+
+        public bool? State { get; set; }
     }
 }

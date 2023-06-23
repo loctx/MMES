@@ -3,6 +3,8 @@ import { OrderTypeService } from 'src/app/services/MD/ordertype.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 
 @Component({
   selector: 'app-ordertype-create',
@@ -12,6 +14,8 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 export class OrdertypeCreateComponent {
   orderTypeForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: OrderTypeService,
@@ -22,6 +26,7 @@ export class OrdertypeCreateComponent {
     this.orderTypeForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: [true, [Validators.required]],
     });
   }
 
@@ -33,6 +38,7 @@ export class OrdertypeCreateComponent {
     this.drawerService.close();
     this.orderTypeForm?.get('code')?.setValue('');
     this.orderTypeForm?.get('name')?.setValue('');
+    this.orderTypeForm?.get('state')?.setValue(true);
   }
 
   onCreate() {
@@ -45,6 +51,7 @@ export class OrdertypeCreateComponent {
         {
           code: this.orderTypeForm.value.code.trim(),
           name: this.orderTypeForm.value.name.trim(),
+          state: this.orderTypeForm.value.state,
         },
         false
       )
@@ -54,6 +61,7 @@ export class OrdertypeCreateComponent {
           this.submitted = false;
           this.orderTypeForm?.get('code')?.setValue('');
           this.orderTypeForm?.get('name')?.setValue('');
+          this.orderTypeForm?.get('state')?.setValue(true);
         },
         (error) => {
           console.log('error: ', error);

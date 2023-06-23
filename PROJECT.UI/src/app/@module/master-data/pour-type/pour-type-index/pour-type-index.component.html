@@ -3,7 +3,7 @@
         <div class="d-flex-wrap d-gap d-space-bw">
             <div class="card-title mb-2 p-0">
                 <i class="bi bi-journal-text"></i>
-                Danh sách loại đổ
+                Hình thức đổ
             </div>
             <div class="d-flex-wrap d-gap">
                 <div *ngIf="filter" class="mb-3">
@@ -35,7 +35,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="code">
-                    <th mat-header-cell *matHeaderCellDef width="150px"> Mã loại đổ </th>
+                    <th mat-header-cell *matHeaderCellDef width="150px"> Mã </th>
                     <td mat-cell *matCellDef="let element">
                         <span href="#" (click)="openEdit(element)"
                             class="cursor-pointer text-primary">{{element.code}}</span>
@@ -44,12 +44,20 @@
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Tên loại đổ</th>
+                    <th mat-header-cell *matHeaderCellDef> Tên hình thức</th>
                     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="state">
+                  <th mat-header-cell *matHeaderCellDef width="90px" class="text-center">Trạng thái</th>
+                  <td mat-cell *matCellDef="let element" class="text-center">
+                      <i *ngIf="element.state" class="bi bi-check-circle-fill text-success"></i>
+                      <i *ngIf="!element.state" class="bi bi-x-circle-fill"></i>
+                  </td>
+              </ng-container>
+
                 <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef width="90px">Hành Động</th>
+                    <th mat-header-cell *matHeaderCellDef width="90px">Hành động</th>
                     <td mat-cell *matCellDef="let element" class="text-center">
                         <i class="bi bi-trash3 text-danger cursor-pointer" (click)="deletePourType(element)"></i>
                     </td>
@@ -57,8 +65,9 @@
 
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="border-bottom"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="openEdit(row)" [ngClass]="{'selected-row': row.code === filter.code}"></tr>
             </table>
+            <app-empty *ngIf="!paginationResult || paginationResult.data?.length == 0"></app-empty>
         </div>
         <div class="float-end" *ngIf="paginationResult">
             <app-pagination [pageSize]="paginationResult.pageSize" [totalRecord]="paginationResult.totalRecord"

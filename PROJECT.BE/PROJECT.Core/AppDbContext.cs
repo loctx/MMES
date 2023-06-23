@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROJECT.CORE.Common;
 using PROJECT.CORE.Entities.AD;
+using PROJECT.CORE.Entities.BU;
 using PROJECT.CORE.Entities.MD;
 using PROJECT.CORE.Entities.SO;
 using System.IdentityModel.Tokens.Jwt;
@@ -113,8 +114,12 @@ namespace PROJECT.CORE
         #endregion
 
         #region Sale Order
-        public DbSet<tblStoreOrderOperating> tblStoreOrderOperating { get; set; }
+        public DbSet<tblSoOrder> tblSoOrder { get; set; }
+        public DbSet<tblSoOrderDetail> tblSoOrderDetail { get; set; }
         #endregion
 
+        #region Bussiness Unit
+        public DbSet<tblBuCustomerCare> tblBuCustomerCare { get; set; }
+        #endregion
     }
 }

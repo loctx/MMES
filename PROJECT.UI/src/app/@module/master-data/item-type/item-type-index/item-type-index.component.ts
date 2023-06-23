@@ -4,8 +4,12 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 import { ItemTypeCreateComponent } from '../item-type-create/item-type-create.component';
 import { ItemTypeEditComponent } from '../item-type-edit/item-type-edit.component';
 import { PaginationResult } from 'src/app/models/Common/pagination.model';
+import {ItemTypeFilter } from 'src/app/@filter/MD/itemtype-filter.model';
 import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
 import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ItemTypeModel,optionsGroup } from 'src/app/models/MD/item-type.model';
+
 @Component({
   selector: 'app-item-type-index',
   templateUrl: './item-type-index.component.html',
@@ -14,9 +18,18 @@ import Swal from 'sweetalert2';
 export class ItemTypeIndexComponent {
   constructor(
     private _service: ItemTypeService,
-    private drawerService: DrawerService
-  ) {}
-
+    private drawerService: DrawerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.filter = {
+        ...this.filter,
+        ...params
+      }
+    });
+  }
+  dataSource!: any;
   //Khai báo biến
   breadcrumbList: any[] = [
     {
@@ -28,9 +41,14 @@ export class ItemTypeIndexComponent {
       path: '/master-data/unit',
     },
   ];
-  displayedColumns: string[] = ['index', 'code', 'name' , 'actions'];
+  displayedColumns: string[] = ['index', 'code', 'name', 'state'  , 'actions'];
   paginationResult!: PaginationResult;
-  filter = new BaseFilter();
+  filter = new ItemTypeFilter();
+  optionsGroup: optionsGroup[] = [];
+  optionsSate = [
+    { name: 'Đã kích hoạt', value: true },
+    { name: 'Chưa kích hoạt', value: false },
+  ];
 
   //Khai báo hàm
   ngOnInit(): void {
@@ -46,10 +64,17 @@ export class ItemTypeIndexComponent {
   }
 
   openEdit(item: any) {
+    this.router.navigate([], { relativeTo: this.route, queryParams: {
+      ...this.filter,
+      code: item.code,
+      name: item.name,
+      state: item.state
+    } });
     this.drawerService
       .open(ItemTypeEditComponent, {
         code: item.code,
         name: item.name,
+        state: item.state
       })
       .subscribe((result) => {
         if (result?.status) {
@@ -68,6 +93,13 @@ export class ItemTypeIndexComponent {
     this._service.search(this.filter, true).subscribe({
       next: ({ data }) => {
         this.paginationResult = data;
+        this.router.navigate([], { relativeTo: this.route, queryParams: this.filter });
+        if(this.filter.code !== '') {
+          const detail = data?.data?.find((item:ItemTypeFilter) => item.code == this.filter.code);
+          if(detail) {
+            this.openEdit(detail);
+          }
+        }
       },
       error: (response) => {
         console.log(response);
@@ -76,7 +108,7 @@ export class ItemTypeIndexComponent {
   }
 
   loadInit() {
-    this.search();
+    this.search(this.filter.currentPage);
   }
 
   onChangePage(pageNumber: number) {
@@ -88,7 +120,7 @@ export class ItemTypeIndexComponent {
     this.search(1, pageSize);
   }
 
-  deleteItemType(item:any) {
+  deleteItemType(item:ItemTypeModel) {
     Swal.fire({
       title: 'Bạn có chắc chắn muốn xóa dữ liệu?',
       text: 'Hành động này sẽ không thể hoàn tác!',

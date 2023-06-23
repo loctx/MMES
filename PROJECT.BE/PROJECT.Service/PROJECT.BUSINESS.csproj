@@ -25,4 +25,9 @@
     <ProjectReference Include="..\PROJECT.Core\PROJECT.CORE.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\SO\" />
+    <Folder Include="Filter\SO\" />
+  </ItemGroup>
+
 </Project>

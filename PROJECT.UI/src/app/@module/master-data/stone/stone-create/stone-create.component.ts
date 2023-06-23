@@ -3,6 +3,9 @@ import { StoneService } from 'src/app/services/MD/stone.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { utils } from 'src/app/utils/utils';
 import { DrawerService } from 'src/app/services/Common/drawer.service';
+import { optionsGroup } from 'src/app/@filter/MD/area-filter.model';
+import { BaseFilter } from 'src/app/@filter/Common/base-filter.model';
+
 @Component({
   selector: 'app-stone-create',
   templateUrl: './stone-create.component.html',
@@ -11,6 +14,8 @@ import { DrawerService } from 'src/app/services/Common/drawer.service';
 export class StoneCreateComponent {
   stoneForm: FormGroup;
   submitted: boolean = false;
+  optionsGroup: optionsGroup[] = [];
+  filterGroup = new BaseFilter();
 
   constructor(
     private _service: StoneService,
@@ -21,6 +26,8 @@ export class StoneCreateComponent {
     this.stoneForm = this._fb.group({
       code: ['', [Validators.required, this.utils.trimSpace]],
       name: ['', [Validators.required, this.utils.trimSpace]],
+      state: [true, [Validators.required]],
+
     });
   }
 
@@ -32,6 +39,7 @@ export class StoneCreateComponent {
     this.drawerService.close();
     this.stoneForm?.get('code')?.setValue('');
     this.stoneForm?.get('name')?.setValue('');
+    this.stoneForm?.get('state')?.setValue(true);
   }
 
   onCreate() {
@@ -44,6 +52,7 @@ export class StoneCreateComponent {
         {
           code: this.stoneForm.value.code.trim(),
           name: this.stoneForm.value.name.trim(),
+          state: this.stoneForm.value.state,
         },
         false
       )
@@ -53,6 +62,7 @@ export class StoneCreateComponent {
           this.submitted = false;
           this.stoneForm?.get('code')?.setValue('');
           this.stoneForm?.get('name')?.setValue('');
+          this.stoneForm?.get('state')?.setValue(true);
         },
         (error) => {
           console.log('error: ', error);

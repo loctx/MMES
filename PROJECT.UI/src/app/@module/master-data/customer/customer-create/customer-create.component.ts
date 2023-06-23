@@ -53,7 +53,7 @@ export class CustomerCreateComponent {
           code: this.customerForm.value.code.trim(),
           name: this.customerForm.value.name.trim(),
           address: this.customerForm.value.address.trim(),
-          phoneNumber: this.customerForm.value.phoneNumber.trim(),
+          phoneNumber: this.customerForm.value.phoneNumber,
           email: this.customerForm.value.email.trim(),
           isProvider: this.customerForm.value.isProvider,
           isCustomer: true

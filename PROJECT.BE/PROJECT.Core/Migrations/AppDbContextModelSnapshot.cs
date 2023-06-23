@@ -719,314 +719,102 @@ namespace PROJECT.CORE.Migrations
                     b.ToTable("tblMdVehicleType");
                 });
 
-            modelBuilder.Entity("PROJECT.CORE.Entities.SO.tblStoreOrderOperating", b =>
+            modelBuilder.Entity("PROJECT.CORE.Entities.SO.tblSoOrder", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(50)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AreaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AreaName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("AutoScaleOut")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CardNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CatId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CodeExport")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CodeStore")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Confirm1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm10")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm2")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm3")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm4")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm5")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm6")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm7")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm8")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Confirm9")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Confirm9Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Confirm9Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CountReindex")
-                        .HasColumnType("int");
+                    b.Property<string>("AreaCode")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreateDay")
+                    b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DayCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeliveryCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeliveryCodeParent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DriverAccept")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DriverName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DriverPrintNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DriverPrintTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DriverUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("IDDistributorSyn")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IndexOrder")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IndexOrder1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IndexOrder2")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IndexOrderTemp")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsScaleAuto")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsSyncedByNewWS")
-                        .HasColumnType("bit");
+                    b.Property<string>("OrderType")
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<bool?>("IsVoiced")
-                        .HasColumnType("bit");
+                    b.Property<string>("PartnerCode")
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("ItemCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("PartnerNote")
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<double?>("ItemId")
-                        .HasColumnType("float");
+                    b.Property<string>("PourCategory")
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("ItemUnitName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Latitude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("LockInDbet")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LogHistory")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LogJobAttach")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LogProcessOrder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Longitude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MoocCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameDistributor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameProduct")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameStore")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NoteExport")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NoteFinish")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NumberVoice")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime?>("PourDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<string>("PourLocation")
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("PackageNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PartnerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Prioritize")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("RealNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("RealRequireNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ReasonExport")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Shifts")
-                        .HasColumnType("int");
+                    b.Property<string>("PourType")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Step")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("SumNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("TimeConfirm1")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm10")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm2")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm3")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm4")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm5")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm6")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm7")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm8")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirm9")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeConfirmHistory")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeIn21")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeIn22")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("TimeIn33")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("TransportMethodId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TransportMethodName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Trough")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Trough1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TroughLineCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TypeProduct")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypeXK")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdateDay")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Vehicle")
+                    b.HasKey("Code");
+
+                    b.ToTable("tblSoOrder");
+                });
+
+            modelBuilder.Entity("PROJECT.CORE.Entities.SO.tblSoOrderDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("WarningNotCall")
+                    b.Property<DateTime?>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("WeightIn")
-                        .HasColumnType("int");
+                    b.Property<bool?>("IsMainItem")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime?>("WeightInTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ItemCode")
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<int?>("WeightOut")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderCode")
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<DateTime?>("WeightOutTime")
-                        .HasColumnType("datetime2");
+                    b.Property<double>("OrderNumber")
+                        .HasColumnType("float");
 
-                    b.Property<string>("XiRoiAttatchmentFile")
+                    b.Property<string>("SandCode")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("StoneCode")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tblStoreOrderOperating");
+                    b.HasIndex("OrderCode");
+
+                    b.ToTable("tblSoOrderDetail");
                 });
 
             modelBuilder.Entity("PROJECT.CORE.Entities.AD.tblAdAccount", b =>
@@ -1057,6 +845,15 @@ namespace PROJECT.CORE.Migrations
                     b.Navigation("Right");
                 });
 
+            modelBuilder.Entity("PROJECT.CORE.Entities.SO.tblSoOrderDetail", b =>
+                {
+                    b.HasOne("PROJECT.CORE.Entities.SO.tblSoOrder", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderCode");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("PROJECT.CORE.Entities.AD.tblAdAccountGroup", b =>
                 {
                     b.Navigation("ListAccount");
@@ -1067,6 +864,11 @@ namespace PROJECT.CORE.Migrations
             modelBuilder.Entity("PROJECT.CORE.Entities.AD.tblAdRight", b =>
                 {
                     b.Navigation("ListAccountGroupRight");
+                });
+
+            modelBuilder.Entity("PROJECT.CORE.Entities.SO.tblSoOrder", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
