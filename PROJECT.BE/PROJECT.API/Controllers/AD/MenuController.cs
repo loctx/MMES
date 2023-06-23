@@ -3,6 +3,7 @@ using PROJECT.API.AppCode.Enum;
 using PROJECT.API.AppCode.Extensions;
 using PROJECT.BUSINESS.Common.Class;
 using PROJECT.BUSINESS.Dtos.AD;
+using PROJECT.BUSINESS.Dtos.MD;
 using PROJECT.BUSINESS.Services.AD;
 
 namespace PROJECT.API.Controllers.AD
@@ -51,6 +52,27 @@ namespace PROJECT.API.Controllers.AD
                 transferObject.Status = false;
                 transferObject.MessageObject.MessageType = MessageType.Error;
                 transferObject.GetMessage("0104", _service);
+            }
+            return Ok(transferObject);
+        }
+
+        [HttpPost("Insert")]
+        public async Task<IActionResult> Insert([FromBody] tblMenuDto menuDto)
+        {
+            var transferObject = new TransferObject();
+            var result = await _service.Add(menuDto);
+            if (_service.Status)
+            {
+                transferObject.Data = result;
+                transferObject.Status = true;
+                transferObject.MessageObject.MessageType = MessageType.Success;
+                transferObject.GetMessage("0100", _service);
+            }
+            else
+            {
+                transferObject.Status = false;
+                transferObject.MessageObject.MessageType = MessageType.Error;
+                transferObject.GetMessage("0101", _service);
             }
             return Ok(transferObject);
         }
