@@ -20,6 +20,7 @@ import { GlobalService } from 'src/app/services/Common/global.service';
 export class ModuleIndexComponent implements OnInit {
   isCreate: boolean = false;
   isEdit: boolean = false;
+  nodeSelected: any;
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TreeFlatNode, TreeNode>();
 
@@ -180,6 +181,7 @@ export class ModuleIndexComponent implements OnInit {
   }
 
   clickNode(node: TreeFlatNode, event: Event) {
+    this.nodeSelected = node;
     const elements = document.querySelectorAll('*');
     elements.forEach((element) => {
       element.classList.remove('mat-tree-node-selected');
@@ -193,8 +195,10 @@ export class ModuleIndexComponent implements OnInit {
     }
     this.nodeForm = data!;
     this.selectId = data!.id;
-    this.nodeForm.numberOrder = data!.numberOrder;
-    this.nodeForm.notes = data!.notes;
+    this.nodeForm.orderNumber = data!.orderNumber;
+    this.nodeForm.pid = data!.pid;
+    this.nodeForm.rightId = data!.rightId;
+    this.nodeForm.icon = data!.icon;
     this.isEdit = true;
     this.isCreate = false;
   }
@@ -210,12 +214,20 @@ export class ModuleIndexComponent implements OnInit {
     this.nodeForm = new TreeNode();
   }
 
-  submitModule() {}
+  submitModule() {
+    const parentNode = this.flatNodeMap.get(this.nodeSelected);
+    this.nodeForm.id = 'MNU' + (this.database.data[0].children.length + 1);
+    this.database.insertItem(parentNode!, this.nodeForm);
+    this.treeControl.expand(this.nodeSelected);
+    // this.submitModule();
+  }
 
   submitOrderTree() {
     this._ms.UpdateOrderTree(this.database.data).subscribe(
       (data: any): void => {
         this._ds.returnData(data);
+        this.loadInit();
+        this.database.dataChange.closed = false;
         this.cancel();
       },
       (error: any) => {

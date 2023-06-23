@@ -10,7 +10,7 @@ export class ModuleService {
   constructor(private _commonService: CommonService) {}
 
   getDataForTree() {
-    return this._commonService.getRequest(`Module/getDataTree`).pipe(
+    return this._commonService.getRequest(`Menu/GetMenuOfUser`).pipe(
       map((data: any) => {
         return data;
       })
@@ -18,10 +18,6 @@ export class ModuleService {
   }
 
   UpdateOrderTree(dataTree: TreeNode[]) {
-    console.log(dataTree[0]);
-    return this._commonService.putRequest(
-      'Module/updateOrderTree',
-      dataTree[0]
-    );
+    return this._commonService.putRequest('Menu/Update', dataTree[0]);
   }
 }
